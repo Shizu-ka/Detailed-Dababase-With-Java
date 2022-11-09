@@ -15,7 +15,7 @@ public class DatabaseGUI {
         System.out.println("hello");
         System.out.println("testing wahyu");
         System.out.println("another testing");
-        System.out.println("testing ketiga");
+
     }
     
 }
