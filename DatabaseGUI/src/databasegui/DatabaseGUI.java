@@ -4,8 +4,11 @@
  */
 package databasegui;
 
+
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
  *
@@ -30,6 +33,12 @@ public class DatabaseGUI {
             Connection conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
             System.out.println("Connect to database successful!!"); 
             
-            
+            //-------------------------------------------------------------------------
+            Statement st = conn.createStatement();
+            String cth = "SELECT TOP 5 * FROM student";
+            ResultSet resultSet = st.executeQuery(cth);
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt(1) + ": " + resultSet.getString(2)+ " (" + resultSet.getString(3) + ") " + resultSet.getInt(4));
+            }
     }
 }
