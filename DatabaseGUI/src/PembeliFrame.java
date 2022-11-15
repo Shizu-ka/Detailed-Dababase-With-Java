@@ -376,7 +376,42 @@ public class PembeliFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        String temp = tfUsername.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
+            btnReset.doClick();
+        }
+        else {
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                String cth2 = "select * from Pembeli where username = '" + temp + "'";
+                String cth = "delete from Pembeli where "
+                             + "username = '" + temp +"'";
+                ResultSet resultSet = st.executeQuery(cth2);
+                //kalau username nya tidak exist
+                if (!resultSet.isBeforeFirst()) {
+                        JOptionPane.showMessageDialog(new PembeliFrame(), "Tidak Ada Hasil");
+                    }
+                else {
+                    st.executeQuery(cth);
+                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di hapus");
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+                try {
+                    PembeliFrame konek = new PembeliFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                    tfUsername.setText(temp);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -519,7 +554,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         String temp = tfUsername.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Input Kosong");
-            btnReset.doClick();
         } else {
             primaryKeyNow = tfUsername.getText();
             connect();
@@ -529,7 +563,6 @@ public class PembeliFrame extends javax.swing.JFrame {
                 ResultSet resultSet = st.executeQuery(cth);
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
-                    btnReset.doClick();
                     tfUsername.setText(temp);
                 } else {
                     while (resultSet.next()) {
