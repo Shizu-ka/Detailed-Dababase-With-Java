@@ -115,7 +115,7 @@ public class PembeliFrame extends javax.swing.JFrame {
         btnCari = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         tfPassword = new javax.swing.JPasswordField();
-        btnShowPassword = new javax.swing.JButton();
+        cbSee = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cabang");
@@ -184,6 +184,11 @@ public class PembeliFrame extends javax.swing.JFrame {
 
         btnTambahData.setText("Tambah Data");
         btnTambahData.setEnabled(false);
+        btnTambahData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahDataActionPerformed(evt);
+            }
+        });
 
         tfNoRumah.setEditable(false);
 
@@ -226,7 +231,14 @@ public class PembeliFrame extends javax.swing.JFrame {
 
         jLabel12.setText("Masukkan username yang ingin dicari");
 
-        btnShowPassword.setText("jButton1");
+        cbSee.setText("See");
+        cbSee.setBorder(null);
+        cbSee.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/eye.png"))); // NOI18N
+        cbSee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSeeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,69 +247,71 @@ public class PembeliFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfKota, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfKecamatan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfJalan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfNoRumah, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(tfNamaAkhir)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfNamaTengah)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCari)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(15, 15, 15)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(745, 745, 745)
-                        .addComponent(btnCabangFrameKembali))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTambahData)
-                .addGap(18, 18, 18)
-                .addComponent(btnHapus)
-                .addGap(18, 18, 18)
-                .addComponent(btnEdit)
-                .addGap(18, 18, 18)
-                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnReset)
-                .addGap(296, 296, 296))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel11))
+                                        .addGap(52, 52, 52)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tfJalan, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                                    .addComponent(tfKecamatan)
+                                                    .addComponent(tfKota)
+                                                    .addComponent(tfNoRumah))
+                                                .addGap(0, 4, Short.MAX_VALUE))
+                                            .addComponent(tfNamaAkhir)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tfNamaDepan, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tfNamaTengah)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cbSee)))))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCari)
+                                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12))
+                                .addGap(15, 15, 15)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(745, 745, 745)
+                                .addComponent(btnCabangFrameKembali))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnTambahData)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnHapus)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset)
+                        .addGap(296, 296, 296))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +327,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                         .addComponent(btnCari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,7 +335,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnShowPassword))
+                            .addComponent(cbSee))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -339,9 +353,9 @@ public class PembeliFrame extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfJalan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(tfJalan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -395,10 +409,11 @@ public class PembeliFrame extends javax.swing.JFrame {
                     }
                 else {
                     st.executeQuery(cth);
-                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di hapus");
+                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
                 }
             } catch (SQLException e) {
                 System.out.println(e);
+                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
             }
                 try {
                     PembeliFrame konek = new PembeliFrame();
@@ -461,8 +476,10 @@ public class PembeliFrame extends javax.swing.JFrame {
                                + ", no_rumah=" + tfNoRumah.getText()
                                + " where username='" + temp+"'";
                 st.executeQuery(cth);
+                                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
                 System.out.println(e);
+                                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             }
                 try {
                     PembeliFrame konek = new PembeliFrame();
@@ -594,10 +611,65 @@ public class PembeliFrame extends javax.swing.JFrame {
             }
         }
     }
-
-    private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {
-
+/*
+    private void btnTambahDataActionPerformed() {
     }//GEN-LAST:event_btnCariActionPerformed
+*/
+    private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
+        String temp = tfUsername.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Error");
+            btnReset.doClick();
+        }
+        else {
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                char[] pwc = tfPassword.getPassword();
+                String pw="";
+                for(char s : pwc) {
+                    pw += String.valueOf(s);
+                }
+                Date date = DateChooserTglLahir.getDate();
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                String cth = "insert into Pembeli values("
+                               + "'" + temp+"'"
+                               + ", '" + tfNoTelp.getText()+"'"
+                               + ", HASHBYTES('SHA2_512', '" + pw +"')"
+                               + ", '" + tfNamaDepan.getText()+"'"
+                               + ", '" + tfNamaTengah.getText()+"'"
+                               + ", '" + tfNamaAkhir.getText()+"'"
+                               + ", '" + sqlDate+"'"
+                               + ", '" + tfJalan.getText()+"'"
+                               + ", '" + tfKecamatan.getText()+"'"
+                               + ", '" + tfKota.getText()+"'"
+                               + ", " + tfNoRumah.getText()
+                               + ")";
+                st.executeQuery(cth);
+                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
+            }
+                try {
+                    PembeliFrame konek = new PembeliFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                    konek.tfUsername.setText(temp);
+                    konek.tfUsername.setText(temp);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }//GEN-LAST:event_btnTambahDataActionPerformed
+
+    private void cbSeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeeActionPerformed
+        if(cbSee.isSelected()) tfPassword.setEchoChar((char)0);
+        else tfPassword.setEchoChar('*');
+    }//GEN-LAST:event_cbSeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,9 +723,9 @@ public class PembeliFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnShowPassword;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
+    private javax.swing.JCheckBox cbSee;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
