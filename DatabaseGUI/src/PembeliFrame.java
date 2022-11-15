@@ -9,24 +9,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Lenovo
  */
 public class PembeliFrame extends javax.swing.JFrame {
 
-  
     public PembeliFrame() {
         initComponents();
     }
-    
+
     private static Connection conn;
     private static String primaryKeyNow = "";
 
@@ -55,7 +54,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         System.out.println("Connect to database successful!!");
     }
 
-
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Username");
@@ -76,12 +74,11 @@ public class PembeliFrame extends javax.swing.JFrame {
         String cth = "select * from Pembeli";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
-            model.addRow(new Object[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5),resultSet.getString(6),resultSet.getDate(7), resultSet.getString(8),resultSet.getString(9),resultSet.getString(10),resultSet.getInt(11)});
+            model.addRow(new Object[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getDate(7), resultSet.getString(8), resultSet.getString(9), resultSet.getString(10), resultSet.getInt(11)});
         }
         tblPembeli.setModel(model);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,8 +112,8 @@ public class PembeliFrame extends javax.swing.JFrame {
         btnTes1 = new javax.swing.JButton();
         btnTes2 = new javax.swing.JButton();
         btnTes3 = new javax.swing.JButton();
-        btnTes4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnCari = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -216,14 +213,19 @@ public class PembeliFrame extends javax.swing.JFrame {
             }
         });
 
-        btnTes4.setText("Reset");
-        btnTes4.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTes4ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Cari");
+        btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Masukkan username yang ingin dicari");
 
@@ -232,9 +234,9 @@ public class PembeliFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +246,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfKota, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfKecamatan, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,11 +271,10 @@ public class PembeliFrame extends javax.swing.JFrame {
                                     .addComponent(tfNamaTengah))))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(btnCari)
                             .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addGap(15, 15, 15)))
@@ -293,7 +294,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnTes3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnTes4)
+                .addComponent(btnReset)
                 .addGap(296, 296, 296))
         );
         layout.setVerticalGroup(
@@ -307,7 +308,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnCari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
@@ -354,7 +355,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTes)
                     .addComponent(btnTes3)
-                    .addComponent(btnTes4)
+                    .addComponent(btnReset)
                     .addComponent(btnTes2)
                     .addComponent(btnTes1))
                 .addGap(7, 7, 7)
@@ -372,7 +373,7 @@ public class PembeliFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
     private void btnTesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesActionPerformed
-        
+
     }//GEN-LAST:event_btnTesActionPerformed
 
     private void btnTes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTes1ActionPerformed
@@ -387,60 +388,119 @@ public class PembeliFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTes3ActionPerformed
 
-    private void btnTes4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTes4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTes4ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        try {
+                    PembeliFrame konek = new PembeliFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+//                    Date date = konek.DateChooserTglLahir.getDate();
+//                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_btnResetActionPerformed
 
     private void tblPembeliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembeliMouseClicked
         int baris = tblPembeli.rowAtPoint(evt.getPoint());
-        String username = tblPembeli.getValueAt(baris,0).toString();
+        String username = tblPembeli.getValueAt(baris, 0).toString();
         tfUsername.setText(username);
         primaryKeyNow = username;
-        
-        String noTelp = tblPembeli.getValueAt(baris,1).toString();
+
+        String noTelp = tblPembeli.getValueAt(baris, 1).toString();
         tfNoTelp.setText(noTelp);
-        
-        String password = tblPembeli.getValueAt(baris,2).toString();
+
+        String password = tblPembeli.getValueAt(baris, 2).toString();
         tfPassword.setText(password);
-        
-        String namaDepan = tblPembeli.getValueAt(baris,3).toString();
+
+        String namaDepan = tblPembeli.getValueAt(baris, 3).toString();
         tfNamaDepan.setText(namaDepan);
-        
-        var obj = tblPembeli.getValueAt(baris,4);
+
+        var obj = tblPembeli.getValueAt(baris, 4);
         if (obj != null) {
-            String namaTengah = tblPembeli.getValueAt(baris,4).toString();
+            String namaTengah = tblPembeli.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        
-        String namaAkhir = tblPembeli.getValueAt(baris,5).toString();
+        String namaAkhir = tblPembeli.getValueAt(baris, 5).toString();
         tfNamaAkhir.setText(namaAkhir);
-        
-        String date = tblPembeli.getValueAt(baris,6).toString();
-        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
-        Date date2;  
+
+        String date = tblPembeli.getValueAt(baris, 6).toString();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date2;
         try {
             date2 = formatter.parse(date);
             DateChooserTglLahir.setDate(date2);
         } catch (ParseException ex) {
             Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String jalan = tblPembeli.getValueAt(baris,7).toString();
+
+        String jalan = tblPembeli.getValueAt(baris, 7).toString();
         tfJalan.setText(jalan);
-        
-        String kecamatan = tblPembeli.getValueAt(baris,8).toString();
+
+        String kecamatan = tblPembeli.getValueAt(baris, 8).toString();
         tfKecamatan.setText(kecamatan);
-        
-        String kota = tblPembeli.getValueAt(baris,9).toString();
+
+        String kota = tblPembeli.getValueAt(baris, 9).toString();
         tfKota.setText(kota);
-        
-        String noRumah = tblPembeli.getValueAt(baris,10).toString();
+
+        String noRumah = tblPembeli.getValueAt(baris, 10).toString();
         tfNoRumah.setText(noRumah);
     }//GEN-LAST:event_tblPembeliMouseClicked
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        String temp = tfUsername.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Input Kosong");
+            btnReset.doClick();
+        } else {
+            primaryKeyNow = tfUsername.getText();
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                String cth = "select * from Pembeli where username = '" + temp + "'";
+                ResultSet resultSet = st.executeQuery(cth);
+                if (!resultSet.isBeforeFirst()) {
+                    JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                    btnReset.doClick();
+                    tfUsername.setText(temp);
+                } else {
+                    while (resultSet.next()) {
+
+                        tfNoTelp.setText(resultSet.getString(2));
+                        tfPassword.setText(resultSet.getString(3));
+                        tfNamaDepan.setText(resultSet.getString(4));
+                        tfNamaTengah.setText(resultSet.getString(5));
+                        tfNamaAkhir.setText(resultSet.getString(6));
+
+                        String date = resultSet.getDate(7).toString();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date2;
+                        try {
+                            date2 = formatter.parse(date);
+                            DateChooserTglLahir.setDate(date2);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        tfJalan.setText(resultSet.getString(8));
+                        tfKecamatan.setText(resultSet.getString(9));
+                        tfKota.setText(resultSet.getString(10));
+                        tfNoRumah.setText(resultSet.getString(11));
+                    }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(new CabangFrame(), e);
+            }
+        }
+    }
+
+    private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }//GEN-LAST:event_btnCariActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,12 +550,12 @@ public class PembeliFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooserTglLahir;
     private javax.swing.JButton btnCabangFrameKembali;
+    private javax.swing.JButton btnCari;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnTes;
     private javax.swing.JButton btnTes1;
     private javax.swing.JButton btnTes2;
     private javax.swing.JButton btnTes3;
-    private javax.swing.JButton btnTes4;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
