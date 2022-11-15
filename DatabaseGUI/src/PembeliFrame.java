@@ -89,7 +89,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfNoTelp = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tfNamaDepan = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -106,15 +105,17 @@ public class PembeliFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPembeli = new javax.swing.JTable();
-        btnTes = new javax.swing.JButton();
+        btnTambahData = new javax.swing.JButton();
         tfNoRumah = new javax.swing.JTextField();
         DateChooserTglLahir = new com.toedter.calendar.JDateChooser();
-        btnTes1 = new javax.swing.JButton();
-        btnTes2 = new javax.swing.JButton();
-        btnTes3 = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         btnCari = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        tfPassword = new javax.swing.JPasswordField();
+        btnShowPassword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cabang");
@@ -134,8 +135,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         tfNoTelp.setEditable(false);
 
         jLabel3.setText("Password");
-
-        tfPassword.setEditable(false);
 
         jLabel4.setText("Nama Depan");
 
@@ -183,33 +182,31 @@ public class PembeliFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPembeli);
 
-        btnTes.setText("Tambah Data");
-        btnTes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTesActionPerformed(evt);
-            }
-        });
+        btnTambahData.setText("Tambah Data");
+        btnTambahData.setEnabled(false);
 
         tfNoRumah.setEditable(false);
 
-        btnTes1.setText("Hapus");
-        btnTes1.addActionListener(new java.awt.event.ActionListener() {
+        btnHapus.setText("Hapus");
+        btnHapus.setEnabled(false);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTes1ActionPerformed(evt);
+                btnHapusActionPerformed(evt);
             }
         });
 
-        btnTes2.setText("Edit");
-        btnTes2.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTes2ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        btnTes3.setText("Simpan");
-        btnTes3.addActionListener(new java.awt.event.ActionListener() {
+        btnSimpan.setText("Simpan");
+        btnSimpan.setEnabled(false);
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTes3ActionPerformed(evt);
+                btnSimpanActionPerformed(evt);
             }
         });
 
@@ -228,6 +225,8 @@ public class PembeliFrame extends javax.swing.JFrame {
         });
 
         jLabel12.setText("Masukkan username yang ingin dicari");
+
+        btnShowPassword.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,10 +264,13 @@ public class PembeliFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                     .addComponent(tfNamaDepan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                    .addComponent(tfNamaTengah))))
+                                    .addComponent(tfNamaTengah)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -285,14 +287,14 @@ public class PembeliFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTes)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTambahData)
                 .addGap(18, 18, 18)
-                .addComponent(btnTes1)
+                .addComponent(btnHapus)
                 .addGap(18, 18, 18)
-                .addComponent(btnTes2)
+                .addComponent(btnEdit)
                 .addGap(18, 18, 18)
-                .addComponent(btnTes3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnReset)
                 .addGap(296, 296, 296))
@@ -311,14 +313,15 @@ public class PembeliFrame extends javax.swing.JFrame {
                         .addComponent(btnCari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -353,11 +356,11 @@ public class PembeliFrame extends javax.swing.JFrame {
                             .addComponent(tfNoRumah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTes)
-                    .addComponent(btnTes3)
+                    .addComponent(btnTambahData)
+                    .addComponent(btnSimpan)
                     .addComponent(btnReset)
-                    .addComponent(btnTes2)
-                    .addComponent(btnTes1))
+                    .addComponent(btnEdit)
+                    .addComponent(btnHapus))
                 .addGap(7, 7, 7)
                 .addComponent(btnCabangFrameKembali)
                 .addGap(27, 27, 27))
@@ -372,21 +375,82 @@ public class PembeliFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
-    private void btnTesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesActionPerformed
-
-    }//GEN-LAST:event_btnTesActionPerformed
-
-    private void btnTes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTes1ActionPerformed
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTes1ActionPerformed
+    }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void btnTes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTes2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTes2ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        btnSimpan.setEnabled(true);
+        btnTambahData.setEnabled(true);
+        btnHapus.setEnabled(true);
+        tfNoTelp.setEditable(true);
+        tfPassword.setEditable(true);
+        tfNamaDepan.setEditable(true);
+        tfNamaTengah.setEditable(true);
+        tfNamaAkhir.setEditable(true);
+        tfJalan.setEditable(true);
+        tfKecamatan.setEditable(true);
+        tfKota.setEditable(true);
+        tfNoRumah.setEditable(true);
+    }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnTes3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTes3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTes3ActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        String temp = primaryKeyNow;
+        String tempPrimaryKey = tfUsername.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Error");
+            btnReset.doClick();
+        }
+        else {
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                char[] pwc = tfPassword.getPassword();
+                String pw="";
+                for(char s : pwc) {
+                    pw += String.valueOf(s);
+                }
+                Date date = DateChooserTglLahir.getDate();
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                String cth = "update Pembeli set "
+                               + "username='" + tfUsername.getText()+"'"
+                               + ", no_telp='" + tfNoTelp.getText()+"'"
+                               + ", password= HASHBYTES('SHA2_512', '"+ pw+"')"
+                               + ", nama_depan='" + tfNamaDepan.getText()+"'"
+                               + ", nama_tengah='" + tfNamaTengah.getText()+"'"
+                               + ", nama_belakang='" + tfNamaAkhir.getText()+"'"
+                               + ", tanggal_lahir='" + sqlDate+"'"
+                               + ", jalan='" + tfJalan.getText()+"'"
+                               + ", kecamatan='" + tfKecamatan.getText()+"'"
+                               + ", kota='" + tfKota.getText()+"'"
+                               + ", no_rumah=" + tfNoRumah.getText()
+                               + " where username='" + temp+"'";
+                st.executeQuery(cth);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+                try {
+                    PembeliFrame konek = new PembeliFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                    if (!temp.equals(tempPrimaryKey)) {
+                        konek.tfUsername.setText(tempPrimaryKey);
+                        konek.tfUsername.setText(tempPrimaryKey);
+                    }
+                    else {
+                        konek.tfUsername.setText(temp);
+                        konek.tfUsername.setText(temp);
+                    }
+                    
+                    konek.btnCari.doClick();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
@@ -551,11 +615,12 @@ public class PembeliFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser DateChooserTglLahir;
     private javax.swing.JButton btnCabangFrameKembali;
     private javax.swing.JButton btnCari;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnTes;
-    private javax.swing.JButton btnTes1;
-    private javax.swing.JButton btnTes2;
-    private javax.swing.JButton btnTes3;
+    private javax.swing.JButton btnShowPassword;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JButton btnTambahData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -578,7 +643,7 @@ public class PembeliFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tfNamaTengah;
     private javax.swing.JTextField tfNoRumah;
     private javax.swing.JTextField tfNoTelp;
-    private javax.swing.JTextField tfPassword;
+    private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }
