@@ -172,15 +172,17 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangActionPerformed
-        CabangFrame frame1 = new CabangFrame();
-        frame1.setVisible(true);
-        this.dispose();       
+        try {
+                    CabangFrame konek = new CabangFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }       
     }//GEN-LAST:event_btnCabangActionPerformed
 
     private void btnPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembeliActionPerformed
-        PembeliFrame frame1 = new PembeliFrame();
-        frame1.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnPembeliActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
