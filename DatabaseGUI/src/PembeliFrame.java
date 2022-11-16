@@ -394,20 +394,18 @@ public class PembeliFrame extends javax.swing.JFrame {
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 String cth2 = "select * from Pembeli where username = '" + temp + "'";
                 String cth = "delete from Pembeli where "
-                             + "username = '" + temp +"'";
+                        + "username = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 //kalau username nya tidak exist
                 if (!resultSet.isBeforeFirst()) {
-                        JOptionPane.showMessageDialog(new PembeliFrame(), "Tidak Ada Hasil");
-                    }
-                else {
+                    JOptionPane.showMessageDialog(new PembeliFrame(), "Tidak Ada Hasil");
+                } else {
                     st.executeQuery(cth);
                     JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
                 }
@@ -415,17 +413,17 @@ public class PembeliFrame extends javax.swing.JFrame {
                 System.out.println(e);
                 JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
             }
-                try {
-                    PembeliFrame konek = new PembeliFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                    tfUsername.setText(temp);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                PembeliFrame konek = new PembeliFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+                tfUsername.setText(temp);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -450,71 +448,69 @@ public class PembeliFrame extends javax.swing.JFrame {
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 char[] pwc = tfPassword.getPassword();
-                String pw="";
-                for(char s : pwc) {
+                String pw = "";
+                for (char s : pwc) {
                     pw += String.valueOf(s);
                 }
                 Date date = DateChooserTglLahir.getDate();
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 String cth = "update Pembeli set "
-                               + "username='" + tfUsername.getText()+"'"
-                               + ", no_telp='" + tfNoTelp.getText()+"'"
-                               + ", password= HASHBYTES('SHA2_512', '"+ pw+"')"
-                               + ", nama_depan='" + tfNamaDepan.getText()+"'"
-                               + ", nama_tengah='" + tfNamaTengah.getText()+"'"
-                               + ", nama_belakang='" + tfNamaAkhir.getText()+"'"
-                               + ", tanggal_lahir='" + sqlDate+"'"
-                               + ", jalan='" + tfJalan.getText()+"'"
-                               + ", kecamatan='" + tfKecamatan.getText()+"'"
-                               + ", kota='" + tfKota.getText()+"'"
-                               + ", no_rumah=" + tfNoRumah.getText()
-                               + " where username='" + temp+"'";
+                        + "username='" + tfUsername.getText() + "'"
+                        + ", no_telp='" + tfNoTelp.getText() + "'"
+                        + ", password= HASHBYTES('SHA2_512', '" + pw + "')"
+                        + ", nama_depan='" + tfNamaDepan.getText() + "'"
+                        + ", nama_tengah='" + tfNamaTengah.getText() + "'"
+                        + ", nama_belakang='" + tfNamaAkhir.getText() + "'"
+                        + ", tanggal_lahir='" + sqlDate + "'"
+                        + ", jalan='" + tfJalan.getText() + "'"
+                        + ", kecamatan='" + tfKecamatan.getText() + "'"
+                        + ", kota='" + tfKota.getText() + "'"
+                        + ", no_rumah=" + tfNoRumah.getText()
+                        + " where username='" + temp + "'";
                 st.executeQuery(cth);
-                                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
+                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
                 System.out.println(e);
-                                    JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
+                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             }
-                try {
-                    PembeliFrame konek = new PembeliFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                    if (!temp.equals(tempPrimaryKey)) {
-                        konek.tfUsername.setText(tempPrimaryKey);
-                        konek.tfUsername.setText(tempPrimaryKey);
-                    }
-                    else {
-                        konek.tfUsername.setText(temp);
-                        konek.tfUsername.setText(temp);
-                    }
-                    
-                    konek.btnCari.doClick();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                PembeliFrame konek = new PembeliFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+                if (!temp.equals(tempPrimaryKey)) {
+                    konek.tfUsername.setText(tempPrimaryKey);
+                    konek.tfUsername.setText(tempPrimaryKey);
+                } else {
+                    konek.tfUsername.setText(temp);
+                    konek.tfUsername.setText(temp);
                 }
+
+                konek.btnCari.doClick();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-                    PembeliFrame konek = new PembeliFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
+            PembeliFrame konek = new PembeliFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+            this.dispose();
 //                    Date date = konek.DateChooserTglLahir.getDate();
 //                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void tblPembeliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembeliMouseClicked
@@ -599,7 +595,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                         } catch (ParseException ex) {
                             Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
+
                         tfJalan.setText(resultSet.getString(8));
                         tfKecamatan.setText(resultSet.getString(9));
                         tfKota.setText(resultSet.getString(10));
@@ -611,7 +607,8 @@ public class PembeliFrame extends javax.swing.JFrame {
             }
         }
     }
-/*
+
+    /*
     private void btnTambahDataActionPerformed() {
     }//GEN-LAST:event_btnCariActionPerformed
 */
@@ -620,55 +617,56 @@ public class PembeliFrame extends javax.swing.JFrame {
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 char[] pwc = tfPassword.getPassword();
-                String pw="";
-                for(char s : pwc) {
+                String pw = "";
+                for (char s : pwc) {
                     pw += String.valueOf(s);
                 }
                 Date date = DateChooserTglLahir.getDate();
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 String cth = "insert into Pembeli values("
-                               + "'" + temp+"'"
-                               + ", '" + tfNoTelp.getText()+"'"
-                               + ", HASHBYTES('SHA2_512', '" + pw +"')"
-                               + ", '" + tfNamaDepan.getText()+"'"
-                               + ", '" + tfNamaTengah.getText()+"'"
-                               + ", '" + tfNamaAkhir.getText()+"'"
-                               + ", '" + sqlDate+"'"
-                               + ", '" + tfJalan.getText()+"'"
-                               + ", '" + tfKecamatan.getText()+"'"
-                               + ", '" + tfKota.getText()+"'"
-                               + ", " + tfNoRumah.getText()
-                               + ")";
+                        + "'" + temp + "'"
+                        + ", '" + tfNoTelp.getText() + "'"
+                        + ", HASHBYTES('SHA2_512', '" + pw + "')"
+                        + ", '" + tfNamaDepan.getText() + "'"
+                        + ", '" + tfNamaTengah.getText() + "'"
+                        + ", '" + tfNamaAkhir.getText() + "'"
+                        + ", '" + sqlDate + "'"
+                        + ", '" + tfJalan.getText() + "'"
+                        + ", '" + tfKecamatan.getText() + "'"
+                        + ", '" + tfKota.getText() + "'"
+                        + ", " + tfNoRumah.getText()
+                        + ")";
                 st.executeQuery(cth);
                 JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
                 System.out.println(e);
                 JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             }
-                try {
-                    PembeliFrame konek = new PembeliFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                    konek.tfUsername.setText(temp);
-                    konek.tfUsername.setText(temp);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                PembeliFrame konek = new PembeliFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+                konek.tfUsername.setText(temp);
+                konek.tfUsername.setText(temp);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void cbSeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeeActionPerformed
-        if(cbSee.isSelected()) tfPassword.setEchoChar((char)0);
-        else tfPassword.setEchoChar('*');
+        if (cbSee.isSelected())
+            tfPassword.setEchoChar((char) 0);
+        else
+            tfPassword.setEchoChar('*');
     }//GEN-LAST:event_cbSeeActionPerformed
 
     /**

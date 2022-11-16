@@ -47,7 +47,6 @@ public class CabangFrame extends javax.swing.JFrame {
         System.out.println("Connect to database successful!!");
     }
 
-
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nama Cabang");
@@ -306,49 +305,49 @@ public class CabangFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-            String temp = tfNamaCabang.getText();
+        String temp = tfNamaCabang.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 String cth2 = "select * from Cabang where nama_cabang = '" + temp + "'";
                 String cth = "delete from Cabang where "
-                             + "nama_cabang = '" + temp +"'";
+                        + "nama_cabang = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 if (!resultSet.isBeforeFirst()) {
-                        JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
-                    }
-                else st.executeQuery(cth);
+                    JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                } else {
+                    st.executeQuery(cth);
+                }
             } catch (SQLException e) {
                 System.out.println(e);
             }
-                try {
-                    CabangFrame konek = new CabangFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                CabangFrame konek = new CabangFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-           
+
         btnSimpan.setEnabled(false);
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-                    CabangFrame konek = new CabangFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            CabangFrame konek = new CabangFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -366,34 +365,33 @@ public class CabangFrame extends javax.swing.JFrame {
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 String cth = "update Cabang set "
-                               + "nama_cabang='" + tfNamaCabang.getText()+"'"
-                               + ", jalan='" + tfJalan.getText()+"'"
-                               + ", kecamatan='" + tfKecamatan.getText()+"'"
-                               + ", kota='" + tfKota.getText()+"'"
-                               + ", no_bangunan=" + tfNoBangunan.getText()
-                               + " where nama_cabang='" + temp+"'";
+                        + "nama_cabang='" + tfNamaCabang.getText() + "'"
+                        + ", jalan='" + tfJalan.getText() + "'"
+                        + ", kecamatan='" + tfKecamatan.getText() + "'"
+                        + ", kota='" + tfKota.getText() + "'"
+                        + ", no_bangunan=" + tfNoBangunan.getText()
+                        + " where nama_cabang='" + temp + "'";
                 st.executeQuery(cth);
             } catch (SQLException e) {
                 System.out.println(e);
             }
-                try {
-                    CabangFrame konek = new CabangFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                CabangFrame konek = new CabangFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-           
+
         btnSimpan.setEnabled(false);
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -402,8 +400,7 @@ public class CabangFrame extends javax.swing.JFrame {
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Input Kosong");
             btnReset.doClick();
-        }
-        else {
+        } else {
             primaryKeyNow = tfNamaCabang.getText();
             connect();
             try {
@@ -411,18 +408,17 @@ public class CabangFrame extends javax.swing.JFrame {
                 String cth = "select * from Cabang where nama_cabang = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth);
                 if (!resultSet.isBeforeFirst()) {
-                        JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
-                        btnReset.doClick();
-                        tfNamaCabang.setText(temp);
-                    }
-                else {
-                while (resultSet.next()) {
-                    
+                    JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                    btnReset.doClick();
+                    tfNamaCabang.setText(temp);
+                } else {
+                    while (resultSet.next()) {
+
                         tfJalan.setText(resultSet.getString(2));
                         tfKecamatan.setText(resultSet.getString(3));
                         tfKota.setText(resultSet.getString(4));
                         tfNoBangunan.setText(String.valueOf(resultSet.getInt(5)));
-                }
+                    }
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
@@ -431,59 +427,58 @@ public class CabangFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
-            String temp = tfNamaCabang.getText();
+        String temp = tfNamaCabang.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
-        }
-        else {
+        } else {
             connect();
             try {
                 Statement st = conn.createStatement();
                 String cth = "insert into Cabang values("
-                               + "'" + temp+"'"
-                               + ", '" + tfJalan.getText()+"'"
-                               + ", '" + tfKecamatan.getText()+"'"
-                               + ", '" + tfKota.getText()+"'"
-                               + ", " + tfNoBangunan.getText()
-                               + ")";
+                        + "'" + temp + "'"
+                        + ", '" + tfJalan.getText() + "'"
+                        + ", '" + tfKecamatan.getText() + "'"
+                        + ", '" + tfKota.getText() + "'"
+                        + ", " + tfNoBangunan.getText()
+                        + ")";
                 st.executeQuery(cth);
             } catch (SQLException e) {
                 System.out.println(e);
             }
-                try {
-                    CabangFrame konek = new CabangFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    this.dispose();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                CabangFrame konek = new CabangFrame();
+                konek.setVisible(true);
+                konek.tampilkanData();
+                this.dispose();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-           
+
         btnSimpan.setEnabled(false);
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void tblCabangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCabangMouseClicked
         int baris = tblCabang.rowAtPoint(evt.getPoint());
-        String namaCabang = tblCabang.getValueAt(baris,0).toString();
+        String namaCabang = tblCabang.getValueAt(baris, 0).toString();
         tfNamaCabang.setText(namaCabang);
         primaryKeyNow = namaCabang;
-        
-        String jalan = tblCabang.getValueAt(baris,1).toString();
+
+        String jalan = tblCabang.getValueAt(baris, 1).toString();
         tfJalan.setText(jalan);
-        
-        String kecamatan = tblCabang.getValueAt(baris,2).toString();
+
+        String kecamatan = tblCabang.getValueAt(baris, 2).toString();
         tfKecamatan.setText(kecamatan);
-        
-        String kota = tblCabang.getValueAt(baris,3).toString();
+
+        String kota = tblCabang.getValueAt(baris, 3).toString();
         tfKota.setText(kota);
-        
-        String noBangunan = tblCabang.getValueAt(baris,4).toString();
+
+        String noBangunan = tblCabang.getValueAt(baris, 4).toString();
         tfNoBangunan.setText(noBangunan);
-        
+
     }//GEN-LAST:event_tblCabangMouseClicked
 
     /**

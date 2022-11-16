@@ -1,3 +1,4 @@
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,36 +14,36 @@ import java.util.logging.Logger;
 public class MainFrame extends javax.swing.JFrame {
 
     private void connect() {
-            String hostname = "localhost";
-            String sqlInstanceName = "LAPTOP-43HAT1M2"; //computer name 
-            String sqlDatabase = "University";  //sql server database name
-            String sqlUser = "123";
-            String sqlPassword = "123"; //passwrod sa account
+        String hostname = "localhost";
+        String sqlInstanceName = "LAPTOP-43HAT1M2"; //computer name 
+        String sqlDatabase = "University";  //sql server database name
+        String sqlUser = "123";
+        String sqlPassword = "123"; //passwrod sa account
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            //jdbc:sqlserver://localhost:1433;instance=COMPUTERBERRY;databaseName=Database;
-            String connectURL = "jdbc:sqlserver://" + hostname + ":1433" 
-                    + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
+        //jdbc:sqlserver://localhost:1433;instance=COMPUTERBERRY;databaseName=Database;
+        String connectURL = "jdbc:sqlserver://" + hostname + ":1433"
+                + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
 
         try {
             Connection conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-            System.out.println("Connect to database successful!!");
+        System.out.println("Connect to database successful!!");
     }
-    
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,12 +174,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangActionPerformed
         try {
-                    CabangFrame konek = new CabangFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }       
+            CabangFrame konek = new CabangFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCabangActionPerformed
 
     private void btnPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembeliActionPerformed
@@ -193,32 +194,39 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         try {
-                    MenuFrame konek = new MenuFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            MenuFrame konek = new MenuFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKasirActionPerformed
-        KasirFrame frame1 = new KasirFrame();
-        frame1.setVisible(true);
-        this.dispose();
+        try {
+            KasirFrame konek = new KasirFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+//                    Date date = konek.DateChooserTglLahir.getDate();
+//                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnKasirActionPerformed
 
     private void btnPesananMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananMenuActionPerformed
-        
+
     }//GEN-LAST:event_btnPesananMenuActionPerformed
 
     private void btnPengantarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengantarActionPerformed
-     
+
     }//GEN-LAST:event_btnPengantarActionPerformed
 
     private void btnPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembayaranActionPerformed
-        PembayaranFrame frame1 = new PembayaranFrame();
-        frame1.setVisible(true);
-        this.dispose();
+//        PembayaranFrame frame1 = new PembayaranFrame();
+//        frame1.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnPembayaranActionPerformed
 
     private void btnPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananActionPerformed
@@ -259,8 +267,7 @@ public class MainFrame extends javax.swing.JFrame {
             public void run() {
                 MainFrame frameUtama = new MainFrame();
                 frameUtama.setVisible(true);
-                
-                
+
             }
         });
     }
