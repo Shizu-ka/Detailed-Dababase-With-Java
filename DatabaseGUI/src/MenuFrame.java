@@ -283,6 +283,7 @@ public class MenuFrame extends javax.swing.JFrame {
                 st.executeQuery(cth);
             } catch (SQLException e) {
                 System.out.println(e);
+                JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Simpan");
             }
                 try {
                     MenuFrame konek = new MenuFrame();
@@ -368,6 +369,7 @@ public class MenuFrame extends javax.swing.JFrame {
                 st.executeQuery(cth);
             } catch (SQLException e) {
                 System.out.println(e);
+                JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Simpan");
             }
                 try {
                     MenuFrame konek = new MenuFrame();
@@ -410,9 +412,13 @@ public class MenuFrame extends javax.swing.JFrame {
                 if (!resultSet.isBeforeFirst()) {
                         JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
                     }
-                else st.executeQuery(cth);
+                else {
+                    st.executeQuery(cth);
+                    JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Hapus");
+                }
             } catch (SQLException e) {
                 System.out.println(e);
+                JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Hapus");
             }
                 try {
                     MenuFrame konek = new MenuFrame();
