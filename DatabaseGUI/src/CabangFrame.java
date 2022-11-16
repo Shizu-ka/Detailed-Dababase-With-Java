@@ -345,6 +345,7 @@ public class CabangFrame extends javax.swing.JFrame {
             CabangFrame konek = new CabangFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            this.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
