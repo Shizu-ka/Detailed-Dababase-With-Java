@@ -106,7 +106,11 @@ public class MenuFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Nama Menu");
 
+        tfNamaMenu.setEditable(false);
+
         jLabel3.setText("Harga");
+
+        tfHarga.setEditable(false);
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,9 +123,19 @@ public class MenuFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMenuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblMenu);
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Masukkan id menu");
 
@@ -135,6 +149,11 @@ public class MenuFrame extends javax.swing.JFrame {
 
         btnHapus.setText("Hapus");
         btnHapus.setEnabled(false);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -145,8 +164,18 @@ public class MenuFrame extends javax.swing.JFrame {
 
         btnSimpan.setText("Simpan");
         btnSimpan.setEnabled(false);
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,10 +301,131 @@ public class MenuFrame extends javax.swing.JFrame {
         btnTambahData.setEnabled(true);
         btnSimpan.setEnabled(true);
         
+        tfIdMenu.setEditable(false);
         tfNamaMenu.setEditable(true);
         tfHarga.setEditable(true);
         
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
+        int baris = tblMenu.rowAtPoint(evt.getPoint());
+        String Idmenu = tblMenu.getValueAt(baris,0).toString();
+        tfIdMenu.setText(Idmenu);
+        primaryKeyNow = Idmenu;
+        
+        String nm = tblMenu.getValueAt(baris,1).toString();
+        tfNamaMenu.setText(nm);
+        
+        String harga = tblMenu.getValueAt(baris,2).toString();
+        tfHarga.setText(harga);
+    }//GEN-LAST:event_tblMenuMouseClicked
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        String temp = tfIdMenu.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Input Kosong");
+            btnReset.doClick();
+        }
+        else {
+            primaryKeyNow = tfIdMenu.getText();
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                String cth = "select * from Menu where id_menu = " + temp;
+                ResultSet resultSet = st.executeQuery(cth);
+                if (!resultSet.isBeforeFirst()) {
+                        JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                        btnReset.doClick();
+                        tfIdMenu.setText(temp);
+                    }
+                else {
+                while (resultSet.next()) {
+                    
+                        tfNamaMenu.setText(resultSet.getString(2));
+                        tfHarga.setText(resultSet.getString(3));
+                }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(new CabangFrame(), e);
+            }
+        }
+    }//GEN-LAST:event_btnCariActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        String temp = primaryKeyNow;
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Error");
+            btnReset.doClick();
+        }
+        else {
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                String cth = "update Menu set "
+                               + "nama_menu='" + tfNamaMenu.getText()+"'"
+                               + ", harga=" + tfHarga.getText()
+                               + " where id_menu='" + temp +"'";
+                st.executeQuery(cth);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+                try {
+                    MenuFrame konek = new MenuFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+       try {
+                    MenuFrame konek = new MenuFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        String temp = tfIdMenu.getText();
+        if (temp.replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new CabangFrame(), "Error");
+            btnReset.doClick();
+        }
+        else {
+            connect();
+            try {
+                Statement st = conn.createStatement();
+                String cth2 = "select * from Menu where id_menu = '" + temp + "'";
+                String cth = "delete from Menu where "
+                             + "id_menu = '" + temp +"'";
+                ResultSet resultSet = st.executeQuery(cth2);
+                if (!resultSet.isBeforeFirst()) {
+                        JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                    }
+                else st.executeQuery(cth);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+                try {
+                    MenuFrame konek = new MenuFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    this.dispose();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
      * @param args the command line arguments
