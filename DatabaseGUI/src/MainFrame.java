@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,9 +35,18 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Connect to database successful!!");
+        JOptionPane.showMessageDialog(new MainFrame(), "Connect to database successful");
+        enableAdmin();
     }
 
+    void enableAdmin() {
+        tpAdmin.setEnabled(true);
+    }
+    
+    void pindah() {
+        tpAdmin.setSelectedIndex(1);
+    }
+    
     /**
      * Creates new form MainFrame
      */
@@ -53,8 +63,10 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tpAdmin = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        btnConnect = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnPembeli = new javax.swing.JButton();
         btnPesanan = new javax.swing.JButton();
@@ -68,18 +80,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tpAdmin.setEnabled(false);
+
+        btnConnect.setText("Connect");
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel6.setText("Tes Koneksi Ke Database");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
 
-        jTabbedPane1.addTab("Connect", jPanel2);
+        tpAdmin.addTab("Connect", jPanel2);
 
         btnPembeli.setText("Pembeli");
         btnPembeli.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(75, 75, 75))
         );
 
-        jTabbedPane1.addTab("Admin", jPanel1);
+        tpAdmin.addTab("Admin", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,14 +234,14 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(tpAdmin)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tpAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -238,6 +275,7 @@ public class MainFrame extends javax.swing.JFrame {
             KasirFrame konek = new KasirFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            konek.klik();
 //                    Date date = konek.DateChooserTglLahir.getDate();
 //                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         } catch (ClassNotFoundException | SQLException ex) {
@@ -276,6 +314,10 @@ public class MainFrame extends javax.swing.JFrame {
                     Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
+       connect();
+    }//GEN-LAST:event_btnConnectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,6 +358,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCabang;
+    private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnKasir;
     private javax.swing.JButton btnKeranjangBelanja;
     private javax.swing.JButton btnMenu;
@@ -324,8 +367,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnPengantar;
     private javax.swing.JButton btnPesanan;
     private javax.swing.JButton btnPesananMenu;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane tpAdmin;
     // End of variables declaration//GEN-END:variables
 }
