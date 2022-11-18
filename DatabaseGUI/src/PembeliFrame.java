@@ -146,7 +146,7 @@ public class PembeliFrame extends javax.swing.JFrame {
         tblPembeliCari = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Pembeli");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
@@ -393,7 +393,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Main", jPanel1);
 
         btnCari.setText("Cari");
         btnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -482,7 +482,7 @@ public class PembeliFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Cari", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -694,7 +694,6 @@ public class PembeliFrame extends javax.swing.JFrame {
                 String cariKueri1 = this.cariKueri + temp + "'";
                 setTable = cariKueri1;
                 try {
-                    tblPembeliCari.repaint();
                     tampilkanData();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -802,7 +801,53 @@ public class PembeliFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbUsernameActionPerformed
 
     private void tblPembeliCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembeliCariMouseClicked
-        // TODO add your handling code here:
+        int baris = tblPembeliCari.rowAtPoint(evt.getPoint());
+        String username = tblPembeliCari.getValueAt(baris, 0).toString();
+        tfUsername.setText(username);
+        primaryKeyNow = username;
+
+        String noTelp = tblPembeli.getValueAt(baris, 1).toString();
+        tfNoTelp.setText(noTelp);
+
+        String password = tblPembeli.getValueAt(baris, 2).toString();
+        tfPassword.setText(password);
+
+        String namaDepan = tblPembeli.getValueAt(baris, 3).toString();
+        tfNamaDepan.setText(namaDepan);
+
+        var obj = tblPembeli.getValueAt(baris, 4);
+        if (obj != null) {
+            String namaTengah = tblPembeli.getValueAt(baris, 4).toString();
+            tfNamaTengah.setText(namaTengah);
+        } else {
+            String namaTengah = "";
+            tfNamaTengah.setText(namaTengah);
+        }
+
+        String namaAkhir = tblPembeli.getValueAt(baris, 5).toString();
+        tfNamaAkhir.setText(namaAkhir);
+
+        String date = tblPembeli.getValueAt(baris, 6).toString();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date2;
+        try {
+            date2 = formatter.parse(date);
+            DateChooserTglLahir.setDate(date2);
+        } catch (ParseException ex) {
+            Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String jalan = tblPembeli.getValueAt(baris, 7).toString();
+        tfJalan.setText(jalan);
+
+        String kecamatan = tblPembeli.getValueAt(baris, 8).toString();
+        tfKecamatan.setText(kecamatan);
+
+        String kota = tblPembeli.getValueAt(baris, 9).toString();
+        tfKota.setText(kota);
+
+        String noRumah = tblPembeli.getValueAt(baris, 10).toString();
+        tfNoRumah.setText(noRumah);
     }//GEN-LAST:event_tblPembeliCariMouseClicked
 
     private void cbNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaDepanActionPerformed
@@ -813,6 +858,9 @@ public class PembeliFrame extends javax.swing.JFrame {
         cariKueri = "select * from Pembeli where no_telp = '";
     }//GEN-LAST:event_cbNoTelpActionPerformed
 
+    void klik() {
+        cbUsername.doClick();
+    }
     /**
      * @param args the command line arguments
      */
@@ -847,6 +895,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                     PembeliFrame konek = new PembeliFrame();
                     konek.setVisible(true);
                     konek.tampilkanData();
+                    konek.klik();
 //                    Date date = konek.DateChooserTglLahir.getDate();
 //                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 } catch (ClassNotFoundException ex) {
