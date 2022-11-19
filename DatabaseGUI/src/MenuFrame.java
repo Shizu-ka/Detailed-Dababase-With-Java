@@ -523,6 +523,7 @@ public class MenuFrame extends javax.swing.JFrame {
             MenuFrame konek = new MenuFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            konek.klik();
             this.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);

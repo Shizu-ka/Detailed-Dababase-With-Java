@@ -642,6 +642,7 @@ public class PembeliFrame extends javax.swing.JFrame {
             PembeliFrame konek = new PembeliFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            konek.klik();
             this.dispose();
 //                    Date date = konek.DateChooserTglLahir.getDate();
 //                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());

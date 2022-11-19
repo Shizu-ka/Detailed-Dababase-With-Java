@@ -42,11 +42,11 @@ public class MainFrame extends javax.swing.JFrame {
     void enableAdmin() {
         tpAdmin.setEnabled(true);
     }
-    
+
     void pindah() {
         tpAdmin.setSelectedIndex(1);
     }
-    
+
     /**
      * Creates new form MainFrame
      */
@@ -289,7 +289,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesananMenuActionPerformed
 
     private void btnPengantarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengantarActionPerformed
-
+        try {
+            PengantarFrame konek = new PengantarFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+            konek.klik();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PengantarFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPengantarActionPerformed
 
     private void btnPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembayaranActionPerformed
@@ -305,18 +312,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesananActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-         try {
-                    MenuFrame konek = new MenuFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    konek.klik();
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        try {
+            MenuFrame konek = new MenuFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+            konek.klik();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-       connect();
+        connect();
     }//GEN-LAST:event_btnConnectActionPerformed
 
     /**

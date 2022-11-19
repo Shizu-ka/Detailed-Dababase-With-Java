@@ -29,7 +29,7 @@ public class PengantarFrame extends javax.swing.JFrame {
     private static Connection conn;
     private static String primaryKeyNow = "";
     private String cariKueri = "";
-    private String setTable = "select * from Kasir";
+    private String setTable = "select * from Pengantar";
 
     private static void connect() {
         String hostname = "localhost";
@@ -48,7 +48,7 @@ public class PengantarFrame extends javax.swing.JFrame {
                 + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
 
         try {
-            KasirFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
+            PengantarFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
 
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,48 +58,46 @@ public class PengantarFrame extends javax.swing.JFrame {
 
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("No Pegawai");
+        model.addColumn("Username");
+        model.addColumn("No Plat");
         model.addColumn("No Telp");
         model.addColumn("Password");
         model.addColumn("Nama Depan");
         model.addColumn("Nama Tengah");
         model.addColumn("Nama Akhir");
-        model.addColumn("Tgl Lahir");
-        model.addColumn("Username");
         model.addColumn("Gaji");
         model.addColumn("Nama Cabang");
 
         DefaultTableModel model2 = new DefaultTableModel();
-        model2.addColumn("No Pegawai");
+        model2.addColumn("Username");
+        model2.addColumn("No Plat");
         model2.addColumn("No Telp");
         model2.addColumn("Password");
         model2.addColumn("Nama Depan");
         model2.addColumn("Nama Tengah");
         model2.addColumn("Nama Akhir");
-        model2.addColumn("Tgl Lahir");
-        model2.addColumn("Username");
         model2.addColumn("Gaji");
         model2.addColumn("Nama Cabang");
 
         connect();
         int no = 1;
         Statement st = conn.createStatement();
-        String cth = "select * from Kasir";
+        String cth = "select * from Pengantar";
         String cth2 = "select nama_cabang from Cabang";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
-            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getDate(7), resultSet.getString(8), resultSet.getInt(9), resultSet.getString(10)});
+            model.addRow(new Object[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getInt(8), resultSet.getString(9)});
         }
-        tblKasir.setModel(model);
+        tblPengantar.setModel(model);
         ResultSet resultSet2 = st.executeQuery(cth2);
         while (resultSet2.next()) {
             cbCabang.addItem(resultSet2.getString(1));
         }
         resultSet = st.executeQuery(setTable);
         while (resultSet.next()) {
-            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getDate(7), resultSet.getString(8), resultSet.getInt(9), resultSet.getString(10)});
+            model2.addRow(new Object[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getInt(8), resultSet.getString(9)});
         }
-        tblKasirCari.setModel(model2);
+        tblPengantarCari.setModel(model2);
     }
 
     @SuppressWarnings("unchecked")
@@ -111,9 +109,9 @@ public class PengantarFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCabangFrameKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfNoPegawai = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         tfNoTelp = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfNoPol = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tfNamaDepan = new javax.swing.JTextField();
@@ -121,16 +119,14 @@ public class PengantarFrame extends javax.swing.JFrame {
         tfNamaTengah = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tfNamaAkhir = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tfUsername = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         tfGaji = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblKasir = new javax.swing.JTable();
+        tblPengantar = new javax.swing.JTable();
         btnTambahData = new javax.swing.JButton();
-        DateChooserTglLahir = new com.toedter.calendar.JDateChooser();
         btnHapus = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
@@ -141,12 +137,12 @@ public class PengantarFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
-        cbNoPegawai = new javax.swing.JCheckBox();
+        cbUsername = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblKasirCari = new javax.swing.JTable();
+        tblPengantarCari = new javax.swing.JTable();
         cbNamaDepan = new javax.swing.JCheckBox();
         cbNoTelp = new javax.swing.JCheckBox();
-        cbUsername = new javax.swing.JCheckBox();
+        cbNoPlat = new javax.swing.JCheckBox();
         cbNamaCabang = new javax.swing.JCheckBox();
         cbGaji = new javax.swing.JCheckBox();
         cbNamaBelakang = new javax.swing.JCheckBox();
@@ -162,11 +158,13 @@ public class PengantarFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("No Pegawai");
-
-        jLabel2.setText("No Telp");
+        jLabel1.setText("Username");
 
         tfNoTelp.setEditable(false);
+
+        jLabel2.setText("No Plat");
+
+        tfNoPol.setEditable(false);
 
         jLabel3.setText("Password");
 
@@ -182,9 +180,7 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         tfNamaAkhir.setEditable(false);
 
-        jLabel7.setText("Tgl Lahir");
-
-        jLabel8.setText("Username");
+        jLabel8.setText("No Telp");
 
         tfUsername.setEditable(false);
 
@@ -194,7 +190,7 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         jLabel10.setText("Cabang");
 
-        tblKasir.setModel(new javax.swing.table.DefaultTableModel(
+        tblPengantar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -205,12 +201,12 @@ public class PengantarFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblKasir.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPengantar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKasirMouseClicked(evt);
+                tblPengantarMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblKasir);
+        jScrollPane1.setViewportView(tblPengantar);
 
         btnTambahData.setText("Tambah Data");
         btnTambahData.setEnabled(false);
@@ -261,6 +257,8 @@ public class PengantarFrame extends javax.swing.JFrame {
             }
         });
 
+        cbCabang.setEditable(true);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -269,45 +267,41 @@ public class PengantarFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfNamaAkhir, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNoPegawai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                                    .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNamaTengah, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbSee)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(864, 864, 864))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbCabang, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                        .addComponent(tfGaji)
-                                        .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(tfNamaTengah))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbCabang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfGaji)
+                            .addComponent(tfNamaDepan)
+                            .addComponent(tfUsername)
+                            .addComponent(tfNamaAkhir, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                            .addComponent(tfNoPol)
+                            .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbSee)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(864, 864, 864))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(383, Short.MAX_VALUE)
@@ -333,39 +327,35 @@ public class PengantarFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(tfNoPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNoPol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
+                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbSee))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaTengah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(tfNamaTengah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel6)
+                    .addComponent(tfNamaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -374,7 +364,7 @@ public class PengantarFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cbCabang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -400,15 +390,15 @@ public class PengantarFrame extends javax.swing.JFrame {
             }
         });
 
-        btnGCari.add(cbNoPegawai);
-        cbNoPegawai.setText("No Pegawai");
-        cbNoPegawai.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbUsername);
+        cbUsername.setText("Username");
+        cbUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNoPegawaiActionPerformed(evt);
+                cbUsernameActionPerformed(evt);
             }
         });
 
-        tblKasirCari.setModel(new javax.swing.table.DefaultTableModel(
+        tblPengantarCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -419,12 +409,12 @@ public class PengantarFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblKasirCari.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPengantarCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKasirCariMouseClicked(evt);
+                tblPengantarCariMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblKasirCari);
+        jScrollPane2.setViewportView(tblPengantarCari);
 
         btnGCari.add(cbNamaDepan);
         cbNamaDepan.setText("Nama Depan");
@@ -442,11 +432,11 @@ public class PengantarFrame extends javax.swing.JFrame {
             }
         });
 
-        btnGCari.add(cbUsername);
-        cbUsername.setText("Username");
-        cbUsername.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbNoPlat);
+        cbNoPlat.setText("No Plat");
+        cbNoPlat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUsernameActionPerformed(evt);
+                cbNoPlatActionPerformed(evt);
             }
         });
 
@@ -486,12 +476,9 @@ public class PengantarFrame extends javax.swing.JFrame {
                         .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(cbNoPegawai)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(cbUsername)
-                                    .addGap(23, 23, 23)))
+                                .addComponent(cbNoPlat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbUsername))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cbNamaDepan)
                                 .addComponent(cbNamaCabang))
@@ -513,12 +500,12 @@ public class PengantarFrame extends javax.swing.JFrame {
                 .addComponent(btnCari)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbNoPegawai)
+                    .addComponent(cbUsername)
                     .addComponent(cbNamaDepan)
                     .addComponent(cbNoTelp))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbUsername)
+                    .addComponent(cbNoPlat)
                     .addComponent(cbNamaCabang)
                     .addComponent(cbGaji))
                 .addGap(18, 18, 18)
@@ -558,17 +545,16 @@ public class PengantarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        String temp = tfNoPegawai.getText();
+        String temp = tfUsername.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth2 = "select * from Kasir where no_pegawai = '" + temp + "'";
-                String cth = "delete from Kasir where "
-                        + "no_pegawai = '" + temp + "'";
+                String cth2 = "select * from Pengantar where username = '" + temp + "'";
+                String cth = "delete from Pengantar where "
+                        + "username = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 //kalau username nya tidak exist
                 if (!resultSet.isBeforeFirst()) {
@@ -584,18 +570,15 @@ public class PengantarFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
                 }
             } catch (SQLException e) {
-                System.out.println(e);
-                JOptionPane.showMessageDialog(new PembeliFrame(), e);
+                JOptionPane.showMessageDialog(new PengantarFrame(), e);
             }
             try {
-                KasirFrame konek = new KasirFrame();
+                PengantarFrame konek = new PengantarFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                tfNoPegawai.setText(temp);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+                tfNoTelp.setText(temp);
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -605,9 +588,10 @@ public class PengantarFrame extends javax.swing.JFrame {
         btnSimpan.setEnabled(true);
         btnTambahData.setEnabled(true);
         btnHapus.setEnabled(true);
-
-        tfNoPegawai.setEditable(false);
+        
         tfNoTelp.setEditable(true);
+        tfUsername.setEditable(true);
+        tfNoPol.setEditable(true);
         tfPassword.setEditable(true);
         tfNamaDepan.setEditable(true);
         tfNamaTengah.setEditable(true);
@@ -620,10 +604,9 @@ public class PengantarFrame extends javax.swing.JFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         String temp = primaryKeyNow;
-        String tempPrimaryKey = tfNoPegawai.getText();
+        String tempPrimaryKey = tfNoTelp.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
-            JOptionPane.showMessageDialog(new KasirFrame(), "Error");
-            btnReset.doClick();
+            JOptionPane.showMessageDialog(new PengantarFrame(), "Error");
         } else {
             connect();
             try {
@@ -633,19 +616,17 @@ public class PengantarFrame extends javax.swing.JFrame {
                 for (char s : pwc) {
                     pw += String.valueOf(s);
                 }
-                Date date = DateChooserTglLahir.getDate();
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                String cth = "update Kasir set "
+                String cth = "update Pengantar set "
                         + "username='" + tfUsername.getText() + "'"
+                        + ", no_pol='" + tfNoPol.getText() + "'"
                         + ", no_telp='" + tfNoTelp.getText() + "'"
                         + ", password= HASHBYTES('SHA2_512', '" + pw + "')"
                         + ", nama_depan='" + tfNamaDepan.getText() + "'"
                         + ", nama_tengah='" + tfNamaTengah.getText() + "'"
                         + ", nama_belakang='" + tfNamaAkhir.getText() + "'"
-                        + ", tanggal_lahir='" + sqlDate + "'"
                         + ", nama_cabang='" + cbCabang.getSelectedItem() + "'"
                         + ", gaji=" + tfGaji.getText()
-                        + " where no_pegawai='" + temp + "'";
+                        + " where username='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -655,11 +636,10 @@ public class PengantarFrame extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(new KasirFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
-                System.out.println(e);
                 JOptionPane.showMessageDialog(new KasirFrame(), e);
             }
             try {
-                KasirFrame konek = new KasirFrame();
+                PengantarFrame konek = new PengantarFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
@@ -671,10 +651,7 @@ public class PengantarFrame extends javax.swing.JFrame {
                     konek.tfUsername.setText(temp);
                 }
 
-                konek.btnCari.doClick();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -682,61 +659,53 @@ public class PengantarFrame extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-            KasirFrame konek = new KasirFrame();
+            PengantarFrame konek = new PengantarFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            konek.klik();
             this.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnResetActionPerformed
 
-    private void tblKasirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKasirMouseClicked
-        int baris = tblKasir.rowAtPoint(evt.getPoint());
-        String username = tblKasir.getValueAt(baris, 0).toString();
-        tfNoPegawai.setText(username);
+    private void tblPengantarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPengantarMouseClicked
+        int baris = tblPengantar.rowAtPoint(evt.getPoint());
+        String username = tblPengantar.getValueAt(baris, 0).toString();
+        tfUsername.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblKasir.getValueAt(baris, 1).toString();
+        String noPol = tblPengantar.getValueAt(baris, 1).toString();
+        tfNoPol.setText(noPol);
+        
+        String noTelp = tblPengantar.getValueAt(baris, 2).toString();
         tfNoTelp.setText(noTelp);
 
-        String password = tblKasir.getValueAt(baris, 2).toString();
+        String password = tblPengantar.getValueAt(baris, 3).toString();
         tfPassword.setText(password);
 
-        String namaDepan = tblKasir.getValueAt(baris, 3).toString();
+        String namaDepan = tblPengantar.getValueAt(baris, 4).toString();
         tfNamaDepan.setText(namaDepan);
 
-        var obj = tblKasir.getValueAt(baris, 4);
+        var obj = tblPengantar.getValueAt(baris, 5);
         if (obj != null) {
-            String namaTengah = tblKasir.getValueAt(baris, 4).toString();
+            String namaTengah = tblPengantar.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        String namaAkhir = tblKasir.getValueAt(baris, 5).toString();
+        String namaAkhir = tblPengantar.getValueAt(baris, 6).toString();
         tfNamaAkhir.setText(namaAkhir);
 
-        String date = tblKasir.getValueAt(baris, 6).toString();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date2;
-        try {
-            date2 = formatter.parse(date);
-            DateChooserTglLahir.setDate(date2);
-        } catch (ParseException ex) {
-            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        String us = tblKasir.getValueAt(baris, 7).toString();
-        tfUsername.setText(us);
-
-        String gaji = tblKasir.getValueAt(baris, 8).toString();
+        String gaji = tblPengantar.getValueAt(baris, 7).toString();
         tfGaji.setText(gaji);
 
-        String kota = tblKasir.getValueAt(baris, 9).toString();
+        String kota = tblPengantar.getValueAt(baris, 8).toString();
         cbCabang.setSelectedItem(kota);
-    }//GEN-LAST:event_tblKasirMouseClicked
+    }//GEN-LAST:event_tblPengantarMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String temp = tfCari.getText();
@@ -759,30 +728,19 @@ public class PengantarFrame extends javax.swing.JFrame {
                     tfCari.setText(temp);
                 } else {
                     while (resultSet.next()) {
-                        tfNoPegawai.setText(resultSet.getString(1));
-                        tfNoTelp.setText(resultSet.getString(2));
-                        tfPassword.setText(resultSet.getString(3));
-                        tfNamaDepan.setText(resultSet.getString(4));
-                        tfNamaTengah.setText(resultSet.getString(5));
-                        tfNamaAkhir.setText(resultSet.getString(6));
-
-                        String date = resultSet.getDate(7).toString();
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date2;
-                        try {
-                            date2 = formatter.parse(date);
-                            DateChooserTglLahir.setDate(date2);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        tfUsername.setText(resultSet.getString(8));
-                        tfGaji.setText(resultSet.getString(9));
-                        cbCabang.setSelectedItem(resultSet.getString(10));
+                        tfUsername.setText(resultSet.getString(1));
+                        tfNoPol.setText(resultSet.getString(2));
+                        tfNoTelp.setText(resultSet.getString(3));
+                        tfPassword.setText(resultSet.getString(4));
+                        tfNamaDepan.setText(resultSet.getString(5));
+                        tfNamaTengah.setText(resultSet.getString(6));
+                        tfNamaAkhir.setText(resultSet.getString(7));
+                        tfGaji.setText(resultSet.getString(8));
+                        cbCabang.setSelectedItem(resultSet.getString(9));
                     }
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(new KasirFrame(), e);
+                JOptionPane.showMessageDialog(new PengantarFrame(), e);
             }
         }
     }
@@ -793,7 +751,7 @@ public class PengantarFrame extends javax.swing.JFrame {
 */
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         String temp = "";
-        tfNoPegawai.setText(temp);
+        tfNoTelp.setText(temp);
         connect();
         try {
             Statement st = conn.createStatement();
@@ -802,16 +760,14 @@ public class PengantarFrame extends javax.swing.JFrame {
             for (char s : pwc) {
                 pw += String.valueOf(s);
             }
-            Date date = DateChooserTglLahir.getDate();
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            String cth = "insert into Kasir values("
-                    + "'" + tfNoTelp.getText() + "'"
+            String cth = "insert into Pengantar values("
+                    + "'" + tfUsername.getText() + "'"
+                    + ", '" + tfNoPol.getText() + "'"
+                    + ", '" + tfNoTelp.getText() + "'"
                     + ", HASHBYTES('SHA2_512', '" + pw + "')"
                     + ", '" + tfNamaDepan.getText() + "'"
                     + ", '" + tfNamaTengah.getText() + "'"
                     + ", '" + tfNamaAkhir.getText() + "'"
-                    + ", '" + sqlDate + "'"
-                    + ", '" + tfUsername.getText() + "'"
                     + ", '" + tfGaji.getText() + "'"
                     + ", '" + cbCabang.getSelectedItem() + "'"
                     + ")";
@@ -827,15 +783,13 @@ public class PengantarFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new KasirFrame(), e);
         }
         try {
-            KasirFrame konek = new KasirFrame();
+            PengantarFrame konek = new PengantarFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             this.dispose();
             konek.tfUsername.setText(temp);
             konek.tfUsername.setText(temp);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
@@ -849,84 +803,75 @@ public class PengantarFrame extends javax.swing.JFrame {
         cariKueri = "select * from Kasir where no_pegawai = '";
     }//GEN-LAST:event_cbSeeActionPerformed
 
-    private void tblKasirCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKasirCariMouseClicked
-        int baris = tblKasirCari.rowAtPoint(evt.getPoint());
-        String username = tblKasirCari.getValueAt(baris, 0).toString();
-        tfNoPegawai.setText(username);
+    private void tblPengantarCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPengantarCariMouseClicked
+        int baris = tblPengantar.rowAtPoint(evt.getPoint());
+        String username = tblPengantar.getValueAt(baris, 0).toString();
+        tfUsername.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblKasir.getValueAt(baris, 1).toString();
+        String noPol = tblPengantar.getValueAt(baris, 1).toString();
+        tfNoPol.setText(noPol);
+        
+        String noTelp = tblPengantar.getValueAt(baris, 2).toString();
         tfNoTelp.setText(noTelp);
 
-        String password = tblKasir.getValueAt(baris, 2).toString();
+        String password = tblPengantar.getValueAt(baris, 3).toString();
         tfPassword.setText(password);
 
-        String namaDepan = tblKasir.getValueAt(baris, 3).toString();
+        String namaDepan = tblPengantar.getValueAt(baris, 4).toString();
         tfNamaDepan.setText(namaDepan);
 
-        var obj = tblKasir.getValueAt(baris, 4);
+        var obj = tblPengantar.getValueAt(baris, 5);
         if (obj != null) {
-            String namaTengah = tblKasir.getValueAt(baris, 4).toString();
+            String namaTengah = tblPengantar.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        String namaAkhir = tblKasir.getValueAt(baris, 5).toString();
+        String namaAkhir = tblPengantar.getValueAt(baris, 6).toString();
         tfNamaAkhir.setText(namaAkhir);
 
-        String date = tblKasir.getValueAt(baris, 6).toString();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date2;
-        try {
-            date2 = formatter.parse(date);
-            DateChooserTglLahir.setDate(date2);
-        } catch (ParseException ex) {
-            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        String us = tblKasir.getValueAt(baris, 7).toString();
-        tfUsername.setText(us);
-
-        String gaji = tblKasir.getValueAt(baris, 8).toString();
+        String gaji = tblPengantar.getValueAt(baris, 7).toString();
         tfGaji.setText(gaji);
 
-        String kota = tblKasir.getValueAt(baris, 9).toString();
+        String kota = tblPengantar.getValueAt(baris, 8).toString();
         cbCabang.setSelectedItem(kota);
-    }//GEN-LAST:event_tblKasirCariMouseClicked
+    }//GEN-LAST:event_tblPengantarCariMouseClicked
 
-    private void cbNoPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoPegawaiActionPerformed
+    private void cbUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsernameActionPerformed
         primaryKeyNow = tfCari.getText();
-        cariKueri = "select * from Kasir where no_pegawai = '";
-    }//GEN-LAST:event_cbNoPegawaiActionPerformed
+        cariKueri = "select * from Pengantar where username = '";
+    }//GEN-LAST:event_cbUsernameActionPerformed
 
     private void cbNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaDepanActionPerformed
-        cariKueri = "select * from Kasir where nama_depan = '";
+        cariKueri = "select * from Pengantar where nama_depan = '";
     }//GEN-LAST:event_cbNamaDepanActionPerformed
 
     private void cbNoTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoTelpActionPerformed
-        cariKueri = "select * from Kasir where no_telp = '";
+        cariKueri = "select * from Pengantar where no_telp = '";
     }//GEN-LAST:event_cbNoTelpActionPerformed
 
-    private void cbUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsernameActionPerformed
-        cariKueri = "select * from Kasir where username = '";
-    }//GEN-LAST:event_cbUsernameActionPerformed
+    private void cbNoPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoPlatActionPerformed
+        cariKueri = "select * from Pengantar where no_pol = '";
+    }//GEN-LAST:event_cbNoPlatActionPerformed
 
     private void cbNamaCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaCabangActionPerformed
-        cariKueri = "select * from Kasir where nama_cabang = '";
+        cariKueri = "select * from Pengantar where nama_cabang = '";
     }//GEN-LAST:event_cbNamaCabangActionPerformed
 
     private void cbGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGajiActionPerformed
-        cariKueri = "select * from Kasir where gaji = '";
+        cariKueri = "select * from Pengantar where gaji = '";
     }//GEN-LAST:event_cbGajiActionPerformed
 
     private void cbNamaBelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaBelakangActionPerformed
-        cariKueri = "select * from Kasir where nama_belakang = '";
+        cariKueri = "select * from Pengantar where nama_belakang = '";
     }//GEN-LAST:event_cbNamaBelakangActionPerformed
 
     void klik() {
-        cbNoPegawai.doClick();
+        cbUsername.doClick();
     }
 
     /**
@@ -960,19 +905,18 @@ public class PengantarFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    KasirFrame konek = new KasirFrame();
+                    PengantarFrame konek = new PengantarFrame();
                     konek.setVisible(true);
                     konek.tampilkanData();
                     konek.klik();
                 } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PengantarFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser DateChooserTglLahir;
     private javax.swing.JButton btnCabangFrameKembali;
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnEdit;
@@ -986,7 +930,7 @@ public class PengantarFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbNamaBelakang;
     private javax.swing.JCheckBox cbNamaCabang;
     private javax.swing.JCheckBox cbNamaDepan;
-    private javax.swing.JCheckBox cbNoPegawai;
+    private javax.swing.JCheckBox cbNoPlat;
     private javax.swing.JCheckBox cbNoTelp;
     private javax.swing.JCheckBox cbSee;
     private javax.swing.JCheckBox cbUsername;
@@ -997,7 +941,6 @@ public class PengantarFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1005,14 +948,14 @@ public class PengantarFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblKasir;
-    private javax.swing.JTable tblKasirCari;
+    private javax.swing.JTable tblPengantar;
+    private javax.swing.JTable tblPengantarCari;
     private javax.swing.JTextField tfCari;
     private javax.swing.JTextField tfGaji;
     private javax.swing.JTextField tfNamaAkhir;
     private javax.swing.JTextField tfNamaDepan;
     private javax.swing.JTextField tfNamaTengah;
-    private javax.swing.JTextField tfNoPegawai;
+    private javax.swing.JTextField tfNoPol;
     private javax.swing.JTextField tfNoTelp;
     private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUsername;

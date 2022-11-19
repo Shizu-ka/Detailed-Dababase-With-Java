@@ -671,7 +671,6 @@ public class KasirFrame extends javax.swing.JFrame {
                     konek.tfUsername.setText(temp);
                 }
 
-                konek.btnCari.doClick();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -685,6 +684,7 @@ public class KasirFrame extends javax.swing.JFrame {
             KasirFrame konek = new KasirFrame();
             konek.setVisible(true);
             konek.tampilkanData();
+            konek.klik();
             this.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
