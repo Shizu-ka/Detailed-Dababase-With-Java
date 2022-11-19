@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class KasirFrame extends javax.swing.JFrame {
+public class PengantarFrame extends javax.swing.JFrame {
 
-    public KasirFrame() {
+    public PengantarFrame() {
         initComponents();
     }
 

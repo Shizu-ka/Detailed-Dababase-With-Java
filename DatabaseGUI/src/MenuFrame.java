@@ -408,11 +408,11 @@ public class MenuFrame extends javax.swing.JFrame {
             } else {
                 rs = st.getResultSet();
             }
-            JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Simpan");
+            JOptionPane.showMessageDialog(new MenuFrame(), "Data Berhasil Di Simpan");
 //            ResultSet resultSet = st.executeQuery(cth);
 //            resultSet = st.getResultSet();
         } catch (SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(new MenuFrame(), e);
         }
         try {
             MenuFrame konek = new MenuFrame();
@@ -503,7 +503,6 @@ public class MenuFrame extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
             } catch (SQLException e) {
-                System.out.println(e);
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {

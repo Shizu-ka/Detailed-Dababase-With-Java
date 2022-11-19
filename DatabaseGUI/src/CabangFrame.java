@@ -56,7 +56,7 @@ public class CabangFrame extends javax.swing.JFrame {
         model.addColumn("Kecamatan");
         model.addColumn("Kota");
         model.addColumn("No Bangunan");
-        
+
         DefaultTableModel model2 = new DefaultTableModel();
         model2.addColumn("Nama Cabang");
         model2.addColumn("Jalan");
@@ -471,10 +471,16 @@ public class CabangFrame extends javax.swing.JFrame {
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
                 } else {
-                    st.executeQuery(cth);
+                    boolean gotResults = st.execute(cth);
+                    ResultSet rs = null;
+                    if (!gotResults) {
+                        System.out.println("No results returned");
+                    } else {
+                        rs = st.getResultSet();
+                    }
                 }
             } catch (SQLException e) {
-                System.out.println(e);
+                JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
                 CabangFrame konek = new CabangFrame();
@@ -528,9 +534,15 @@ public class CabangFrame extends javax.swing.JFrame {
                         + ", kota='" + tfKota.getText() + "'"
                         + ", no_bangunan=" + tfNoBangunan.getText()
                         + " where nama_cabang='" + temp + "'";
-                st.executeQuery(cth);
+                boolean gotResults = st.execute(cth);
+                ResultSet rs = null;
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
             } catch (SQLException e) {
-                System.out.println(e);
+                JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
                 CabangFrame konek = new CabangFrame();
@@ -597,7 +609,13 @@ public class CabangFrame extends javax.swing.JFrame {
                         + ", '" + tfKota.getText() + "'"
                         + ", " + tfNoBangunan.getText()
                         + ")";
-                st.executeQuery(cth);
+                boolean gotResults = st.execute(cth);
+                ResultSet rs = null;
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -676,9 +694,10 @@ public class CabangFrame extends javax.swing.JFrame {
         cariKueri = "select * from Cabang where no_bangunan = '";
     }//GEN-LAST:event_cbNoBangunanActionPerformed
 
-    void klik(){
+    void klik() {
         cbNamaCabang.doClick();
     }
+
     /**
      * @param args the command line arguments
      */

@@ -531,12 +531,18 @@ public class PembeliFrame extends javax.swing.JFrame {
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(new PembeliFrame(), "Tidak Ada Hasil");
                 } else {
-                    st.executeQuery(cth);
+                    boolean gotResults = st.execute(cth);
+                    ResultSet rs = null;
+                    if (!gotResults) {
+                        System.out.println("No results returned");
+                    } else {
+                        rs = st.getResultSet();
+                    }
                     JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
                 }
             } catch (SQLException e) {
                 System.out.println(e);
-                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Hapus");
+                JOptionPane.showMessageDialog(new PembeliFrame(), e);
             }
             try {
                 PembeliFrame konek = new PembeliFrame();
@@ -597,7 +603,13 @@ public class PembeliFrame extends javax.swing.JFrame {
                         + ", kota='" + tfKota.getText() + "'"
                         + ", no_rumah=" + tfNoRumah.getText()
                         + " where username='" + temp + "'";
-                st.executeQuery(cth);
+                boolean gotResults = st.execute(cth);
+                ResultSet rs = null;
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
                 JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
                 System.out.println(e);
@@ -772,11 +784,17 @@ public class PembeliFrame extends javax.swing.JFrame {
                         + ", '" + tfKota.getText() + "'"
                         + ", " + tfNoRumah.getText()
                         + ")";
-                st.executeQuery(cth);
+                boolean gotResults = st.execute(cth);
+                ResultSet rs = null;
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
                 JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
             } catch (SQLException e) {
                 System.out.println(e);
-                JOptionPane.showMessageDialog(new PembeliFrame(), "Data Berhasil Di Simpan");
+                JOptionPane.showMessageDialog(new PembeliFrame(), e);
             }
             try {
                 PembeliFrame konek = new PembeliFrame();
@@ -866,6 +884,7 @@ public class PembeliFrame extends javax.swing.JFrame {
     void klik() {
         cbUsername.doClick();
     }
+
     /**
      * @param args the command line arguments
      */
