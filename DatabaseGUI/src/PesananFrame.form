@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="btnGCari">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGPengambilan">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -64,56 +66,51 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel9" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" pref="87" max="32767" attributes="0"/>
-                                  <Component id="jLabel7" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="tfNamaAkhir" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfNoPegawai" alignment="0" pref="266" max="32767" attributes="0"/>
-                                          <Component id="tfNoTelp" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfNamaDepan" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfNamaTengah" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="tfPassword" min="-2" pref="202" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="cbSee" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="864" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="cbCabang" min="-2" pref="256" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="tfUsername" pref="256" max="32767" attributes="0"/>
-                                              <Component id="tfGaji" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="DateChooserTglLahir" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jLabel2" pref="171" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="1052" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="DateChooserTglPemesanan" min="-2" pref="256" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                      <Component id="tfTotal" min="-2" pref="250" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel9" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="tfPengantar" min="-2" pref="250" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfPembeli" alignment="0" pref="250" max="32767" attributes="0"/>
+                                              <Component id="tfIdPesanan" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cbTakeAway" min="-2" pref="85" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="cbDelivery" min="-2" pref="85" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jLabel5" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfPegawai" pref="250" max="32767" attributes="0"/>
+                                          <Component id="tfKodePembayaran" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -152,55 +149,47 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfNoPegawai" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfIdPesanan" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfNoTelp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfPembeli" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbSee" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfNamaDepan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfKodePembayaran" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfNamaTengah" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfPegawai" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfNamaAkhir" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="DateChooserTglLahir" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="cbTakeAway" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbDelivery" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfGaji" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfPengantar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbCabang" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="DateChooserTglPemesanan" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="198" max="32767" attributes="0"/>
+                      <EmptySpace pref="268" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -234,84 +223,72 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="No Pegawai"/>
+                <Property name="text" type="java.lang.String" value="ID Pesanan"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNoPegawai">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="No Telp"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfNoTelp">
+            <Component class="javax.swing.JTextField" name="tfIdPesanan">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Password"/>
+                <Property name="text" type="java.lang.String" value="Pembeli"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfPembeli">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nama Depan"/>
+                <Property name="text" type="java.lang.String" value="Kode Pembayaran"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNamaDepan">
+            <Component class="javax.swing.JTextField" name="tfKodePembayaran">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nama Tengah"/>
+                <Property name="text" type="java.lang.String" value="No Kasir"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNamaTengah">
+            <Component class="javax.swing.JTextField" name="tfPegawai">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nama Akhir"/>
+                <Property name="text" type="java.lang.String" value="Total"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNamaAkhir">
+            <Component class="javax.swing.JTextField" name="tfTotal">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tgl Lahir"/>
+                <Property name="text" type="java.lang.String" value="Tgl Pemesanan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Username"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfUsername">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="Pengambilan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gaji"/>
+                <Property name="text" type="java.lang.String" value="Pengantar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfGaji">
+            <Component class="javax.swing.JTextField" name="tfPengantar">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cabang"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -321,7 +298,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblKasir">
+                <Component class="javax.swing.JTable" name="tblPesanan">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -333,7 +310,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblKasirMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPesananMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -347,7 +324,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTambahDataActionPerformed"/>
               </Events>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="DateChooserTglLahir">
+            <Component class="com.toedter.calendar.JDateChooser" name="DateChooserTglPemesanan">
             </Component>
             <Component class="javax.swing.JButton" name="btnHapus">
               <Properties>
@@ -383,34 +360,23 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="tfPassword">
+            <Component class="javax.swing.JCheckBox" name="cbTakeAway">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGPengambilan"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Takeaway"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbSee">
+            <Component class="javax.swing.JCheckBox" name="cbDelivery">
               <Properties>
-                <Property name="text" type="java.lang.String" value="See"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGPengambilan"/>
                 </Property>
-                <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/eye.png"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Delivery"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSeeActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cbCabang">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -434,27 +400,22 @@
                               <Component id="tfCari" min="-2" pref="326" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbNoPegawai" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="cbUsername" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="cbIdPesanan" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbPegawai" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbNamaDepan" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbNamaCabang" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbPembeli" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbTotal" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbGaji" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbNoTelp" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="cbPengambilan" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbPembayaran" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="cbNamaBelakang" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPengantar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="840" max="-2" attributes="0"/>
@@ -471,18 +432,18 @@
                       <Component id="btnCari" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbNoPegawai" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbNamaDepan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbNoTelp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbIdPesanan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPembeli" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPembayaran" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbNamaCabang" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbGaji" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPegawai" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbPengambilan" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cbNamaBelakang" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbPengantar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -503,15 +464,15 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfCari">
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbNoPegawai">
+            <Component class="javax.swing.JCheckBox" name="cbIdPesanan">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="No Pegawai"/>
+                <Property name="text" type="java.lang.String" value="Id Pesanan"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoPegawaiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbIdPesananActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -521,7 +482,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblKasirCari">
+                <Component class="javax.swing.JTable" name="tblPesananCari">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -533,75 +494,75 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblKasirCariMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPesananCariMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JCheckBox" name="cbNamaDepan">
+            <Component class="javax.swing.JCheckBox" name="cbPembeli">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nama Depan"/>
+                <Property name="text" type="java.lang.String" value="Pembeli"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNamaDepanActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPembeliActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbNoTelp">
+            <Component class="javax.swing.JCheckBox" name="cbPembayaran">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="No Telp"/>
+                <Property name="text" type="java.lang.String" value="Kode Pembayaran"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNoTelpActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPembayaranActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbUsername">
+            <Component class="javax.swing.JCheckBox" name="cbPegawai">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Username"/>
+                <Property name="text" type="java.lang.String" value="ID Kasir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUsernameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPegawaiActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbNamaCabang">
+            <Component class="javax.swing.JCheckBox" name="cbTotal">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nama Cabang"/>
+                <Property name="text" type="java.lang.String" value="Total"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNamaCabangActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTotalActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbGaji">
+            <Component class="javax.swing.JCheckBox" name="cbPengambilan">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gaji"/>
+                <Property name="text" type="java.lang.String" value="Pengambilan"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGajiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPengambilanActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cbNamaBelakang">
+            <Component class="javax.swing.JCheckBox" name="cbPengantar">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGCari"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nama Belakang"/>
+                <Property name="text" type="java.lang.String" value="Username Pengantar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNamaBelakangActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPengantarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

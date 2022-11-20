@@ -8,8 +8,11 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -81,22 +84,17 @@ public class PesananFrame extends javax.swing.JFrame {
         connect();
         int no = 1;
         Statement st = conn.createStatement();
-        String cth = "select * from Kasir";
-        String cth2 = "select nama_cabang from Cabang";
+        String cth = "select * from Pesanan";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
-            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getDate(7), resultSet.getString(8), resultSet.getInt(9), resultSet.getString(10)});
+            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getString(6), resultSet.getString(7), resultSet.getDate(8)});
         }
-        tblKasir.setModel(model);
-        ResultSet resultSet2 = st.executeQuery(cth2);
-        while (resultSet2.next()) {
-            cbCabang.addItem(resultSet2.getString(1));
-        }
+        tblPesanan.setModel(model);
         resultSet = st.executeQuery(setTable);
         while (resultSet.next()) {
-            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getDate(7), resultSet.getString(8), resultSet.getInt(9), resultSet.getString(10)});
+            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getString(6), resultSet.getString(7), resultSet.getDate(8)});
         }
-        tblKasirCari.setModel(model2);
+        tblPesananCari.setModel(model2);
     }
 
     @SuppressWarnings("unchecked")
@@ -104,49 +102,46 @@ public class PesananFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGCari = new javax.swing.ButtonGroup();
+        btnGPengambilan = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnCabangFrameKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfNoPegawai = new javax.swing.JTextField();
+        tfIdPesanan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfNoTelp = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        tfPembeli = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tfNamaDepan = new javax.swing.JTextField();
+        tfKodePembayaran = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tfNamaTengah = new javax.swing.JTextField();
+        tfPegawai = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tfNamaAkhir = new javax.swing.JTextField();
+        tfTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tfGaji = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        tfPengantar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblKasir = new javax.swing.JTable();
+        tblPesanan = new javax.swing.JTable();
         btnTambahData = new javax.swing.JButton();
-        DateChooserTglLahir = new com.toedter.calendar.JDateChooser();
+        DateChooserTglPemesanan = new com.toedter.calendar.JDateChooser();
         btnHapus = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        tfPassword = new javax.swing.JPasswordField();
-        cbSee = new javax.swing.JCheckBox();
-        cbCabang = new javax.swing.JComboBox<>();
+        cbTakeAway = new javax.swing.JCheckBox();
+        cbDelivery = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
-        cbNoPegawai = new javax.swing.JCheckBox();
+        cbIdPesanan = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblKasirCari = new javax.swing.JTable();
-        cbNamaDepan = new javax.swing.JCheckBox();
-        cbNoTelp = new javax.swing.JCheckBox();
-        cbUsername = new javax.swing.JCheckBox();
-        cbNamaCabang = new javax.swing.JCheckBox();
-        cbGaji = new javax.swing.JCheckBox();
-        cbNamaBelakang = new javax.swing.JCheckBox();
+        tblPesananCari = new javax.swing.JTable();
+        cbPembeli = new javax.swing.JCheckBox();
+        cbPembayaran = new javax.swing.JCheckBox();
+        cbPegawai = new javax.swing.JCheckBox();
+        cbTotal = new javax.swing.JCheckBox();
+        cbPengambilan = new javax.swing.JCheckBox();
+        cbPengantar = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cabang");
@@ -159,39 +154,35 @@ public class PesananFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("No Pegawai");
+        jLabel1.setText("ID Pesanan");
 
-        jLabel2.setText("No Telp");
+        tfIdPesanan.setEditable(false);
 
-        tfNoTelp.setEditable(false);
+        jLabel2.setText("Pembeli");
 
-        jLabel3.setText("Password");
+        tfPembeli.setEditable(false);
 
-        jLabel4.setText("Nama Depan");
+        jLabel4.setText("Kode Pembayaran");
 
-        tfNamaDepan.setEditable(false);
+        tfKodePembayaran.setEditable(false);
 
-        jLabel5.setText("Nama Tengah");
+        jLabel5.setText("No Kasir");
 
-        tfNamaTengah.setEditable(false);
+        tfPegawai.setEditable(false);
 
-        jLabel6.setText("Nama Akhir");
+        jLabel6.setText("Total");
 
-        tfNamaAkhir.setEditable(false);
+        tfTotal.setEditable(false);
 
-        jLabel7.setText("Tgl Lahir");
+        jLabel7.setText("Tgl Pemesanan");
 
-        jLabel8.setText("Username");
+        jLabel8.setText("Pengambilan");
 
-        tfUsername.setEditable(false);
+        jLabel9.setText("Pengantar");
 
-        jLabel9.setText("Gaji");
+        tfPengantar.setEditable(false);
 
-        tfGaji.setEditable(false);
-
-        jLabel10.setText("Cabang");
-
-        tblKasir.setModel(new javax.swing.table.DefaultTableModel(
+        tblPesanan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -202,12 +193,12 @@ public class PesananFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblKasir.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPesanan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKasirMouseClicked(evt);
+                tblPesananMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblKasir);
+        jScrollPane1.setViewportView(tblPesanan);
 
         btnTambahData.setText("Tambah Data");
         btnTambahData.setEnabled(false);
@@ -247,16 +238,13 @@ public class PesananFrame extends javax.swing.JFrame {
             }
         });
 
-        tfPassword.setEditable(false);
+        btnGPengambilan.add(cbTakeAway);
+        cbTakeAway.setText("Takeaway");
+        cbTakeAway.setEnabled(false);
 
-        cbSee.setText("See");
-        cbSee.setBorder(null);
-        cbSee.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/eye.png"))); // NOI18N
-        cbSee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSeeActionPerformed(evt);
-            }
-        });
+        btnGPengambilan.add(cbDelivery);
+        cbDelivery.setText("Delivery");
+        cbDelivery.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -266,45 +254,41 @@ public class PesananFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfNamaAkhir, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNoPegawai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                                    .addComponent(tfNoTelp, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNamaTengah, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbSee)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(864, 864, 864))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbCabang, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                        .addComponent(tfGaji)
-                                        .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                        .addGap(1052, 1052, 1052))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(DateChooserTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(39, 39, 39)
+                                .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfPengantar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfPembeli, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                        .addComponent(tfIdPesanan))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfPegawai, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(tfKodePembayaran))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(383, Short.MAX_VALUE)
@@ -333,45 +317,38 @@ public class PesananFrame extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfNoPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfIdPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfPembeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbSee))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaDepan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaTengah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(tfPegawai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNamaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DateChooserTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbTakeAway)
+                        .addComponent(cbDelivery)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(tfGaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPengantar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(cbCabang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DateChooserTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(268, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -397,15 +374,15 @@ public class PesananFrame extends javax.swing.JFrame {
             }
         });
 
-        btnGCari.add(cbNoPegawai);
-        cbNoPegawai.setText("No Pegawai");
-        cbNoPegawai.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbIdPesanan);
+        cbIdPesanan.setText("Id Pesanan");
+        cbIdPesanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNoPegawaiActionPerformed(evt);
+                cbIdPesananActionPerformed(evt);
             }
         });
 
-        tblKasirCari.setModel(new javax.swing.table.DefaultTableModel(
+        tblPesananCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -416,58 +393,58 @@ public class PesananFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblKasirCari.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPesananCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKasirCariMouseClicked(evt);
+                tblPesananCariMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblKasirCari);
+        jScrollPane2.setViewportView(tblPesananCari);
 
-        btnGCari.add(cbNamaDepan);
-        cbNamaDepan.setText("Nama Depan");
-        cbNamaDepan.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbPembeli);
+        cbPembeli.setText("Pembeli");
+        cbPembeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamaDepanActionPerformed(evt);
-            }
-        });
-
-        btnGCari.add(cbNoTelp);
-        cbNoTelp.setText("No Telp");
-        cbNoTelp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNoTelpActionPerformed(evt);
+                cbPembeliActionPerformed(evt);
             }
         });
 
-        btnGCari.add(cbUsername);
-        cbUsername.setText("Username");
-        cbUsername.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbPembayaran);
+        cbPembayaran.setText("Kode Pembayaran");
+        cbPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUsernameActionPerformed(evt);
+                cbPembayaranActionPerformed(evt);
             }
         });
 
-        btnGCari.add(cbNamaCabang);
-        cbNamaCabang.setText("Nama Cabang");
-        cbNamaCabang.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbPegawai);
+        cbPegawai.setText("ID Kasir");
+        cbPegawai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamaCabangActionPerformed(evt);
+                cbPegawaiActionPerformed(evt);
             }
         });
 
-        btnGCari.add(cbGaji);
-        cbGaji.setText("Gaji");
-        cbGaji.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbTotal);
+        cbTotal.setText("Total");
+        cbTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGajiActionPerformed(evt);
+                cbTotalActionPerformed(evt);
             }
         });
 
-        btnGCari.add(cbNamaBelakang);
-        cbNamaBelakang.setText("Nama Belakang");
-        cbNamaBelakang.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbPengambilan);
+        cbPengambilan.setText("Pengambilan");
+        cbPengambilan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamaBelakangActionPerformed(evt);
+                cbPengambilanActionPerformed(evt);
+            }
+        });
+
+        btnGCari.add(cbPengantar);
+        cbPengantar.setText("Username Pengantar");
+        cbPengantar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPengantarActionPerformed(evt);
             }
         });
 
@@ -483,20 +460,17 @@ public class PesananFrame extends javax.swing.JFrame {
                         .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(cbNoPegawai)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(cbUsername)
-                                    .addGap(23, 23, 23)))
+                                .addComponent(cbIdPesanan)
+                                .addComponent(cbPegawai))
+                            .addGap(7, 7, 7)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbNamaDepan)
-                                .addComponent(cbNamaCabang))
-                            .addGap(18, 18, 18)
+                                .addComponent(cbPembeli)
+                                .addComponent(cbTotal))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbGaji)
-                                .addComponent(cbNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(cbNamaBelakang))
+                                .addComponent(cbPengambilan)
+                                .addComponent(cbPembayaran))))
+                    .addComponent(cbPengantar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -510,16 +484,16 @@ public class PesananFrame extends javax.swing.JFrame {
                 .addComponent(btnCari)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbNoPegawai)
-                    .addComponent(cbNamaDepan)
-                    .addComponent(cbNoTelp))
+                    .addComponent(cbIdPesanan)
+                    .addComponent(cbPembeli)
+                    .addComponent(cbPembayaran))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbUsername)
-                    .addComponent(cbNamaCabang)
-                    .addComponent(cbGaji))
+                    .addComponent(cbPegawai)
+                    .addComponent(cbTotal)
+                    .addComponent(cbPengambilan))
                 .addGap(18, 18, 18)
-                .addComponent(cbNamaBelakang)
+                .addComponent(cbPengantar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -555,17 +529,16 @@ public class PesananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        String temp = tfNoPegawai.getText();
+        String temp = tfIdPesanan.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth2 = "select * from Kasir where no_pegawai = '" + temp + "'";
-                String cth = "delete from Kasir where "
-                        + "no_pegawai = '" + temp + "'";
+                String cth2 = "select * from Pesanan where id_pesanan = '" + temp + "'";
+                String cth = "delete from Pesanan where "
+                        + "id_pesanan = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 //kalau username nya tidak exist
                 if (!resultSet.isBeforeFirst()) {
@@ -585,14 +558,12 @@ public class PesananFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new PembeliFrame(), e);
             }
             try {
-                KasirFrame konek = new KasirFrame();
+                PesananFrame konek = new PesananFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                tfNoPegawai.setText(temp);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+                tfIdPesanan.setText(temp);
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -603,21 +574,20 @@ public class PesananFrame extends javax.swing.JFrame {
         btnTambahData.setEnabled(true);
         btnHapus.setEnabled(true);
 
-        tfNoPegawai.setEditable(false);
-        tfNoTelp.setEditable(true);
-        tfPassword.setEditable(true);
-        tfNamaDepan.setEditable(true);
-        tfNamaTengah.setEditable(true);
-        tfNamaAkhir.setEditable(true);
-        tfUsername.setEditable(true);
-        tfGaji.setEditable(true);
-        cbCabang.setEditable(true);
+        tfIdPesanan.setEditable(false);
+        tfPembeli.setEditable(true);
+        tfKodePembayaran.setEditable(true);
+        tfPegawai.setEditable(true);
+        tfTotal.setEditable(true);
+        cbTakeAway.setEnabled(true);
+        cbDelivery.setEnabled(true);
+        tfPengantar.setEditable(true);
 
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         String temp = primaryKeyNow;
-        String tempPrimaryKey = tfNoPegawai.getText();
+        String tempPrimaryKey = tfIdPesanan.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new KasirFrame(), "Error");
             btnReset.doClick();
@@ -625,24 +595,17 @@ public class PesananFrame extends javax.swing.JFrame {
             connect();
             try {
                 Statement st = conn.createStatement();
-                char[] pwc = tfPassword.getPassword();
-                String pw = "";
-                for (char s : pwc) {
-                    pw += String.valueOf(s);
-                }
-                Date date = DateChooserTglLahir.getDate();
+                Date date = DateChooserTglPemesanan.getDate();
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                String cth = "update Kasir set "
-                        + "username='" + tfUsername.getText() + "'"
-                        + ", no_telp='" + tfNoTelp.getText() + "'"
-                        + ", password= HASHBYTES('SHA2_512', '" + pw + "')"
-                        + ", nama_depan='" + tfNamaDepan.getText() + "'"
-                        + ", nama_tengah='" + tfNamaTengah.getText() + "'"
-                        + ", nama_belakang='" + tfNamaAkhir.getText() + "'"
-                        + ", tanggal_lahir='" + sqlDate + "'"
-                        + ", nama_cabang='" + cbCabang.getSelectedItem() + "'"
-                        + ", gaji=" + tfGaji.getText()
-                        + " where no_pegawai='" + temp + "'";
+                String cth = "update Pesanan set "
+                        + "username_pembeli='" + tfPembeli.getText() + "'"
+                        + ", kode_pembayaran='" + tfKodePembayaran.getText() + "'"
+                        + ", no_pegawai='" + tfPegawai.getText() + "'"
+                        + ", total='" + tfTotal.getText() + "'"
+                        + ", jenis_pengambilan='" + getSelectedButtonText(btnGPengambilan) + "'"
+                        + ", username_pengantar='" + tfPengantar.getText() + "'"
+                        + ", tgl_pemesanan='" + sqlDate + "'"
+                        + " where id_pesanan='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -656,21 +619,19 @@ public class PesananFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new KasirFrame(), e);
             }
             try {
-                KasirFrame konek = new KasirFrame();
+                PesananFrame konek = new PesananFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
                 if (!temp.equals(tempPrimaryKey)) {
-                    konek.tfUsername.setText(tempPrimaryKey);
-                    konek.tfUsername.setText(tempPrimaryKey);
+                    konek.tfIdPesanan.setText(tempPrimaryKey);
+                    konek.tfIdPesanan.setText(tempPrimaryKey);
                 } else {
-                    konek.tfUsername.setText(temp);
-                    konek.tfUsername.setText(temp);
+                    konek.tfIdPesanan.setText(temp);
+                    konek.tfIdPesanan.setText(temp);
                 }
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -678,7 +639,7 @@ public class PesananFrame extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-            KasirFrame konek = new KasirFrame();
+            PesananFrame konek = new PesananFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             konek.klik();
@@ -688,52 +649,46 @@ public class PesananFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnResetActionPerformed
 
-    private void tblKasirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKasirMouseClicked
-        int baris = tblKasir.rowAtPoint(evt.getPoint());
-        String username = tblKasir.getValueAt(baris, 0).toString();
-        tfNoPegawai.setText(username);
+    private void tblPesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesananMouseClicked
+        int baris = tblPesanan.rowAtPoint(evt.getPoint());
+        String username = tblPesanan.getValueAt(baris, 0).toString();
+        tfIdPesanan.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblKasir.getValueAt(baris, 1).toString();
-        tfNoTelp.setText(noTelp);
+        String noTelp = tblPesanan.getValueAt(baris, 1).toString();
+        tfPembeli.setText(noTelp);
 
-        String password = tblKasir.getValueAt(baris, 2).toString();
-        tfPassword.setText(password);
+        String password = tblPesanan.getValueAt(baris, 2).toString();
+        tfKodePembayaran.setText(password);
 
-        String namaDepan = tblKasir.getValueAt(baris, 3).toString();
-        tfNamaDepan.setText(namaDepan);
+        String namaDepan = tblPesanan.getValueAt(baris, 3).toString();
+        tfPegawai.setText(namaDepan);
 
-        var obj = tblKasir.getValueAt(baris, 4);
-        if (obj != null) {
-            String namaTengah = tblKasir.getValueAt(baris, 4).toString();
-            tfNamaTengah.setText(namaTengah);
-        } else {
-            String namaTengah = "";
-            tfNamaTengah.setText(namaTengah);
-        }
+        String namaAkhir = tblPesanan.getValueAt(baris, 4).toString();
+        tfTotal.setText(namaAkhir);
 
-        String namaAkhir = tblKasir.getValueAt(baris, 5).toString();
-        tfNamaAkhir.setText(namaAkhir);
-
-        String date = tblKasir.getValueAt(baris, 6).toString();
+        String date = tblPesanan.getValueAt(baris, 7).toString();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2;
         try {
             date2 = formatter.parse(date);
-            DateChooserTglLahir.setDate(date2);
+            DateChooserTglPemesanan.setDate(date2);
         } catch (ParseException ex) {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String us = tblKasir.getValueAt(baris, 7).toString();
-        tfUsername.setText(us);
+        String us = tblPesanan.getValueAt(baris, 5).toString();
 
-        String gaji = tblKasir.getValueAt(baris, 8).toString();
-        tfGaji.setText(gaji);
+        if (us.equalsIgnoreCase("Takeaway")) {
+            cbTakeAway.setSelected(true);
+        } else {
+            cbDelivery.setSelected(true);
+        }
 
-        String kota = tblKasir.getValueAt(baris, 9).toString();
-        cbCabang.setSelectedItem(kota);
-    }//GEN-LAST:event_tblKasirMouseClicked
+        String gaji = tblPesanan.getValueAt(baris, 6).toString();
+        tfPengantar.setText(gaji);
+
+    }//GEN-LAST:event_tblPesananMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String temp = tfCari.getText();
@@ -748,7 +703,7 @@ public class PesananFrame extends javax.swing.JFrame {
                 try {
                     tampilkanData();
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PesananFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 ResultSet resultSet = st.executeQuery(cth);
                 if (!resultSet.isBeforeFirst()) {
@@ -756,26 +711,28 @@ public class PesananFrame extends javax.swing.JFrame {
                     tfCari.setText(temp);
                 } else {
                     while (resultSet.next()) {
-                        tfNoPegawai.setText(resultSet.getString(1));
-                        tfNoTelp.setText(resultSet.getString(2));
-                        tfPassword.setText(resultSet.getString(3));
-                        tfNamaDepan.setText(resultSet.getString(4));
-                        tfNamaTengah.setText(resultSet.getString(5));
-                        tfNamaAkhir.setText(resultSet.getString(6));
+                        tfIdPesanan.setText(resultSet.getString(1));
+                        tfPembeli.setText(resultSet.getString(2));
+                        tfKodePembayaran.setText(resultSet.getString(3));
+                        tfPegawai.setText(resultSet.getString(4));
+                        tfTotal.setText(resultSet.getString(5));
 
-                        String date = resultSet.getDate(7).toString();
+                        String date = resultSet.getDate(8).toString();
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                         Date date2;
                         try {
                             date2 = formatter.parse(date);
-                            DateChooserTglLahir.setDate(date2);
+                            DateChooserTglPemesanan.setDate(date2);
                         } catch (ParseException ex) {
-                            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(PengantarFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        tfUsername.setText(resultSet.getString(8));
-                        tfGaji.setText(resultSet.getString(9));
-                        cbCabang.setSelectedItem(resultSet.getString(10));
+                        String us = resultSet.getString(6);
+                        if (us.equalsIgnoreCase("Takeaway")) {
+                            cbTakeAway.setSelected(true);
+                        } else {
+                            cbDelivery.setSelected(true);
+                        }
+                        tfPengantar.setText(resultSet.getString(7));
                     }
                 }
             } catch (SQLException e) {
@@ -790,27 +747,20 @@ public class PesananFrame extends javax.swing.JFrame {
 */
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         String temp = "";
-        tfNoPegawai.setText(temp);
+        tfIdPesanan.setText(temp);
         connect();
         try {
             Statement st = conn.createStatement();
-            char[] pwc = tfPassword.getPassword();
-            String pw = "";
-            for (char s : pwc) {
-                pw += String.valueOf(s);
-            }
-            Date date = DateChooserTglLahir.getDate();
+            Date date = DateChooserTglPemesanan.getDate();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            String cth = "insert into Kasir values("
-                    + "'" + tfNoTelp.getText() + "'"
-                    + ", HASHBYTES('SHA2_512', '" + pw + "')"
-                    + ", '" + tfNamaDepan.getText() + "'"
-                    + ", '" + tfNamaTengah.getText() + "'"
-                    + ", '" + tfNamaAkhir.getText() + "'"
+            String cth = "insert into Pesanan values("
+                    + "'" + tfPembeli.getText() + "'"
+                    + ", '" + tfKodePembayaran.getText() + "'"
+                    + ", '" + tfPegawai.getText() + "'"
+                    + ", '" + tfTotal.getText() + "'"
+                    + ", '" + getSelectedButtonText(btnGPengambilan) + "'"
+                    + ", '" + tfPengantar.getText() + "'"
                     + ", '" + sqlDate + "'"
-                    + ", '" + tfUsername.getText() + "'"
-                    + ", '" + tfGaji.getText() + "'"
-                    + ", '" + cbCabang.getSelectedItem() + "'"
                     + ")";
             boolean gotResults = st.execute(cth);
             ResultSet rs = null;
@@ -824,106 +774,100 @@ public class PesananFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new KasirFrame(), e);
         }
         try {
-            KasirFrame konek = new KasirFrame();
+            PesananFrame konek = new PesananFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             this.dispose();
-            konek.tfUsername.setText(temp);
-            konek.tfUsername.setText(temp);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            konek.tfIdPesanan.setText(temp);
+            konek.tfIdPesanan.setText(temp);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
-    private void cbSeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeeActionPerformed
-        if (cbSee.isSelected()) {
-            tfPassword.setEchoChar((char) 0);
-        } else {
-            tfPassword.setEchoChar('*');
-        }
-        cariKueri = "select * from Kasir where no_pegawai = '";
-    }//GEN-LAST:event_cbSeeActionPerformed
-
-    private void tblKasirCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKasirCariMouseClicked
-        int baris = tblKasirCari.rowAtPoint(evt.getPoint());
-        String username = tblKasirCari.getValueAt(baris, 0).toString();
-        tfNoPegawai.setText(username);
+    private void tblPesananCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesananCariMouseClicked
+        int baris = tblPesanan.rowAtPoint(evt.getPoint());
+        String username = tblPesanan.getValueAt(baris, 0).toString();
+        tfIdPesanan.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblKasir.getValueAt(baris, 1).toString();
-        tfNoTelp.setText(noTelp);
+        String noTelp = tblPesanan.getValueAt(baris, 1).toString();
+        tfPembeli.setText(noTelp);
 
-        String password = tblKasir.getValueAt(baris, 2).toString();
-        tfPassword.setText(password);
+        String password = tblPesanan.getValueAt(baris, 2).toString();
+        tfKodePembayaran.setText(password);
 
-        String namaDepan = tblKasir.getValueAt(baris, 3).toString();
-        tfNamaDepan.setText(namaDepan);
+        String namaDepan = tblPesanan.getValueAt(baris, 3).toString();
+        tfPegawai.setText(namaDepan);
 
-        var obj = tblKasir.getValueAt(baris, 4);
-        if (obj != null) {
-            String namaTengah = tblKasir.getValueAt(baris, 4).toString();
-            tfNamaTengah.setText(namaTengah);
-        } else {
-            String namaTengah = "";
-            tfNamaTengah.setText(namaTengah);
-        }
+        String namaAkhir = tblPesanan.getValueAt(baris, 4).toString();
+        tfTotal.setText(namaAkhir);
 
-        String namaAkhir = tblKasir.getValueAt(baris, 5).toString();
-        tfNamaAkhir.setText(namaAkhir);
-
-        String date = tblKasir.getValueAt(baris, 6).toString();
+        String date = tblPesanan.getValueAt(baris, 7).toString();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2;
         try {
             date2 = formatter.parse(date);
-            DateChooserTglLahir.setDate(date2);
+            DateChooserTglPemesanan.setDate(date2);
         } catch (ParseException ex) {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String us = tblKasir.getValueAt(baris, 7).toString();
-        tfUsername.setText(us);
+        String us = tblPesanan.getValueAt(baris, 5).toString();
+        if (us.equalsIgnoreCase("Takeaway")) {
+            cbTakeAway.setSelected(true);
+        } else {
+            cbDelivery.setSelected(true);
+        }
 
-        String gaji = tblKasir.getValueAt(baris, 8).toString();
-        tfGaji.setText(gaji);
+        String gaji = tblPesanan.getValueAt(baris, 6).toString();
+        tfPengantar.setText(gaji);
+    }//GEN-LAST:event_tblPesananCariMouseClicked
 
-        String kota = tblKasir.getValueAt(baris, 9).toString();
-        cbCabang.setSelectedItem(kota);
-    }//GEN-LAST:event_tblKasirCariMouseClicked
-
-    private void cbNoPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoPegawaiActionPerformed
+    private void cbIdPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdPesananActionPerformed
         primaryKeyNow = tfCari.getText();
-        cariKueri = "select * from Kasir where no_pegawai = '";
-    }//GEN-LAST:event_cbNoPegawaiActionPerformed
+        cariKueri = "select * from Pesanan where id_pesanan = '";
+    }//GEN-LAST:event_cbIdPesananActionPerformed
 
-    private void cbNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaDepanActionPerformed
-        cariKueri = "select * from Kasir where nama_depan = '";
-    }//GEN-LAST:event_cbNamaDepanActionPerformed
+    private void cbPembeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPembeliActionPerformed
+        cariKueri = "select * from Pesanan where username_pembeli = '";
+    }//GEN-LAST:event_cbPembeliActionPerformed
 
-    private void cbNoTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoTelpActionPerformed
-        cariKueri = "select * from Kasir where no_telp = '";
-    }//GEN-LAST:event_cbNoTelpActionPerformed
+    private void cbPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPembayaranActionPerformed
+        cariKueri = "select * from Pesanan where kode_pembayaran = '";
+    }//GEN-LAST:event_cbPembayaranActionPerformed
 
-    private void cbUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsernameActionPerformed
-        cariKueri = "select * from Kasir where username = '";
-    }//GEN-LAST:event_cbUsernameActionPerformed
+    private void cbPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPegawaiActionPerformed
+        cariKueri = "select * from Pesanan where no_pegawai = '";
+    }//GEN-LAST:event_cbPegawaiActionPerformed
 
-    private void cbNamaCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaCabangActionPerformed
-        cariKueri = "select * from Kasir where nama_cabang = '";
-    }//GEN-LAST:event_cbNamaCabangActionPerformed
+    private void cbTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTotalActionPerformed
+        cariKueri = "select * from Pesanan where total = '";
+    }//GEN-LAST:event_cbTotalActionPerformed
 
-    private void cbGajiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGajiActionPerformed
-        cariKueri = "select * from Kasir where gaji = '";
-    }//GEN-LAST:event_cbGajiActionPerformed
+    private void cbPengambilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPengambilanActionPerformed
+        cariKueri = "select * from Pesanan where jenis_pengambilan = '";
+    }//GEN-LAST:event_cbPengambilanActionPerformed
 
-    private void cbNamaBelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaBelakangActionPerformed
-        cariKueri = "select * from Kasir where nama_belakang = '";
-    }//GEN-LAST:event_cbNamaBelakangActionPerformed
+    private void cbPengantarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPengantarActionPerformed
+        cariKueri = "select * from Pesanan where username_pengantar = '";
+    }//GEN-LAST:event_cbPengantarActionPerformed
 
     void klik() {
-        cbNoPegawai.doClick();
+        cbIdPesanan.doClick();
+        cbDelivery.doClick();
+    }
+
+    String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return "";
     }
 
     /**
@@ -957,7 +901,7 @@ public class PesananFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    KasirFrame konek = new KasirFrame();
+                    PesananFrame konek = new PesananFrame();
                     konek.setVisible(true);
                     konek.tampilkanData();
                     konek.klik();
@@ -969,28 +913,27 @@ public class PesananFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser DateChooserTglLahir;
+    private com.toedter.calendar.JDateChooser DateChooserTglPemesanan;
     private javax.swing.JButton btnCabangFrameKembali;
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnEdit;
     private javax.swing.ButtonGroup btnGCari;
+    private javax.swing.ButtonGroup btnGPengambilan;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
-    private javax.swing.JComboBox<String> cbCabang;
-    private javax.swing.JCheckBox cbGaji;
-    private javax.swing.JCheckBox cbNamaBelakang;
-    private javax.swing.JCheckBox cbNamaCabang;
-    private javax.swing.JCheckBox cbNamaDepan;
-    private javax.swing.JCheckBox cbNoPegawai;
-    private javax.swing.JCheckBox cbNoTelp;
-    private javax.swing.JCheckBox cbSee;
-    private javax.swing.JCheckBox cbUsername;
+    private javax.swing.JCheckBox cbDelivery;
+    private javax.swing.JCheckBox cbIdPesanan;
+    private javax.swing.JCheckBox cbPegawai;
+    private javax.swing.JCheckBox cbPembayaran;
+    private javax.swing.JCheckBox cbPembeli;
+    private javax.swing.JCheckBox cbPengambilan;
+    private javax.swing.JCheckBox cbPengantar;
+    private javax.swing.JCheckBox cbTakeAway;
+    private javax.swing.JCheckBox cbTotal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1002,16 +945,14 @@ public class PesananFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblKasir;
-    private javax.swing.JTable tblKasirCari;
+    private javax.swing.JTable tblPesanan;
+    private javax.swing.JTable tblPesananCari;
     private javax.swing.JTextField tfCari;
-    private javax.swing.JTextField tfGaji;
-    private javax.swing.JTextField tfNamaAkhir;
-    private javax.swing.JTextField tfNamaDepan;
-    private javax.swing.JTextField tfNamaTengah;
-    private javax.swing.JTextField tfNoPegawai;
-    private javax.swing.JTextField tfNoTelp;
-    private javax.swing.JPasswordField tfPassword;
-    private javax.swing.JTextField tfUsername;
+    private javax.swing.JTextField tfIdPesanan;
+    private javax.swing.JTextField tfKodePembayaran;
+    private javax.swing.JTextField tfPegawai;
+    private javax.swing.JTextField tfPembeli;
+    private javax.swing.JTextField tfPengantar;
+    private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
 }
