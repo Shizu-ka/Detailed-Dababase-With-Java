@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -157,6 +158,11 @@ public class CabangFrame extends javax.swing.JFrame {
         jLabel5.setText("No Bangunan");
 
         tfNoBangunan.setEditable(false);
+        tfNoBangunan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfNoBangunanKeyPressed(evt);
+            }
+        });
 
         tblCabang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -694,6 +700,12 @@ public class CabangFrame extends javax.swing.JFrame {
     private void cbNoBangunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoBangunanActionPerformed
         cariKueri = "select * from Cabang where no_bangunan = '";
     }//GEN-LAST:event_cbNoBangunanActionPerformed
+
+    private void tfNoBangunanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNoBangunanKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnTambahData.doClick();
+        }  
+    }//GEN-LAST:event_tfNoBangunanKeyPressed
 
     void klik() {
         cbNamaCabang.doClick();

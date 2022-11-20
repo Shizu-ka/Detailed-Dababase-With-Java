@@ -1,4 +1,4 @@
-
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class MenuFrame extends javax.swing.JFrame {
+public class MenuFrame extends javax.swing.JFrame{
 
     public MenuFrame() {
         initComponents();
@@ -129,10 +129,20 @@ public class MenuFrame extends javax.swing.JFrame {
         jLabel2.setText("Nama Menu");
 
         tfNamaMenu.setEditable(false);
+        tfNamaMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaMenuActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Harga");
 
         tfHarga.setEditable(false);
+        tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfHargaKeyPressed(evt);
+            }
+        });
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -458,7 +468,7 @@ public class MenuFrame extends javax.swing.JFrame {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth = this.cariKueri + temp+ "'";
+                String cth = this.cariKueri + temp + "'";
                 setTable = cth;
                 try {
                     tampilkanData();
@@ -597,10 +607,27 @@ public class MenuFrame extends javax.swing.JFrame {
         String harga = tblMenu.getValueAt(baris, 2).toString();
         tfHarga.setText(harga);
     }//GEN-LAST:event_tblMenuCariMouseClicked
-    
+
+    private void tfNamaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaMenuActionPerformed
+
+    }//GEN-LAST:event_tfNamaMenuActionPerformed
+
+    private void tfHargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHargaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnTambahData.doClick();
+        }
+    }//GEN-LAST:event_tfHargaKeyPressed
+
+//    @Override
+//    public void actionPerformed(ActionEvent event) {
+//        
+//    }
+
+
     void klik() {
         cbIdMenu.doClick();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -672,4 +699,5 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tfIdMenu;
     private javax.swing.JTextField tfNamaMenu;
     // End of variables declaration//GEN-END:variables
+
 }
