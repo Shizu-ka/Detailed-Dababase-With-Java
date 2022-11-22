@@ -786,24 +786,24 @@ public class PesananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void tblPesananCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesananCariMouseClicked
-        int baris = tblPesanan.rowAtPoint(evt.getPoint());
-        String username = tblPesanan.getValueAt(baris, 0).toString();
+        int baris = tblPesananCari.rowAtPoint(evt.getPoint());
+        String username = tblPesananCari.getValueAt(baris, 0).toString();
         tfIdPesanan.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblPesanan.getValueAt(baris, 1).toString();
+        String noTelp = tblPesananCari.getValueAt(baris, 1).toString();
         tfPembeli.setText(noTelp);
 
-        String password = tblPesanan.getValueAt(baris, 2).toString();
+        String password = tblPesananCari.getValueAt(baris, 2).toString();
         tfKodePembayaran.setText(password);
 
-        String namaDepan = tblPesanan.getValueAt(baris, 3).toString();
+        String namaDepan = tblPesananCari.getValueAt(baris, 3).toString();
         tfPegawai.setText(namaDepan);
 
-        String namaAkhir = tblPesanan.getValueAt(baris, 4).toString();
+        String namaAkhir = tblPesananCari.getValueAt(baris, 4).toString();
         tfTotal.setText(namaAkhir);
 
-        String date = tblPesanan.getValueAt(baris, 7).toString();
+        String date = tblPesananCari.getValueAt(baris, 7).toString();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2;
         try {
@@ -813,14 +813,14 @@ public class PesananFrame extends javax.swing.JFrame {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String us = tblPesanan.getValueAt(baris, 5).toString();
+        String us = tblPesananCari.getValueAt(baris, 5).toString();
         if (us.equalsIgnoreCase("Takeaway")) {
             cbTakeAway.setSelected(true);
         } else {
             cbDelivery.setSelected(true);
         }
 
-        String gaji = tblPesanan.getValueAt(baris, 6).toString();
+        String gaji = tblPesananCari.getValueAt(baris, 6).toString();
         tfPengantar.setText(gaji);
     }//GEN-LAST:event_tblPesananCariMouseClicked
 

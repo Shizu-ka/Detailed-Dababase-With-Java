@@ -856,28 +856,28 @@ public class KasirFrame extends javax.swing.JFrame {
         tfNoPegawai.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblKasir.getValueAt(baris, 1).toString();
+        String noTelp = tblKasirCari.getValueAt(baris, 1).toString();
         tfNoTelp.setText(noTelp);
 
-        String password = tblKasir.getValueAt(baris, 2).toString();
+        String password = tblKasirCari.getValueAt(baris, 2).toString();
         tfPassword.setText(password);
 
-        String namaDepan = tblKasir.getValueAt(baris, 3).toString();
+        String namaDepan = tblKasirCari.getValueAt(baris, 3).toString();
         tfNamaDepan.setText(namaDepan);
 
-        var obj = tblKasir.getValueAt(baris, 4);
+        var obj = tblKasirCari.getValueAt(baris, 4);
         if (obj != null) {
-            String namaTengah = tblKasir.getValueAt(baris, 4).toString();
+            String namaTengah = tblKasirCari.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        String namaAkhir = tblKasir.getValueAt(baris, 5).toString();
+        String namaAkhir = tblKasirCari.getValueAt(baris, 5).toString();
         tfNamaAkhir.setText(namaAkhir);
 
-        String date = tblKasir.getValueAt(baris, 6).toString();
+        String date = tblKasirCari.getValueAt(baris, 6).toString();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2;
         try {
@@ -887,13 +887,13 @@ public class KasirFrame extends javax.swing.JFrame {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String us = tblKasir.getValueAt(baris, 7).toString();
+        String us = tblKasirCari.getValueAt(baris, 7).toString();
         tfUsername.setText(us);
 
-        String gaji = tblKasir.getValueAt(baris, 8).toString();
+        String gaji = tblKasirCari.getValueAt(baris, 8).toString();
         tfGaji.setText(gaji);
 
-        String kota = tblKasir.getValueAt(baris, 9).toString();
+        String kota = tblKasirCari.getValueAt(baris, 9).toString();
         cbCabang.setSelectedItem(kota);
     }//GEN-LAST:event_tblKasirCariMouseClicked
 

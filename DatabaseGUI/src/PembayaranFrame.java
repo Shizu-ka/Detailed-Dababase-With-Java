@@ -547,7 +547,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
             try {
                 Statement st = conn.createStatement();
                 String cth = "update Pembayaran set "
-                        + "metode_pemabayaran='" + getSelectedButtonText(btnGMetodePembayaran) + "'"
+                        + "metode_pembayaran='" + getSelectedButtonText(btnGMetodePembayaran) + "'"
                         + ", total=" + tfTotal.getText()
                         + " where kode_pembayaran='" + temp + "'";
                 boolean gotResults = st.execute(cth);
@@ -636,12 +636,12 @@ public class PembayaranFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbHargaActionPerformed
 
     private void tblPembayaranCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranCariMouseClicked
-        int baris = tblPembayaran.rowAtPoint(evt.getPoint());
-        String Idmenu = tblPembayaran.getValueAt(baris, 0).toString();
+        int baris = tblPembayaranCari.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPembayaranCari.getValueAt(baris, 0).toString();
         tfKodePembayaran.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
-        String nm = tblPembayaran.getValueAt(baris, 1).toString();
+        String nm = tblPembayaranCari.getValueAt(baris, 1).toString();
         switch (nm.toLowerCase()) {
             case "qris" ->
                 cbQris.setSelected(true);
@@ -653,7 +653,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
                 cbBni.setSelected(true);
         }
 
-        String harga = tblPembayaran.getValueAt(baris, 2).toString();
+        String harga = tblPembayaranCari.getValueAt(baris, 2).toString();
         tfTotal.setText(harga);
     }//GEN-LAST:event_tblPembayaranCariMouseClicked
 
@@ -714,9 +714,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
                     konek.setVisible(true);
                     konek.tampilkanData();
                     konek.klik();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
+                } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

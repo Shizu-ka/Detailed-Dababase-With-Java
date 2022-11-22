@@ -804,40 +804,40 @@ public class PengantarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSeeActionPerformed
 
     private void tblPengantarCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPengantarCariMouseClicked
-        int baris = tblPengantar.rowAtPoint(evt.getPoint());
-        String username = tblPengantar.getValueAt(baris, 0).toString();
+        int baris = tblPengantarCari.rowAtPoint(evt.getPoint());
+        String username = tblPengantarCari.getValueAt(baris, 0).toString();
         tfUsername.setText(username);
         primaryKeyNow = username;
 
-        String noPol = tblPengantar.getValueAt(baris, 1).toString();
+        String noPol = tblPengantarCari.getValueAt(baris, 1).toString();
         tfNoPol.setText(noPol);
         
-        String noTelp = tblPengantar.getValueAt(baris, 2).toString();
+        String noTelp = tblPengantarCari.getValueAt(baris, 2).toString();
         tfNoTelp.setText(noTelp);
 
-        String password = tblPengantar.getValueAt(baris, 3).toString();
+        String password = tblPengantarCari.getValueAt(baris, 3).toString();
         tfPassword.setText(password);
 
-        String namaDepan = tblPengantar.getValueAt(baris, 4).toString();
+        String namaDepan = tblPengantarCari.getValueAt(baris, 4).toString();
         tfNamaDepan.setText(namaDepan);
 
-        var obj = tblPengantar.getValueAt(baris, 5);
+        var obj = tblPengantarCari.getValueAt(baris, 5);
         if (obj != null) {
-            String namaTengah = tblPengantar.getValueAt(baris, 4).toString();
+            String namaTengah = tblPengantarCari.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        String namaAkhir = tblPengantar.getValueAt(baris, 6).toString();
+        String namaAkhir = tblPengantarCari.getValueAt(baris, 6).toString();
         tfNamaAkhir.setText(namaAkhir);
 
 
-        String gaji = tblPengantar.getValueAt(baris, 7).toString();
+        String gaji = tblPengantarCari.getValueAt(baris, 7).toString();
         tfGaji.setText(gaji);
 
-        String kota = tblPengantar.getValueAt(baris, 8).toString();
+        String kota = tblPengantarCari.getValueAt(baris, 8).toString();
         cbCabang.setSelectedItem(kota);
     }//GEN-LAST:event_tblPengantarCariMouseClicked
 
