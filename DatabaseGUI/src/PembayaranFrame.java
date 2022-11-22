@@ -1,11 +1,15 @@
+
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class PembayaranFrame extends javax.swing.JFrame{
+public class PembayaranFrame extends javax.swing.JFrame {
 
     public PembayaranFrame() {
         initComponents();
@@ -26,7 +30,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
     private static Connection conn;
     private static String primaryKeyNow = "";
     private String cariKueri = "";
-    private String setTable = "select * from Menu";
+    private String setTable = "select * from Pembayaran";
 
     private static void connect() {
         String hostname = "localhost";
@@ -45,7 +49,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
                 + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
 
         try {
-            MenuFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
+            PembayaranFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
 
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,32 +59,30 @@ public class PembayaranFrame extends javax.swing.JFrame{
 
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID Menu");
-        model.addColumn("Nama Menu");
-        model.addColumn("Harga");
+        model.addColumn("Kode Pembayaran");
+        model.addColumn("Metode Pembayaran");
+        model.addColumn("Total");
         DefaultTableModel model2 = new DefaultTableModel();
-        model2.addColumn("ID Menu");
-        model2.addColumn("Nama Menu");
-        model2.addColumn("Harga");
+        model2.addColumn("Kode Pembayaran");
+        model2.addColumn("Metode Pembayaran");
+        model2.addColumn("Total");
 
         connect();
         int no = 1;
         Statement st = conn.createStatement();
-        String cth = "select * from Menu";
+        String cth = "select * from Pembayaran";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
             model.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3)});
         }
-        tblMenu.setModel(model);
-        tblMenu.getColumnModel().getColumn(0).setPreferredWidth(1);
-        tblMenu.getColumnModel().getColumn(2).setPreferredWidth(1);
+        tblPembayaran.setModel(model);
+
         resultSet = st.executeQuery(setTable);
         while (resultSet.next()) {
             model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3)});
         }
-        tblMenuCari.setModel(model2);
-        tblMenuCari.getColumnModel().getColumn(0).setPreferredWidth(1);
-        tblMenuCari.getColumnModel().getColumn(2).setPreferredWidth(1);
+        tblPembayaranCari.setModel(model2);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -88,33 +90,37 @@ public class PembayaranFrame extends javax.swing.JFrame{
     private void initComponents() {
 
         btnGCari = new javax.swing.ButtonGroup();
+        btnGMetodePembayaran = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnCabangFrameKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfIdMenu = new javax.swing.JTextField();
+        tfKodePembayaran = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfNamaMenu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfHarga = new javax.swing.JTextField();
+        tfTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMenu = new javax.swing.JTable();
+        tblPembayaran = new javax.swing.JTable();
         btnTambahData = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        cbQris = new javax.swing.JCheckBox();
+        cbCash = new javax.swing.JCheckBox();
+        cbBca = new javax.swing.JCheckBox();
+        cbBni = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblMenuCari = new javax.swing.JTable();
-        cbIdMenu = new javax.swing.JCheckBox();
-        cbNamaMenu = new javax.swing.JCheckBox();
+        tblPembayaranCari = new javax.swing.JTable();
+        cbKodePembayaran = new javax.swing.JCheckBox();
+        cbMetodePembayaran = new javax.swing.JCheckBox();
         cbHarga = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Pembayaran");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
@@ -124,27 +130,20 @@ public class PembayaranFrame extends javax.swing.JFrame{
             }
         });
 
-        jLabel1.setText("ID Menu");
+        jLabel1.setText("Kode Pembayaran");
 
-        jLabel2.setText("Nama Menu");
+        jLabel2.setText("Metode Pembayaran");
 
-        tfNamaMenu.setEditable(false);
-        tfNamaMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNamaMenuActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Total");
 
-        jLabel3.setText("Harga");
-
-        tfHarga.setEditable(false);
-        tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfTotal.setEditable(false);
+        tfTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfHargaKeyPressed(evt);
+                tfTotalKeyPressed(evt);
             }
         });
 
-        tblMenu.setModel(new javax.swing.table.DefaultTableModel(
+        tblPembayaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -155,12 +154,12 @@ public class PembayaranFrame extends javax.swing.JFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPembayaran.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMenuMouseClicked(evt);
+                tblPembayaranMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblMenu);
+        jScrollPane1.setViewportView(tblPembayaran);
 
         btnTambahData.setText("Tambah Data");
         btnTambahData.setEnabled(false);
@@ -200,6 +199,22 @@ public class PembayaranFrame extends javax.swing.JFrame{
             }
         });
 
+        btnGMetodePembayaran.add(cbQris);
+        cbQris.setText("Qris");
+        cbQris.setEnabled(false);
+
+        btnGMetodePembayaran.add(cbCash);
+        cbCash.setText("Cash");
+        cbCash.setEnabled(false);
+
+        btnGMetodePembayaran.add(cbBca);
+        cbBca.setText("BCA");
+        cbBca.setEnabled(false);
+
+        btnGMetodePembayaran.add(cbBni);
+        cbBni.setText("BNI");
+        cbBni.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,14 +230,22 @@ public class PembayaranFrame extends javax.swing.JFrame{
                         .addGap(18, 18, 18))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tfNamaMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                    .addComponent(tfIdMenu)
-                    .addComponent(tfHarga))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(tfKodePembayaran, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                        .addComponent(tfTotal))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbQris, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbCash, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbBca, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbBni, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,15 +274,18 @@ public class PembayaranFrame extends javax.swing.JFrame{
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbQris)
+                    .addComponent(cbCash)
+                    .addComponent(cbBca)
+                    .addComponent(cbBni))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambahData)
@@ -271,7 +297,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
                     .addComponent(btnSimpan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(568, Short.MAX_VALUE)
@@ -288,7 +314,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
             }
         });
 
-        tblMenuCari.setModel(new javax.swing.table.DefaultTableModel(
+        tblPembayaranCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -299,26 +325,26 @@ public class PembayaranFrame extends javax.swing.JFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblMenuCari.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPembayaranCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMenuCariMouseClicked(evt);
+                tblPembayaranCariMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblMenuCari);
+        jScrollPane3.setViewportView(tblPembayaranCari);
 
-        btnGCari.add(cbIdMenu);
-        cbIdMenu.setText("ID Menu");
-        cbIdMenu.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbKodePembayaran);
+        cbKodePembayaran.setText("Kode Pembayaran");
+        cbKodePembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbIdMenuActionPerformed(evt);
+                cbKodePembayaranActionPerformed(evt);
             }
         });
 
-        btnGCari.add(cbNamaMenu);
-        cbNamaMenu.setText("Nama Menu");
-        cbNamaMenu.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbMetodePembayaran);
+        cbMetodePembayaran.setText("Metode Pembayaran");
+        cbMetodePembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamaMenuActionPerformed(evt);
+                cbMetodePembayaranActionPerformed(evt);
             }
         });
 
@@ -335,23 +361,22 @@ public class PembayaranFrame extends javax.swing.JFrame{
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbKodePembayaran)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbMetodePembayaran)
+                                .addGap(4, 4, 4)
+                                .addComponent(cbHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnCari)
                             .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(cbIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(cbHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,14 +385,14 @@ public class PembayaranFrame extends javax.swing.JFrame{
                 .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCari)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbMetodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cari", jPanel2);
@@ -402,13 +427,13 @@ public class PembayaranFrame extends javax.swing.JFrame{
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         String temp = "";
-        tfIdMenu.setText(temp);
+        tfKodePembayaran.setText(temp);
         connect();
         try {
             Statement st = conn.createStatement();
-            String cth = "insert into Menu values('"
-                    + tfNamaMenu.getText() + "'"
-                    + ", " + tfHarga.getText()
+            String cth = "insert into Pembayaran values('"
+                    + getSelectedButtonText(btnGMetodePembayaran) + "'"
+                    + ", " + tfTotal.getText()
                     + ")";
 
             boolean gotResults = st.execute(cth);
@@ -425,13 +450,11 @@ public class PembayaranFrame extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(new MenuFrame(), e);
         }
         try {
-            MenuFrame konek = new MenuFrame();
+            PembayaranFrame konek = new PembayaranFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             this.dispose();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
@@ -441,24 +464,36 @@ public class PembayaranFrame extends javax.swing.JFrame{
         btnTambahData.setEnabled(true);
         btnSimpan.setEnabled(true);
 
-        tfIdMenu.setEditable(false);
-        tfNamaMenu.setEditable(true);
-        tfHarga.setEditable(true);
+        tfKodePembayaran.setEditable(false);
+        cbQris.setEnabled(true);
+        cbCash.setEnabled(true);
+        cbBca.setEnabled(true);
+        cbBni.setEnabled(true);
+        tfTotal.setEditable(true);
 
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
-        int baris = tblMenu.rowAtPoint(evt.getPoint());
-        String Idmenu = tblMenu.getValueAt(baris, 0).toString();
-        tfIdMenu.setText(Idmenu);
+    private void tblPembayaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranMouseClicked
+        int baris = tblPembayaran.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPembayaran.getValueAt(baris, 0).toString();
+        tfKodePembayaran.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
-        String nm = tblMenu.getValueAt(baris, 1).toString();
-        tfNamaMenu.setText(nm);
+        String nm = tblPembayaran.getValueAt(baris, 1).toString();
+        switch (nm.toLowerCase()) {
+            case "qris" ->
+                cbQris.setSelected(true);
+            case "cash" ->
+                cbCash.setSelected(true);
+            case "bca" ->
+                cbBca.setSelected(true);
+            case "bni" ->
+                cbBni.setSelected(true);
+        }
 
-        String harga = tblMenu.getValueAt(baris, 2).toString();
-        tfHarga.setText(harga);
-    }//GEN-LAST:event_tblMenuMouseClicked
+        String harga = tblPembayaran.getValueAt(baris, 2).toString();
+        tfTotal.setText(harga);
+    }//GEN-LAST:event_tblPembayaranMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String temp = tfCari.getText();
@@ -481,9 +516,19 @@ public class PembayaranFrame extends javax.swing.JFrame{
                     tfCari.setText(temp);
                 } else {
                     while (resultSet.next()) {
-                        tfIdMenu.setText(resultSet.getString(1));
-                        tfNamaMenu.setText(resultSet.getString(2));
-                        tfHarga.setText(resultSet.getString(3));
+                        tfKodePembayaran.setText(resultSet.getString(1));
+                        String us = resultSet.getString(2);
+                        switch (us.toLowerCase()) {
+                            case "qris" ->
+                                cbQris.setSelected(true);
+                            case "cash" ->
+                                cbCash.setSelected(true);
+                            case "bca" ->
+                                cbBca.setSelected(true);
+                            case "bni" ->
+                                cbBni.setSelected(true);
+                        }
+                        tfTotal.setText(resultSet.getString(3));
                     }
                 }
             } catch (SQLException e) {
@@ -501,9 +546,9 @@ public class PembayaranFrame extends javax.swing.JFrame{
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth = "update Menu set "
-                        + "nama_menu='" + tfNamaMenu.getText() + "'"
-                        + ", harga=" + tfHarga.getText()
+                String cth = "update Pembayaran set "
+                        + "metode_pemabayaran='" + tfMetodePembayaran.getText() + "'"
+                        + ", harga=" + tfTotal.getText()
                         + " where id_menu='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
@@ -541,7 +586,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        String temp = tfIdMenu.getText();
+        String temp = tfKodePembayaran.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
@@ -582,50 +627,52 @@ public class PembayaranFrame extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void cbIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdMenuActionPerformed
+    private void cbKodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKodePembayaranActionPerformed
         primaryKeyNow = tfCari.getText();
         cariKueri = "select * from Menu where id_menu = '";
-    }//GEN-LAST:event_cbIdMenuActionPerformed
+    }//GEN-LAST:event_cbKodePembayaranActionPerformed
 
-    private void cbNamaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaMenuActionPerformed
+    private void cbMetodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMetodePembayaranActionPerformed
         cariKueri = "select * from Menu where nama_menu = '";
-    }//GEN-LAST:event_cbNamaMenuActionPerformed
+    }//GEN-LAST:event_cbMetodePembayaranActionPerformed
 
     private void cbHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHargaActionPerformed
         cariKueri = "select * from Menu where harga = '";
     }//GEN-LAST:event_cbHargaActionPerformed
 
-    private void tblMenuCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuCariMouseClicked
-        int baris = tblMenuCari.rowAtPoint(evt.getPoint());
-        String Idmenu = tblMenuCari.getValueAt(baris, 0).toString();
-        tfIdMenu.setText(Idmenu);
+    private void tblPembayaranCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranCariMouseClicked
+        int baris = tblPembayaranCari.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPembayaranCari.getValueAt(baris, 0).toString();
+        tfKodePembayaran.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
-        String nm = tblMenu.getValueAt(baris, 1).toString();
-        tfNamaMenu.setText(nm);
+        String nm = tblPembayaran.getValueAt(baris, 1).toString();
+        tfMetodePembayaran.setText(nm);
 
-        String harga = tblMenu.getValueAt(baris, 2).toString();
-        tfHarga.setText(harga);
-    }//GEN-LAST:event_tblMenuCariMouseClicked
+        String harga = tblPembayaran.getValueAt(baris, 2).toString();
+        tfTotal.setText(harga);
+    }//GEN-LAST:event_tblPembayaranCariMouseClicked
 
-    private void tfNamaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaMenuActionPerformed
-
-    }//GEN-LAST:event_tfNamaMenuActionPerformed
-
-    private void tfHargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHargaKeyPressed
+    private void tfTotalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTotalKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnTambahData.doClick();
         }
-    }//GEN-LAST:event_tfHargaKeyPressed
-
-//    @Override
-//    public void actionPerformed(ActionEvent event) {
-//        
-//    }
-
+    }//GEN-LAST:event_tfTotalKeyPressed
 
     void klik() {
-        cbIdMenu.doClick();
+        cbKodePembayaran.doClick();
+    }
+
+    String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return "";
     }
 
     /**
@@ -659,7 +706,7 @@ public class PembayaranFrame extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MenuFrame konek = new MenuFrame();
+                    PembayaranFrame konek = new PembayaranFrame();
                     konek.setVisible(true);
                     konek.tampilkanData();
                     konek.klik();
@@ -677,13 +724,18 @@ public class PembayaranFrame extends javax.swing.JFrame{
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnEdit;
     private javax.swing.ButtonGroup btnGCari;
+    private javax.swing.ButtonGroup btnGMetodePembayaran;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
+    private javax.swing.JCheckBox cbBca;
+    private javax.swing.JCheckBox cbBni;
+    private javax.swing.JCheckBox cbCash;
     private javax.swing.JCheckBox cbHarga;
-    private javax.swing.JCheckBox cbIdMenu;
-    private javax.swing.JCheckBox cbNamaMenu;
+    private javax.swing.JCheckBox cbKodePembayaran;
+    private javax.swing.JCheckBox cbMetodePembayaran;
+    private javax.swing.JCheckBox cbQris;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -692,12 +744,11 @@ public class PembayaranFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblMenu;
-    private javax.swing.JTable tblMenuCari;
+    private javax.swing.JTable tblPembayaran;
+    private javax.swing.JTable tblPembayaranCari;
     private javax.swing.JTextField tfCari;
-    private javax.swing.JTextField tfHarga;
-    private javax.swing.JTextField tfIdMenu;
-    private javax.swing.JTextField tfNamaMenu;
+    private javax.swing.JTextField tfKodePembayaran;
+    private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
 
 }
