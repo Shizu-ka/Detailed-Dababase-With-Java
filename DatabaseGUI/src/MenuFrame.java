@@ -138,6 +138,11 @@ public class MenuFrame extends javax.swing.JFrame{
         jLabel3.setText("Harga");
 
         tfHarga.setEditable(false);
+        tfHarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfHargaActionPerformed(evt);
+            }
+        });
         tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfHargaKeyPressed(evt);
@@ -617,6 +622,10 @@ public class MenuFrame extends javax.swing.JFrame{
             btnTambahData.doClick();
         }
     }//GEN-LAST:event_tfHargaKeyPressed
+
+    private void tfHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfHargaActionPerformed
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {

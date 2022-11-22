@@ -548,7 +548,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
                 Statement st = conn.createStatement();
                 String cth = "update Pembayaran set "
                         + "metode_pemabayaran='" + getSelectedButtonText(btnGMetodePembayaran) + "'"
-                        + ", harga=" + tfTotal.getText()
+                        + ", total=" + tfTotal.getText()
                         + " where kode_pembayaran='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
@@ -561,13 +561,11 @@ public class PembayaranFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
-                MenuFrame konek = new MenuFrame();
+                PembayaranFrame konek = new PembayaranFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -575,7 +573,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-            MenuFrame konek = new MenuFrame();
+            PembayaranFrame konek = new PembayaranFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             konek.klik();
@@ -594,9 +592,9 @@ public class PembayaranFrame extends javax.swing.JFrame {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth2 = "select * from Menu where id_menu = '" + temp + "'";
-                String cth = "delete from Menu where "
-                        + "id_menu = '" + temp + "'";
+                String cth2 = "select * from Pembayaran where kode_pembayaran = '" + temp + "'";
+                String cth = "delete from Pembayaran where "
+                        + "kode_pembayaran = '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
@@ -611,17 +609,14 @@ public class PembayaranFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(new CabangFrame(), "Data Berhasil Di Hapus");
                 }
             } catch (SQLException e) {
-                System.out.println(e);
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
-                MenuFrame konek = new MenuFrame();
+                PembayaranFrame konek = new PembayaranFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -629,25 +624,34 @@ public class PembayaranFrame extends javax.swing.JFrame {
 
     private void cbKodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKodePembayaranActionPerformed
         primaryKeyNow = tfCari.getText();
-        cariKueri = "select * from Menu where id_menu = '";
+        cariKueri = "select * from Pembayaran where kode_pembayaran = '";
     }//GEN-LAST:event_cbKodePembayaranActionPerformed
 
     private void cbMetodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMetodePembayaranActionPerformed
-        cariKueri = "select * from Menu where nama_menu = '";
+        cariKueri = "select * from Pembayaran where metode_pembayaran = '";
     }//GEN-LAST:event_cbMetodePembayaranActionPerformed
 
     private void cbHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHargaActionPerformed
-        cariKueri = "select * from Menu where harga = '";
+        cariKueri = "select * from Pembayaran where total = '";
     }//GEN-LAST:event_cbHargaActionPerformed
 
     private void tblPembayaranCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranCariMouseClicked
-        int baris = tblPembayaranCari.rowAtPoint(evt.getPoint());
-        String Idmenu = tblPembayaranCari.getValueAt(baris, 0).toString();
+        int baris = tblPembayaran.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPembayaran.getValueAt(baris, 0).toString();
         tfKodePembayaran.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
         String nm = tblPembayaran.getValueAt(baris, 1).toString();
-        tfMetodePembayaran.setText(nm);
+        switch (nm.toLowerCase()) {
+            case "qris" ->
+                cbQris.setSelected(true);
+            case "cash" ->
+                cbCash.setSelected(true);
+            case "bca" ->
+                cbBca.setSelected(true);
+            case "bni" ->
+                cbBni.setSelected(true);
+        }
 
         String harga = tblPembayaran.getValueAt(baris, 2).toString();
         tfTotal.setText(harga);
