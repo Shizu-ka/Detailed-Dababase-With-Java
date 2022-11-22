@@ -158,6 +158,8 @@ public class PembeliFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
 
+        tfUsername.setEditable(false);
+
         jLabel2.setText("No Telp");
 
         tfNoTelp.setEditable(false);
@@ -249,6 +251,8 @@ public class PembeliFrame extends javax.swing.JFrame {
                 btnResetActionPerformed(evt);
             }
         });
+
+        tfPassword.setEditable(false);
 
         cbSee.setText("See");
         cbSee.setBorder(null);
@@ -562,6 +566,7 @@ public class PembeliFrame extends javax.swing.JFrame {
         btnSimpan.setEnabled(true);
         btnTambahData.setEnabled(true);
         btnHapus.setEnabled(true);
+        tfUsername.setEditable(true);
         tfNoTelp.setEditable(true);
         tfPassword.setEditable(true);
         tfNamaDepan.setEditable(true);
@@ -830,28 +835,28 @@ public class PembeliFrame extends javax.swing.JFrame {
         tfUsername.setText(username);
         primaryKeyNow = username;
 
-        String noTelp = tblPembeli.getValueAt(baris, 1).toString();
+        String noTelp = tblPembeliCari.getValueAt(baris, 1).toString();
         tfNoTelp.setText(noTelp);
 
-        String password = tblPembeli.getValueAt(baris, 2).toString();
+        String password = tblPembeliCari.getValueAt(baris, 2).toString();
         tfPassword.setText(password);
 
-        String namaDepan = tblPembeli.getValueAt(baris, 3).toString();
+        String namaDepan = tblPembeliCari.getValueAt(baris, 3).toString();
         tfNamaDepan.setText(namaDepan);
 
-        var obj = tblPembeli.getValueAt(baris, 4);
+        var obj = tblPembeliCari.getValueAt(baris, 4);
         if (obj != null) {
-            String namaTengah = tblPembeli.getValueAt(baris, 4).toString();
+            String namaTengah = tblPembeliCari.getValueAt(baris, 4).toString();
             tfNamaTengah.setText(namaTengah);
         } else {
             String namaTengah = "";
             tfNamaTengah.setText(namaTengah);
         }
 
-        String namaAkhir = tblPembeli.getValueAt(baris, 5).toString();
+        String namaAkhir = tblPembeliCari.getValueAt(baris, 5).toString();
         tfNamaAkhir.setText(namaAkhir);
 
-        String date = tblPembeli.getValueAt(baris, 6).toString();
+        String date = tblPembeliCari.getValueAt(baris, 6).toString();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date2;
         try {
@@ -861,16 +866,16 @@ public class PembeliFrame extends javax.swing.JFrame {
             Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String jalan = tblPembeli.getValueAt(baris, 7).toString();
+        String jalan = tblPembeliCari.getValueAt(baris, 7).toString();
         tfJalan.setText(jalan);
 
-        String kecamatan = tblPembeli.getValueAt(baris, 8).toString();
+        String kecamatan = tblPembeliCari.getValueAt(baris, 8).toString();
         tfKecamatan.setText(kecamatan);
 
-        String kota = tblPembeli.getValueAt(baris, 9).toString();
+        String kota = tblPembeliCari.getValueAt(baris, 9).toString();
         tfKota.setText(kota);
 
-        String noRumah = tblPembeli.getValueAt(baris, 10).toString();
+        String noRumah = tblPembeliCari.getValueAt(baris, 10).toString();
         tfNoRumah.setText(noRumah);
     }//GEN-LAST:event_tblPembeliCariMouseClicked
 

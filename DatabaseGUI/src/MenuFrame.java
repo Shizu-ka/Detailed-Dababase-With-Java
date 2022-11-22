@@ -126,6 +126,8 @@ public class MenuFrame extends javax.swing.JFrame{
 
         jLabel1.setText("ID Menu");
 
+        tfIdMenu.setEditable(false);
+
         jLabel2.setText("Nama Menu");
 
         tfNamaMenu.setEditable(false);
@@ -606,10 +608,10 @@ public class MenuFrame extends javax.swing.JFrame{
         tfIdMenu.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
-        String nm = tblMenu.getValueAt(baris, 1).toString();
+        String nm = tblMenuCari.getValueAt(baris, 1).toString();
         tfNamaMenu.setText(nm);
 
-        String harga = tblMenu.getValueAt(baris, 2).toString();
+        String harga = tblMenuCari.getValueAt(baris, 2).toString();
         tfHarga.setText(harga);
     }//GEN-LAST:event_tblMenuCariMouseClicked
 

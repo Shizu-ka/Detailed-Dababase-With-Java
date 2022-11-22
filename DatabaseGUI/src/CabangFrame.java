@@ -143,6 +143,8 @@ public class CabangFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Nama Cabang");
 
+        tfNamaCabang.setEditable(false);
+
         jLabel2.setText("Jalan");
 
         tfJalan.setEditable(false);
@@ -519,6 +521,7 @@ public class CabangFrame extends javax.swing.JFrame {
         btnSimpan.setEnabled(true);
         btnTambahData.setEnabled(true);
         btnHapus.setEnabled(true);
+        tfNamaCabang.setEditable(true);
         tfJalan.setEditable(true);
         tfKecamatan.setEditable(true);
         tfKota.setEditable(true);
@@ -672,16 +675,16 @@ public class CabangFrame extends javax.swing.JFrame {
         tfNamaCabang.setText(namaCabang);
         primaryKeyNow = namaCabang;
 
-        String jalan = tblCabang.getValueAt(baris, 1).toString();
+        String jalan = tblCabangCari.getValueAt(baris, 1).toString();
         tfJalan.setText(jalan);
 
-        String kecamatan = tblCabang.getValueAt(baris, 2).toString();
+        String kecamatan = tblCabangCari.getValueAt(baris, 2).toString();
         tfKecamatan.setText(kecamatan);
 
-        String kota = tblCabang.getValueAt(baris, 3).toString();
+        String kota = tblCabangCari.getValueAt(baris, 3).toString();
         tfKota.setText(kota);
 
-        String noBangunan = tblCabang.getValueAt(baris, 4).toString();
+        String noBangunan = tblCabangCari.getValueAt(baris, 4).toString();
         tfNoBangunan.setText(noBangunan);
     }//GEN-LAST:event_tblCabangCariMouseClicked
 

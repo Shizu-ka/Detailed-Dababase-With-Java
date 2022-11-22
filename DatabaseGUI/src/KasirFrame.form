@@ -238,6 +238,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfNoPegawai">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>

@@ -165,6 +165,8 @@ public class KasirFrame extends javax.swing.JFrame {
 
         jLabel1.setText("No Pegawai");
 
+        tfNoPegawai.setEditable(false);
+
         jLabel2.setText("No Telp");
 
         tfNoTelp.setEditable(false);

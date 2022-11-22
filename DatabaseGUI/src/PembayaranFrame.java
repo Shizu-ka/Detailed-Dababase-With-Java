@@ -132,6 +132,8 @@ public class PembayaranFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Kode Pembayaran");
 
+        tfKodePembayaran.setEditable(false);
+
         jLabel2.setText("Metode Pembayaran");
 
         jLabel3.setText("Total");
