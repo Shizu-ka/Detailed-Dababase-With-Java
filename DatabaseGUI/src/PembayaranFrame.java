@@ -547,9 +547,9 @@ public class PembayaranFrame extends javax.swing.JFrame {
             try {
                 Statement st = conn.createStatement();
                 String cth = "update Pembayaran set "
-                        + "metode_pemabayaran='" + tfMetodePembayaran.getText() + "'"
+                        + "metode_pemabayaran='" + getSelectedButtonText(btnGMetodePembayaran) + "'"
                         + ", harga=" + tfTotal.getText()
-                        + " where id_menu='" + temp + "'";
+                        + " where kode_pembayaran='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
