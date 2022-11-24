@@ -83,6 +83,7 @@ public class MainFrame extends javax.swing.JFrame {
         tpAdmin.setEnabled(false);
 
         btnConnect.setText("Connect");
+        btnConnect.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConnectActionPerformed(evt);
