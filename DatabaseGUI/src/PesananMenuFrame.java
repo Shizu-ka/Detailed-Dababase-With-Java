@@ -164,6 +164,11 @@ public class PesananMenuFrame extends javax.swing.JFrame {
                 tblPesananMenuMouseClicked(evt);
             }
         });
+        tblPesananMenu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPesananMenuKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPesananMenu);
 
         btnTambahData.setText("Tambah Data");
@@ -306,6 +311,11 @@ public class PesananMenuFrame extends javax.swing.JFrame {
         tblPesananMenuCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPesananMenuCariMouseClicked(evt);
+            }
+        });
+        tblPesananMenuCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPesananMenuCariKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tblPesananMenuCari);
@@ -621,6 +631,44 @@ public class PesananMenuFrame extends javax.swing.JFrame {
     private void tfKodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodePembayaranActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfKodePembayaranActionPerformed
+
+    private void tblPesananMenuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPesananMenuKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPesananMenu.getSelectedRow();
+                String Idmenu = tblPesananMenu.getValueAt(baris, 0).toString();
+                tfIdPesanan.setText(Idmenu);
+                primaryKeyNow = Idmenu;
+
+                String nm = tblPesananMenu.getValueAt(baris, 1).toString();
+                tfIdMenu.setText(nm);
+
+                String harga = tblPesananMenu.getValueAt(baris, 2).toString();
+                tfKodePembayaran.setText(harga);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPesananMenuKeyReleased
+
+    private void tblPesananMenuCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPesananMenuCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPesananMenuCari.getSelectedRow();
+                String Idmenu = tblPesananMenuCari.getValueAt(baris, 0).toString();
+                tfIdPesanan.setText(Idmenu);
+                primaryKeyNow = Idmenu;
+
+                String nm = tblPesananMenuCari.getValueAt(baris, 1).toString();
+                tfIdMenu.setText(nm);
+
+                String harga = tblPesananMenuCari.getValueAt(baris, 2).toString();
+                tfKodePembayaran.setText(harga);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPesananMenuCariKeyReleased
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {

@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -204,6 +205,11 @@ public class PengantarFrame extends javax.swing.JFrame {
         tblPengantar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPengantarMouseClicked(evt);
+            }
+        });
+        tblPengantar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPengantarKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblPengantar);
@@ -414,6 +420,11 @@ public class PengantarFrame extends javax.swing.JFrame {
                 tblPengantarCariMouseClicked(evt);
             }
         });
+        tblPengantarCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPengantarCariKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblPengantarCari);
 
         btnGCari.add(cbNamaDepan);
@@ -588,7 +599,7 @@ public class PengantarFrame extends javax.swing.JFrame {
         btnSimpan.setEnabled(true);
         btnTambahData.setEnabled(true);
         btnHapus.setEnabled(true);
-        
+
         tfNoTelp.setEditable(true);
         tfUsername.setEditable(true);
         tfNoPol.setEditable(true);
@@ -677,7 +688,7 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         String noPol = tblPengantar.getValueAt(baris, 1).toString();
         tfNoPol.setText(noPol);
-        
+
         String noTelp = tblPengantar.getValueAt(baris, 2).toString();
         tfNoTelp.setText(noTelp);
 
@@ -698,7 +709,6 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         String namaAkhir = tblPengantar.getValueAt(baris, 6).toString();
         tfNamaAkhir.setText(namaAkhir);
-
 
         String gaji = tblPengantar.getValueAt(baris, 7).toString();
         tfGaji.setText(gaji);
@@ -811,7 +821,7 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         String noPol = tblPengantarCari.getValueAt(baris, 1).toString();
         tfNoPol.setText(noPol);
-        
+
         String noTelp = tblPengantarCari.getValueAt(baris, 2).toString();
         tfNoTelp.setText(noTelp);
 
@@ -832,7 +842,6 @@ public class PengantarFrame extends javax.swing.JFrame {
 
         String namaAkhir = tblPengantarCari.getValueAt(baris, 6).toString();
         tfNamaAkhir.setText(namaAkhir);
-
 
         String gaji = tblPengantarCari.getValueAt(baris, 7).toString();
         tfGaji.setText(gaji);
@@ -869,6 +878,92 @@ public class PengantarFrame extends javax.swing.JFrame {
     private void cbNamaBelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaBelakangActionPerformed
         cariKueri = "select * from Pengantar where nama_belakang = '";
     }//GEN-LAST:event_cbNamaBelakangActionPerformed
+
+    private void tblPengantarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPengantarKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPengantar.getSelectedRow();
+                String username = tblPengantar.getValueAt(baris, 0).toString();
+                tfUsername.setText(username);
+                primaryKeyNow = username;
+
+                String noPol = tblPengantar.getValueAt(baris, 1).toString();
+                tfNoPol.setText(noPol);
+
+                String noTelp = tblPengantar.getValueAt(baris, 2).toString();
+                tfNoTelp.setText(noTelp);
+
+                String password = tblPengantar.getValueAt(baris, 3).toString();
+                tfPassword.setText(password);
+
+                String namaDepan = tblPengantar.getValueAt(baris, 4).toString();
+                tfNamaDepan.setText(namaDepan);
+
+                var obj = tblPengantar.getValueAt(baris, 5);
+                if (obj != null) {
+                    String namaTengah = tblPengantar.getValueAt(baris, 4).toString();
+                    tfNamaTengah.setText(namaTengah);
+                } else {
+                    String namaTengah = "";
+                    tfNamaTengah.setText(namaTengah);
+                }
+
+                String namaAkhir = tblPengantar.getValueAt(baris, 6).toString();
+                tfNamaAkhir.setText(namaAkhir);
+
+                String gaji = tblPengantar.getValueAt(baris, 7).toString();
+                tfGaji.setText(gaji);
+
+                String kota = tblPengantar.getValueAt(baris, 8).toString();
+                cbCabang.setSelectedItem(kota);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPengantarKeyReleased
+
+    private void tblPengantarCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPengantarCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPengantarCari.getSelectedRow();
+                String username = tblPengantarCari.getValueAt(baris, 0).toString();
+                tfUsername.setText(username);
+                primaryKeyNow = username;
+
+                String noPol = tblPengantarCari.getValueAt(baris, 1).toString();
+                tfNoPol.setText(noPol);
+
+                String noTelp = tblPengantarCari.getValueAt(baris, 2).toString();
+                tfNoTelp.setText(noTelp);
+
+                String password = tblPengantarCari.getValueAt(baris, 3).toString();
+                tfPassword.setText(password);
+
+                String namaDepan = tblPengantarCari.getValueAt(baris, 4).toString();
+                tfNamaDepan.setText(namaDepan);
+
+                var obj = tblPengantarCari.getValueAt(baris, 5);
+                if (obj != null) {
+                    String namaTengah = tblPengantarCari.getValueAt(baris, 4).toString();
+                    tfNamaTengah.setText(namaTengah);
+                } else {
+                    String namaTengah = "";
+                    tfNamaTengah.setText(namaTengah);
+                }
+
+                String namaAkhir = tblPengantarCari.getValueAt(baris, 6).toString();
+                tfNamaAkhir.setText(namaAkhir);
+
+                String gaji = tblPengantarCari.getValueAt(baris, 7).toString();
+                tfGaji.setText(gaji);
+
+                String kota = tblPengantarCari.getValueAt(baris, 8).toString();
+                cbCabang.setSelectedItem(kota);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPengantarCariKeyReleased
 
     void klik() {
         cbUsername.doClick();

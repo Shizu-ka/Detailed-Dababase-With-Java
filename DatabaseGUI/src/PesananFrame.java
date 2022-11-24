@@ -198,6 +198,11 @@ public class PesananFrame extends javax.swing.JFrame {
                 tblPesananMouseClicked(evt);
             }
         });
+        tblPesanan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPesananKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPesanan);
 
         btnTambahData.setText("Tambah Data");
@@ -396,6 +401,11 @@ public class PesananFrame extends javax.swing.JFrame {
         tblPesananCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPesananCariMouseClicked(evt);
+            }
+        });
+        tblPesananCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPesananCariKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(tblPesananCari);
@@ -852,6 +862,97 @@ public class PesananFrame extends javax.swing.JFrame {
     private void cbPengantarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPengantarActionPerformed
         cariKueri = "select * from Pesanan where username_pengantar = '";
     }//GEN-LAST:event_cbPengantarActionPerformed
+
+    private void tblPesananKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPesananKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPesanan.getSelectedRow();
+                String username = tblPesanan.getValueAt(baris, 0).toString();
+                tfIdPesanan.setText(username);
+                primaryKeyNow = username;
+
+                String noTelp = tblPesanan.getValueAt(baris, 1).toString();
+                tfPembeli.setText(noTelp);
+
+                String password = tblPesanan.getValueAt(baris, 2).toString();
+                tfKodePembayaran.setText(password);
+
+                String namaDepan = tblPesanan.getValueAt(baris, 3).toString();
+                tfPegawai.setText(namaDepan);
+
+                String namaAkhir = tblPesanan.getValueAt(baris, 4).toString();
+                tfTotal.setText(namaAkhir);
+
+                String date = tblPesanan.getValueAt(baris, 7).toString();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date2;
+                try {
+                    date2 = formatter.parse(date);
+                    DateChooserTglPemesanan.setDate(date2);
+                } catch (ParseException ex) {
+                    Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                String us = tblPesanan.getValueAt(baris, 5).toString();
+
+                if (us.equalsIgnoreCase("Takeaway")) {
+                    cbTakeAway.setSelected(true);
+                } else {
+                    cbDelivery.setSelected(true);
+                }
+
+                String gaji = tblPesanan.getValueAt(baris, 6).toString();
+                tfPengantar.setText(gaji);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPesananKeyReleased
+
+    private void tblPesananCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPesananCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPesananCari.getSelectedRow();
+                String username = tblPesananCari.getValueAt(baris, 0).toString();
+                tfIdPesanan.setText(username);
+                primaryKeyNow = username;
+
+                String noTelp = tblPesananCari.getValueAt(baris, 1).toString();
+                tfPembeli.setText(noTelp);
+
+                String password = tblPesananCari.getValueAt(baris, 2).toString();
+                tfKodePembayaran.setText(password);
+
+                String namaDepan = tblPesananCari.getValueAt(baris, 3).toString();
+                tfPegawai.setText(namaDepan);
+
+                String namaAkhir = tblPesananCari.getValueAt(baris, 4).toString();
+                tfTotal.setText(namaAkhir);
+
+                String date = tblPesananCari.getValueAt(baris, 7).toString();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date2;
+                try {
+                    date2 = formatter.parse(date);
+                    DateChooserTglPemesanan.setDate(date2);
+                } catch (ParseException ex) {
+                    Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                String us = tblPesananCari.getValueAt(baris, 5).toString();
+                if (us.equalsIgnoreCase("Takeaway")) {
+                    cbTakeAway.setSelected(true);
+                } else {
+                    cbDelivery.setSelected(true);
+                }
+
+                String gaji = tblPesananCari.getValueAt(baris, 6).toString();
+                tfPengantar.setText(gaji);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPesananCariKeyReleased
 
     void klik() {
         cbIdPesanan.doClick();

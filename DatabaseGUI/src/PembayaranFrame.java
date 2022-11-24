@@ -161,6 +161,11 @@ public class PembayaranFrame extends javax.swing.JFrame {
                 tblPembayaranMouseClicked(evt);
             }
         });
+        tblPembayaran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPembayaranKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPembayaran);
 
         btnTambahData.setText("Tambah Data");
@@ -330,6 +335,11 @@ public class PembayaranFrame extends javax.swing.JFrame {
         tblPembayaranCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPembayaranCariMouseClicked(evt);
+            }
+        });
+        tblPembayaranCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPembayaranCariKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tblPembayaranCari);
@@ -664,6 +674,62 @@ public class PembayaranFrame extends javax.swing.JFrame {
             btnTambahData.doClick();
         }
     }//GEN-LAST:event_tfTotalKeyPressed
+
+    private void tblPembayaranKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPembayaranKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPembayaran.getSelectedRow();
+                String Idmenu = tblPembayaran.getValueAt(baris, 0).toString();
+                tfKodePembayaran.setText(Idmenu);
+                primaryKeyNow = Idmenu;
+
+                String nm = tblPembayaran.getValueAt(baris, 1).toString();
+                switch (nm.toLowerCase()) {
+                    case "qris" ->
+                        cbQris.setSelected(true);
+                    case "cash" ->
+                        cbCash.setSelected(true);
+                    case "bca" ->
+                        cbBca.setSelected(true);
+                    case "bni" ->
+                        cbBni.setSelected(true);
+                }
+
+                String harga = tblPembayaran.getValueAt(baris, 2).toString();
+                tfTotal.setText(harga);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPembayaranKeyReleased
+
+    private void tblPembayaranCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPembayaranCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPembayaran.getSelectedRow();
+                String Idmenu = tblPembayaranCari.getValueAt(baris, 0).toString();
+                tfKodePembayaran.setText(Idmenu);
+                primaryKeyNow = Idmenu;
+
+                String nm = tblPembayaranCari.getValueAt(baris, 1).toString();
+                switch (nm.toLowerCase()) {
+                    case "qris" ->
+                        cbQris.setSelected(true);
+                    case "cash" ->
+                        cbCash.setSelected(true);
+                    case "bca" ->
+                        cbBca.setSelected(true);
+                    case "bni" ->
+                        cbBni.setSelected(true);
+                }
+
+                String harga = tblPembayaranCari.getValueAt(baris, 2).toString();
+                tfTotal.setText(harga);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPembayaranCariKeyReleased
 
     void klik() {
         cbKodePembayaran.doClick();

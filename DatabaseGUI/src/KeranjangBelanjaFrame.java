@@ -340,6 +340,11 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
                 tblKeranjangBelanjaCariMouseClicked(evt);
             }
         });
+        tblKeranjangBelanjaCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblKeranjangBelanjaCariKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblKeranjangBelanjaCari);
 
         btnGCari.add(cbUsernamePembeli);
@@ -639,7 +644,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
 
         String harga = tblKeranjangBelanjaCari.getValueAt(baris, 2).toString();
         tfKuantitas.setText(harga);
-        
+
         String total = tblKeranjangBelanjaCari.getValueAt(baris, 3).toString();
         tfTotal.setText(harga);
     }//GEN-LAST:event_tblKeranjangBelanjaCariMouseClicked
@@ -701,10 +706,32 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
 
         String harga = tblKeranjangBelanja.getValueAt(baris, 2).toString();
         tfKuantitas.setText(harga);
-        
+
         String total = tblKeranjangBelanja.getValueAt(baris, 3).toString();
         tfTotal.setText(harga);
     }//GEN-LAST:event_tblKeranjangBelanjaMouseClicked
+
+    private void tblKeranjangBelanjaCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblKeranjangBelanjaCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblKeranjangBelanjaCari.getSelectedRow();
+                String Idmenu = tblKeranjangBelanjaCari.getValueAt(baris, 0).toString();
+                tfUsernamePembeli.setText(Idmenu);
+                primaryKeyNow = Idmenu;
+
+                String nm = tblKeranjangBelanjaCari.getValueAt(baris, 1).toString();
+                tfIdMenu.setText(nm);
+
+                String harga = tblKeranjangBelanjaCari.getValueAt(baris, 2).toString();
+                tfKuantitas.setText(harga);
+
+                String total = tblKeranjangBelanjaCari.getValueAt(baris, 3).toString();
+                tfTotal.setText(harga);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblKeranjangBelanjaCariKeyReleased
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {
