@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -208,6 +209,11 @@ public class PembeliFrame extends javax.swing.JFrame {
         tblPembeli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPembeliMouseClicked(evt);
+            }
+        });
+        tblPembeli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPembeliKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblPembeli);
@@ -447,6 +453,11 @@ public class PembeliFrame extends javax.swing.JFrame {
         tblPembeliCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPembeliCariMouseClicked(evt);
+            }
+        });
+        tblPembeliCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPembeliCariKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(tblPembeliCari);
@@ -886,6 +897,118 @@ public class PembeliFrame extends javax.swing.JFrame {
     private void cbNoTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNoTelpActionPerformed
         cariKueri = "select * from Pembeli where no_telp = '";
     }//GEN-LAST:event_cbNoTelpActionPerformed
+
+    private void tblPembeliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPembeliKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPembeli.getSelectedRow();
+                String username = tblPembeli.getValueAt(baris, 0).toString();
+                tfUsername.setText(username);
+                primaryKeyNow = username;
+
+                String noTelp = tblPembeli.getValueAt(baris, 1).toString();
+                tfNoTelp.setText(noTelp);
+
+                String password = tblPembeli.getValueAt(baris, 2).toString();
+                tfPassword.setText(password);
+
+                String namaDepan = tblPembeli.getValueAt(baris, 3).toString();
+                tfNamaDepan.setText(namaDepan);
+
+                var obj = tblPembeli.getValueAt(baris, 4);
+                if (obj != null) {
+                    String namaTengah = tblPembeli.getValueAt(baris, 4).toString();
+                    tfNamaTengah.setText(namaTengah);
+                } else {
+                    String namaTengah = "";
+                    tfNamaTengah.setText(namaTengah);
+                }
+
+                String namaAkhir = tblPembeli.getValueAt(baris, 5).toString();
+                tfNamaAkhir.setText(namaAkhir);
+
+                String date = tblPembeli.getValueAt(baris, 6).toString();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date2;
+                try {
+                    date2 = formatter.parse(date);
+                    DateChooserTglLahir.setDate(date2);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                String jalan = tblPembeli.getValueAt(baris, 7).toString();
+                tfJalan.setText(jalan);
+
+                String kecamatan = tblPembeli.getValueAt(baris, 8).toString();
+                tfKecamatan.setText(kecamatan);
+
+                String kota = tblPembeli.getValueAt(baris, 9).toString();
+                tfKota.setText(kota);
+
+                String noRumah = tblPembeli.getValueAt(baris, 10).toString();
+                tfNoRumah.setText(noRumah);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPembeliKeyReleased
+
+    private void tblPembeliCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPembeliCariKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
+            try {
+                int baris = tblPembeliCari.getSelectedRow();
+                String username = tblPembeliCari.getValueAt(baris, 0).toString();
+                tfUsername.setText(username);
+                primaryKeyNow = username;
+
+                String noTelp = tblPembeliCari.getValueAt(baris, 1).toString();
+                tfNoTelp.setText(noTelp);
+
+                String password = tblPembeliCari.getValueAt(baris, 2).toString();
+                tfPassword.setText(password);
+
+                String namaDepan = tblPembeliCari.getValueAt(baris, 3).toString();
+                tfNamaDepan.setText(namaDepan);
+
+                var obj = tblPembeliCari.getValueAt(baris, 4);
+                if (obj != null) {
+                    String namaTengah = tblPembeliCari.getValueAt(baris, 4).toString();
+                    tfNamaTengah.setText(namaTengah);
+                } else {
+                    String namaTengah = "";
+                    tfNamaTengah.setText(namaTengah);
+                }
+
+                String namaAkhir = tblPembeliCari.getValueAt(baris, 5).toString();
+                tfNamaAkhir.setText(namaAkhir);
+
+                String date = tblPembeliCari.getValueAt(baris, 6).toString();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date2;
+                try {
+                    date2 = formatter.parse(date);
+                    DateChooserTglLahir.setDate(date2);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                String jalan = tblPembeliCari.getValueAt(baris, 7).toString();
+                tfJalan.setText(jalan);
+
+                String kecamatan = tblPembeliCari.getValueAt(baris, 8).toString();
+                tfKecamatan.setText(kecamatan);
+
+                String kota = tblPembeliCari.getValueAt(baris, 9).toString();
+                tfKota.setText(kota);
+
+                String noRumah = tblPembeliCari.getValueAt(baris, 10).toString();
+                tfNoRumah.setText(noRumah);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_tblPembeliCariKeyReleased
 
     void klik() {
         cbUsername.doClick();

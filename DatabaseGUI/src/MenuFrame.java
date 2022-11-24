@@ -163,6 +163,11 @@ public class MenuFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMenuMouseClicked(evt);
+            }
+        });
         tblMenu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblMenuKeyReleased(evt);
@@ -621,7 +626,6 @@ public class MenuFrame extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             try {
             int baris = tblMenu.getSelectedRow();
-            System.out.println(baris);
             String Idmenu = tblMenu.getValueAt(baris, 0).toString();
             tfIdMenu.setText(Idmenu);
             primaryKeyNow = Idmenu;
@@ -636,6 +640,19 @@ public class MenuFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tblMenuKeyReleased
+
+    private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
+        int baris = tblMenu.rowAtPoint(evt.getPoint());
+        String Idmenu = tblMenu.getValueAt(baris, 0).toString();
+        tfIdMenu.setText(Idmenu);
+        primaryKeyNow = Idmenu;
+
+        String nm = tblMenu.getValueAt(baris, 1).toString();
+        tfNamaMenu.setText(nm);
+
+        String harga = tblMenu.getValueAt(baris, 2).toString();
+        tfHarga.setText(harga);
+    }//GEN-LAST:event_tblMenuMouseClicked
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {
