@@ -27,7 +27,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
     private static Connection conn;
     private static String primaryKeyNow = "";
     private String cariKueri = "";
-    private String setTable = "select * from Menu";
+    private String setTable = "select * from KeranjangBelanja";
 
     private static void connect() {
         String hostname = "localhost";
@@ -46,7 +46,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
                 + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
 
         try {
-            MenuFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
+            KeranjangBelanjaFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
 
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,13 +56,15 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
 
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Username Pembeli");
         model.addColumn("ID Menu");
-        model.addColumn("Nama Menu");
-        model.addColumn("Harga");
+        model.addColumn("Kuantitas");
+        model.addColumn("Total");
         DefaultTableModel model2 = new DefaultTableModel();
+        model2.addColumn("Username Pembeli");
         model2.addColumn("ID Menu");
-        model2.addColumn("Nama Menu");
-        model2.addColumn("Harga");
+        model2.addColumn("Kuantitas");
+        model2.addColumn("Total");
 
         connect();
         int no = 1;
@@ -620,18 +622,18 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
     private void tblMenuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblMenuKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             try {
-            int baris = tblMenu.getSelectedRow();
-            System.out.println(baris);
-            String Idmenu = tblMenu.getValueAt(baris, 0).toString();
-            tfIdMenu.setText(Idmenu);
-            primaryKeyNow = Idmenu;
+                int baris = tblMenu.getSelectedRow();
+                System.out.println(baris);
+                String Idmenu = tblMenu.getValueAt(baris, 0).toString();
+                tfIdMenu.setText(Idmenu);
+                primaryKeyNow = Idmenu;
 
-            String nm = tblMenu.getValueAt(baris, 1).toString();
-            tfNamaMenu.setText(nm);
+                String nm = tblMenu.getValueAt(baris, 1).toString();
+                tfNamaMenu.setText(nm);
 
-            String harga = tblMenu.getValueAt(baris, 2).toString();
-            tfHarga.setText(harga);
-            }catch (Exception e) {
+                String harga = tblMenu.getValueAt(baris, 2).toString();
+                tfHarga.setText(harga);
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }
