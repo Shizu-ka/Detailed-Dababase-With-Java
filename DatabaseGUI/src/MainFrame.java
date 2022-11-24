@@ -120,6 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
         tpAdmin.addTab("Connect", jPanel2);
 
         btnPembeli.setText("Pembeli");
+        btnPembeli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPembeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPembeliActionPerformed(evt);
@@ -127,6 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnPesanan.setText("Pesanan");
+        btnPesanan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesanan.setMaximumSize(new java.awt.Dimension(72, 23));
         btnPesanan.setPreferredSize(new java.awt.Dimension(72, 23));
         btnPesanan.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +138,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnMenu.setText("Menu");
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
@@ -143,6 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnKasir.setText("Kasir");
+        btnKasir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKasir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKasirActionPerformed(evt);
@@ -150,6 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnPembayaran.setText("Pembayaran");
+        btnPembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPembayaranActionPerformed(evt);
@@ -157,6 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnPesananMenu.setText("Pesanan Menu");
+        btnPesananMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesananMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesananMenuActionPerformed(evt);
@@ -164,6 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnPengantar.setText("Pengantar");
+        btnPengantar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPengantar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPengantarActionPerformed(evt);
@@ -171,8 +178,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnKeranjangBelanja.setText("Keranjang Belanja");
+        btnKeranjangBelanja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnCabang.setText("Cabang");
+        btnCabang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCabang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCabangActionPerformed(evt);
