@@ -164,6 +164,11 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblKeranjangBelanja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKeranjangBelanjaMouseClicked(evt);
+            }
+        });
         tblKeranjangBelanja.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblKeranjangBelanjaKeyReleased(evt);
@@ -484,7 +489,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
         btnSimpan.setEnabled(true);
 
         tfTotal.setEditable(true);
-        tfUsernamePembeli.setEditable(false);
+        tfUsernamePembeli.setEditable(true);
         tfIdMenu.setEditable(true);
         tfKuantitas.setEditable(true);
 
@@ -493,7 +498,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String temp = tfCari.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
-            JOptionPane.showMessageDialog(new CabangFrame(), "Input Kosong");
+            JOptionPane.showMessageDialog(new KeranjangBelanjaFrame(), "Input Kosong");
         } else {
             connect();
             try {
@@ -503,21 +508,22 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
                 try {
                     tampilkanData();
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(PembeliFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(KeranjangBelanjaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 ResultSet resultSet = st.executeQuery(cth);
                 if (!resultSet.isBeforeFirst()) {
-                    JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
+                    JOptionPane.showMessageDialog(new KeranjangBelanjaFrame(), "Tidak Ada Hasil");
                     tfCari.setText(temp);
                 } else {
                     while (resultSet.next()) {
                         tfUsernamePembeli.setText(resultSet.getString(1));
                         tfIdMenu.setText(resultSet.getString(2));
                         tfKuantitas.setText(resultSet.getString(3));
+                        tfTotal.setText(resultSet.getString(4));
                     }
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(new MenuFrame(), e);
+                JOptionPane.showMessageDialog(new KeranjangBelanjaFrame(), e);
             }
         }
     }//GEN-LAST:event_btnCariActionPerformed
@@ -633,6 +639,9 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
 
         String harga = tblKeranjangBelanjaCari.getValueAt(baris, 2).toString();
         tfKuantitas.setText(harga);
+        
+        String total = tblKeranjangBelanjaCari.getValueAt(baris, 3).toString();
+        tfTotal.setText(harga);
     }//GEN-LAST:event_tblKeranjangBelanjaCariMouseClicked
 
     private void tfIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdMenuActionPerformed
@@ -680,6 +689,22 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
     private void cbTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTotalActionPerformed
         cariKueri = "select * from KeranjangBelanja where total = '";
     }//GEN-LAST:event_cbTotalActionPerformed
+
+    private void tblKeranjangBelanjaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKeranjangBelanjaMouseClicked
+        int baris = tblKeranjangBelanja.rowAtPoint(evt.getPoint());
+        String Idmenu = tblKeranjangBelanja.getValueAt(baris, 0).toString();
+        tfUsernamePembeli.setText(Idmenu);
+        primaryKeyNow = Idmenu;
+
+        String nm = tblKeranjangBelanja.getValueAt(baris, 1).toString();
+        tfIdMenu.setText(nm);
+
+        String harga = tblKeranjangBelanja.getValueAt(baris, 2).toString();
+        tfKuantitas.setText(harga);
+        
+        String total = tblKeranjangBelanja.getValueAt(baris, 3).toString();
+        tfTotal.setText(harga);
+    }//GEN-LAST:event_tblKeranjangBelanjaMouseClicked
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {
