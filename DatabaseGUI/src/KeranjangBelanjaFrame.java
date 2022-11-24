@@ -18,9 +18,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class MenuFrame extends javax.swing.JFrame {
+public class KeranjangBelanjaFrame extends javax.swing.JFrame {
 
-    public MenuFrame() {
+    public KeranjangBelanjaFrame() {
         initComponents();
     }
 

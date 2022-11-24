@@ -18,16 +18,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class MenuFrame extends javax.swing.JFrame {
+public class PesananMenuFrame extends javax.swing.JFrame {
 
-    public MenuFrame() {
+    public PesananMenuFrame() {
         initComponents();
     }
 
     private static Connection conn;
     private static String primaryKeyNow = "";
     private String cariKueri = "";
-    private String setTable = "select * from Menu";
+    private String setTable = "select * from PesananMenu";
 
     private static void connect() {
         String hostname = "localhost";
@@ -46,7 +46,7 @@ public class MenuFrame extends javax.swing.JFrame {
                 + ";instance=" + sqlInstanceName + ";databaseName=" + sqlDatabase + ";encrypt=true;trustServerCertificate=true";
 
         try {
-            MenuFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
+            PesananMenuFrame.conn = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
 
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,32 +56,28 @@ public class MenuFrame extends javax.swing.JFrame {
 
     void tampilkanData() throws ClassNotFoundException, SQLException {
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pesanan");
         model.addColumn("ID Menu");
-        model.addColumn("Nama Menu");
-        model.addColumn("Harga");
+        model.addColumn("Kode Pembayaran");
         DefaultTableModel model2 = new DefaultTableModel();
+        model2.addColumn("ID Pesanan");
         model2.addColumn("ID Menu");
-        model2.addColumn("Nama Menu");
-        model2.addColumn("Harga");
+        model2.addColumn("Kode Pembayaran");
 
         connect();
         int no = 1;
         Statement st = conn.createStatement();
-        String cth = "select * from Menu";
+        String cth = "select * from PesananMenu";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
-            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3)});
+            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3)});
         }
-        tblMenu.setModel(model);
-        tblMenu.getColumnModel().getColumn(0).setPreferredWidth(1);
-        tblMenu.getColumnModel().getColumn(2).setPreferredWidth(1);
+        tblPesananMenu.setModel(model);
         resultSet = st.executeQuery(setTable);
         while (resultSet.next()) {
-            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3)});
+            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3)});
         }
-        tblMenuCari.setModel(model2);
-        tblMenuCari.getColumnModel().getColumn(0).setPreferredWidth(1);
-        tblMenuCari.getColumnModel().getColumn(2).setPreferredWidth(1);
+        tblPesananMenuCari.setModel(model2);
     }
 
     @SuppressWarnings("unchecked")
@@ -93,13 +89,13 @@ public class MenuFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCabangFrameKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfIdMenu = new javax.swing.JTextField();
+        tfIdPesanan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfNamaMenu = new javax.swing.JTextField();
+        tfIdMenu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfHarga = new javax.swing.JTextField();
+        tfKodePembayaran = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMenu = new javax.swing.JTable();
+        tblPesananMenu = new javax.swing.JTable();
         btnTambahData = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
@@ -109,10 +105,10 @@ public class MenuFrame extends javax.swing.JFrame {
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblMenuCari = new javax.swing.JTable();
+        tblPesananMenuCari = new javax.swing.JTable();
+        cbIdPesanan = new javax.swing.JCheckBox();
         cbIdMenu = new javax.swing.JCheckBox();
-        cbNamaMenu = new javax.swing.JCheckBox();
-        cbHarga = new javax.swing.JCheckBox();
+        cbKodePembayaran = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cabang");
@@ -125,34 +121,34 @@ public class MenuFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("ID Menu");
+        jLabel1.setText("ID Pesanan");
+
+        tfIdPesanan.setEditable(false);
+
+        jLabel2.setText("ID Menu");
 
         tfIdMenu.setEditable(false);
-
-        jLabel2.setText("Nama Menu");
-
-        tfNamaMenu.setEditable(false);
-        tfNamaMenu.addActionListener(new java.awt.event.ActionListener() {
+        tfIdMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNamaMenuActionPerformed(evt);
+                tfIdMenuActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Harga");
+        jLabel3.setText("Kode Pembayaran");
 
-        tfHarga.setEditable(false);
-        tfHarga.addActionListener(new java.awt.event.ActionListener() {
+        tfKodePembayaran.setEditable(false);
+        tfKodePembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfHargaActionPerformed(evt);
+                tfKodePembayaranActionPerformed(evt);
             }
         });
-        tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfKodePembayaran.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfHargaKeyPressed(evt);
+                tfKodePembayaranKeyPressed(evt);
             }
         });
 
-        tblMenu.setModel(new javax.swing.table.DefaultTableModel(
+        tblPesananMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -163,12 +159,12 @@ public class MenuFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblMenu.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblMenuKeyReleased(evt);
+        tblPesananMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPesananMenuMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblMenu);
+        jScrollPane1.setViewportView(tblPesananMenu);
 
         btnTambahData.setText("Tambah Data");
         btnTambahData.setEnabled(false);
@@ -224,9 +220,9 @@ public class MenuFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tfNamaMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                    .addComponent(tfIdMenu)
-                    .addComponent(tfHarga))
+                    .addComponent(tfIdMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(tfIdPesanan)
+                    .addComponent(tfKodePembayaran))
                 .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -259,15 +255,15 @@ public class MenuFrame extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfIdPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambahData)
@@ -296,7 +292,7 @@ public class MenuFrame extends javax.swing.JFrame {
             }
         });
 
-        tblMenuCari.setModel(new javax.swing.table.DefaultTableModel(
+        tblPesananMenuCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -307,12 +303,20 @@ public class MenuFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblMenuCari.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPesananMenuCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblMenuCariMouseClicked(evt);
+                tblPesananMenuCariMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblMenuCari);
+        jScrollPane3.setViewportView(tblPesananMenuCari);
+
+        btnGCari.add(cbIdPesanan);
+        cbIdPesanan.setText("ID Pesanan");
+        cbIdPesanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIdPesananActionPerformed(evt);
+            }
+        });
 
         btnGCari.add(cbIdMenu);
         cbIdMenu.setText("ID Menu");
@@ -322,19 +326,11 @@ public class MenuFrame extends javax.swing.JFrame {
             }
         });
 
-        btnGCari.add(cbNamaMenu);
-        cbNamaMenu.setText("Nama Menu");
-        cbNamaMenu.addActionListener(new java.awt.event.ActionListener() {
+        btnGCari.add(cbKodePembayaran);
+        cbKodePembayaran.setText("Kode Pembayaran");
+        cbKodePembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamaMenuActionPerformed(evt);
-            }
-        });
-
-        btnGCari.add(cbHarga);
-        cbHarga.setText("Harga");
-        cbHarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbHargaActionPerformed(evt);
+                cbKodePembayaranActionPerformed(evt);
             }
         });
 
@@ -343,7 +339,7 @@ public class MenuFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,12 +350,12 @@ public class MenuFrame extends javax.swing.JFrame {
                             .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(cbIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbIdPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(cbHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))))
+                        .addComponent(cbIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbKodePembayaran)
+                        .addGap(70, 70, 70))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,9 +366,9 @@ public class MenuFrame extends javax.swing.JFrame {
                 .addComponent(btnCari)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbIdPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -410,13 +406,14 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         String temp = "";
-        tfIdMenu.setText(temp);
+        tfIdPesanan.setText(temp);
         connect();
         try {
             Statement st = conn.createStatement();
-            String cth = "insert into Menu values('"
-                    + tfNamaMenu.getText() + "'"
-                    + ", " + tfHarga.getText()
+            String cth = "insert into PesananMenu values('"
+                    + tfIdPesanan.getText() + "'"
+                    + ", " + tfIdMenu.getText()
+                    + ", " + tfKodePembayaran.getText()
                     + ")";
 
             boolean gotResults = st.execute(cth);
@@ -433,13 +430,11 @@ public class MenuFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new MenuFrame(), e);
         }
         try {
-            MenuFrame konek = new MenuFrame();
+            PesananMenuFrame konek = new PesananMenuFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             this.dispose();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
@@ -449,11 +444,24 @@ public class MenuFrame extends javax.swing.JFrame {
         btnTambahData.setEnabled(true);
         btnSimpan.setEnabled(true);
 
-        tfIdMenu.setEditable(false);
-        tfNamaMenu.setEditable(true);
-        tfHarga.setEditable(true);
+        tfIdPesanan.setEditable(true);
+        tfIdMenu.setEditable(true);
+        tfKodePembayaran.setEditable(true);
 
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tblPesananMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesananMenuMouseClicked
+        int baris = tblPesananMenu.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPesananMenu.getValueAt(baris, 0).toString();
+        tfIdPesanan.setText(Idmenu);
+        primaryKeyNow = Idmenu;
+
+        String nm = tblPesananMenu.getValueAt(baris, 1).toString();
+        tfIdMenu.setText(nm);
+
+        String harga = tblPesananMenu.getValueAt(baris, 2).toString();
+        tfKodePembayaran.setText(harga);
+    }//GEN-LAST:event_tblPesananMenuMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         String temp = tfCari.getText();
@@ -476,9 +484,9 @@ public class MenuFrame extends javax.swing.JFrame {
                     tfCari.setText(temp);
                 } else {
                     while (resultSet.next()) {
-                        tfIdMenu.setText(resultSet.getString(1));
-                        tfNamaMenu.setText(resultSet.getString(2));
-                        tfHarga.setText(resultSet.getString(3));
+                        tfIdPesanan.setText(resultSet.getString(1));
+                        tfIdMenu.setText(resultSet.getString(2));
+                        tfKodePembayaran.setText(resultSet.getString(3));
                     }
                 }
             } catch (SQLException e) {
@@ -496,10 +504,11 @@ public class MenuFrame extends javax.swing.JFrame {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth = "update Menu set "
-                        + "nama_menu='" + tfNamaMenu.getText() + "'"
-                        + ", harga=" + tfHarga.getText()
-                        + " where id_menu='" + temp + "'";
+                String cth = "update PesananMenu set "
+                        + "id_pesanan='" + tfIdPesanan.getText() + "'"
+                        + ", id_menu=" + tfIdMenu.getText()
+                        + ", kode_pembayaran=" + tfKodePembayaran.getText()
+                        + " where id_pesanan='" + temp + "'";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -511,13 +520,11 @@ public class MenuFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
-                MenuFrame konek = new MenuFrame();
+                PesananMenuFrame konek = new PesananMenuFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -525,7 +532,7 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         try {
-            MenuFrame konek = new MenuFrame();
+            PesananMenuFrame konek = new PesananMenuFrame();
             konek.setVisible(true);
             konek.tampilkanData();
             konek.klik();
@@ -536,7 +543,7 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        String temp = tfIdMenu.getText();
+        String temp = tfIdPesanan.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
             btnReset.doClick();
@@ -544,9 +551,9 @@ public class MenuFrame extends javax.swing.JFrame {
             connect();
             try {
                 Statement st = conn.createStatement();
-                String cth2 = "select * from Menu where id_menu = '" + temp + "'";
-                String cth = "delete from Menu where "
-                        + "id_menu = '" + temp + "'";
+                String cth2 = "select * from PesananMenu where id_pesanan = '" + temp + "'";
+                String cth = "delete from PesananMenu where "
+                        + "id_pesanan= '" + temp + "'";
                 ResultSet resultSet = st.executeQuery(cth2);
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(new CabangFrame(), "Tidak Ada Hasil");
@@ -565,84 +572,62 @@ public class MenuFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new CabangFrame(), e);
             }
             try {
-                MenuFrame konek = new MenuFrame();
+                PesananMenuFrame konek = new PesananMenuFrame();
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void cbIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdMenuActionPerformed
+    private void cbIdPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdPesananActionPerformed
         primaryKeyNow = tfCari.getText();
-        cariKueri = "select * from Menu where id_menu = '";
+        cariKueri = "select * from PesananMenu where id_pesanan = '";
+    }//GEN-LAST:event_cbIdPesananActionPerformed
+
+    private void cbIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdMenuActionPerformed
+        cariKueri = "select * from PesananMenu where id_menu = '";
     }//GEN-LAST:event_cbIdMenuActionPerformed
 
-    private void cbNamaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaMenuActionPerformed
-        cariKueri = "select * from Menu where nama_menu = '";
-    }//GEN-LAST:event_cbNamaMenuActionPerformed
+    private void cbKodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKodePembayaranActionPerformed
+        cariKueri = "select * from PesananMenu where kode_pembayaran = '";
+    }//GEN-LAST:event_cbKodePembayaranActionPerformed
 
-    private void cbHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHargaActionPerformed
-        cariKueri = "select * from Menu where harga = '";
-    }//GEN-LAST:event_cbHargaActionPerformed
-
-    private void tblMenuCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuCariMouseClicked
-        int baris = tblMenuCari.rowAtPoint(evt.getPoint());
-        String Idmenu = tblMenuCari.getValueAt(baris, 0).toString();
-        tfIdMenu.setText(Idmenu);
+    private void tblPesananMenuCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesananMenuCariMouseClicked
+        int baris = tblPesananMenuCari.rowAtPoint(evt.getPoint());
+        String Idmenu = tblPesananMenuCari.getValueAt(baris, 0).toString();
+        tfIdPesanan.setText(Idmenu);
         primaryKeyNow = Idmenu;
 
-        String nm = tblMenuCari.getValueAt(baris, 1).toString();
-        tfNamaMenu.setText(nm);
+        String nm = tblPesananMenuCari.getValueAt(baris, 1).toString();
+        tfIdMenu.setText(nm);
 
-        String harga = tblMenuCari.getValueAt(baris, 2).toString();
-        tfHarga.setText(harga);
-    }//GEN-LAST:event_tblMenuCariMouseClicked
+        String harga = tblPesananMenuCari.getValueAt(baris, 2).toString();
+        tfKodePembayaran.setText(harga);
+    }//GEN-LAST:event_tblPesananMenuCariMouseClicked
 
-    private void tfNamaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaMenuActionPerformed
+    private void tfIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdMenuActionPerformed
 
-    }//GEN-LAST:event_tfNamaMenuActionPerformed
+    }//GEN-LAST:event_tfIdMenuActionPerformed
 
-    private void tfHargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHargaKeyPressed
+    private void tfKodePembayaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKodePembayaranKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnTambahData.doClick();
         }
-    }//GEN-LAST:event_tfHargaKeyPressed
+    }//GEN-LAST:event_tfKodePembayaranKeyPressed
 
-    private void tfHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHargaActionPerformed
+    private void tfKodePembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKodePembayaranActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfHargaActionPerformed
-
-    private void tblMenuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblMenuKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
-            try {
-            int baris = tblMenu.getSelectedRow();
-            System.out.println(baris);
-            String Idmenu = tblMenu.getValueAt(baris, 0).toString();
-            tfIdMenu.setText(Idmenu);
-            primaryKeyNow = Idmenu;
-
-            String nm = tblMenu.getValueAt(baris, 1).toString();
-            tfNamaMenu.setText(nm);
-
-            String harga = tblMenu.getValueAt(baris, 2).toString();
-            tfHarga.setText(harga);
-            }catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }//GEN-LAST:event_tblMenuKeyReleased
+    }//GEN-LAST:event_tfKodePembayaranActionPerformed
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {
 //        
 //    }
     void klik() {
-        cbIdMenu.doClick();
+        cbIdPesanan.doClick();
     }
 
     /**
@@ -676,13 +661,11 @@ public class MenuFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MenuFrame konek = new MenuFrame();
+                    PesananMenuFrame konek = new PesananMenuFrame();
                     konek.setVisible(true);
                     konek.tampilkanData();
                     konek.klik();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
+                } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -698,9 +681,9 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
-    private javax.swing.JCheckBox cbHarga;
     private javax.swing.JCheckBox cbIdMenu;
-    private javax.swing.JCheckBox cbNamaMenu;
+    private javax.swing.JCheckBox cbIdPesanan;
+    private javax.swing.JCheckBox cbKodePembayaran;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -709,12 +692,12 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblMenu;
-    private javax.swing.JTable tblMenuCari;
+    private javax.swing.JTable tblPesananMenu;
+    private javax.swing.JTable tblPesananMenuCari;
     private javax.swing.JTextField tfCari;
-    private javax.swing.JTextField tfHarga;
     private javax.swing.JTextField tfIdMenu;
-    private javax.swing.JTextField tfNamaMenu;
+    private javax.swing.JTextField tfIdPesanan;
+    private javax.swing.JTextField tfKodePembayaran;
     // End of variables declaration//GEN-END:variables
 
 }
