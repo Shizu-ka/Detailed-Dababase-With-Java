@@ -146,6 +146,10 @@ public class PembeliFrame extends javax.swing.JFrame {
         cbNoTelp = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPembeliCari = new javax.swing.JTable();
+        cbKota = new javax.swing.JCheckBox();
+        cbNamaAkhir = new javax.swing.JCheckBox();
+        cbJalan = new javax.swing.JCheckBox();
+        cbKecamatan = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pembeli");
@@ -268,6 +272,7 @@ public class PembeliFrame extends javax.swing.JFrame {
         tfPassword.setEditable(false);
 
         cbSee.setBorder(null);
+        cbSee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbSee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eye2.png"))); // NOI18N
         cbSee.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/eye.png"))); // NOI18N
         cbSee.addActionListener(new java.awt.event.ActionListener() {
@@ -295,8 +300,8 @@ public class PembeliFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfNamaTengah)
                                     .addComponent(tfNamaDepan)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tfPassword)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cbSee, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(tfNoTelp)))
@@ -324,11 +329,11 @@ public class PembeliFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(49, 49, 49)
                                 .addComponent(tfUsername)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 484, Short.MAX_VALUE)
                         .addComponent(btnTambahData)
                         .addGap(18, 18, 18)
                         .addComponent(btnHapus)
@@ -356,10 +361,11 @@ public class PembeliFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(tfNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbSee))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbSee)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -464,6 +470,38 @@ public class PembeliFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblPembeliCari);
 
+        btnGcari.add(cbKota);
+        cbKota.setText("Kota");
+        cbKota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKotaActionPerformed(evt);
+            }
+        });
+
+        btnGcari.add(cbNamaAkhir);
+        cbNamaAkhir.setText("Nama Akhir");
+        cbNamaAkhir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNamaAkhirActionPerformed(evt);
+            }
+        });
+
+        btnGcari.add(cbJalan);
+        cbJalan.setText("Jalan");
+        cbJalan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbJalanActionPerformed(evt);
+            }
+        });
+
+        btnGcari.add(cbKecamatan);
+        cbKecamatan.setText("Kecamatan");
+        cbKecamatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKecamatanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -474,17 +512,26 @@ public class PembeliFrame extends javax.swing.JFrame {
                     .addComponent(tfCari, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(cbUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cbNamaDepan)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cbNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(254, 254, 254)
-                            .addComponent(btnCari))))
+                            .addComponent(btnCari))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbKota, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbKecamatan, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cbNamaDepan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbNamaAkhir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cbNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbJalan, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,6 +545,13 @@ public class PembeliFrame extends javax.swing.JFrame {
                     .addComponent(cbUsername)
                     .addComponent(cbNamaDepan)
                     .addComponent(cbNoTelp))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbKota)
+                    .addComponent(cbNamaAkhir)
+                    .addComponent(cbJalan))
+                .addGap(18, 18, 18)
+                .addComponent(cbKecamatan)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
         );
@@ -1012,6 +1066,22 @@ public class PembeliFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblPembeliCariKeyReleased
 
+    private void cbKotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKotaActionPerformed
+       cariKueri = "select * from Pembeli where kota = '";
+    }//GEN-LAST:event_cbKotaActionPerformed
+
+    private void cbNamaAkhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaAkhirActionPerformed
+        cariKueri = "select * from Pembeli where nama_belakang = '";
+    }//GEN-LAST:event_cbNamaAkhirActionPerformed
+
+    private void cbJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbJalanActionPerformed
+        cariKueri = "select * from Pembeli where jalan = '";
+    }//GEN-LAST:event_cbJalanActionPerformed
+
+    private void cbKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKecamatanActionPerformed
+        cariKueri = "select * from Pembeli where kecamatan = '";
+    }//GEN-LAST:event_cbKecamatanActionPerformed
+
     void klik() {
         cbUsername.doClick();
     }
@@ -1076,6 +1146,10 @@ public class PembeliFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
+    private javax.swing.JCheckBox cbJalan;
+    private javax.swing.JCheckBox cbKecamatan;
+    private javax.swing.JCheckBox cbKota;
+    private javax.swing.JCheckBox cbNamaAkhir;
     private javax.swing.JCheckBox cbNamaDepan;
     private javax.swing.JCheckBox cbNoTelp;
     private javax.swing.JCheckBox cbSee;

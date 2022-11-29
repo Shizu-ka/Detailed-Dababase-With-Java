@@ -79,8 +79,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnCabang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main");
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        tpAdmin.setBackground(new java.awt.Color(255, 255, 255));
         tpAdmin.setEnabled(false);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btnConnect.setText("Connect");
         btnConnect.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -118,6 +123,8 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         tpAdmin.addTab("Connect", jPanel2);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnPembeli.setText("Pembeli");
         btnPembeli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -321,9 +328,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPembayaranActionPerformed
 
     private void btnPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananActionPerformed
-        PesananFrame frame1 = new PesananFrame();
-        frame1.setVisible(true);
-        this.dispose();
+        try {
+                    PesananFrame konek = new PesananFrame();
+                    konek.setVisible(true);
+                    konek.tampilkanData();
+                    konek.klik();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }//GEN-LAST:event_btnPesananActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed

@@ -227,6 +227,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kembali"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCabangFrameKembaliActionPerformed"/>
@@ -345,6 +348,9 @@
             <Component class="javax.swing.JButton" name="btnTambahData">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tambah Data"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -356,6 +362,9 @@
             <Component class="javax.swing.JButton" name="btnHapus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hapus"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -365,6 +374,9 @@
             <Component class="javax.swing.JButton" name="btnEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
@@ -373,6 +385,9 @@
             <Component class="javax.swing.JButton" name="btnSimpan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Simpan"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -382,6 +397,9 @@
             <Component class="javax.swing.JButton" name="btnReset">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reset"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
@@ -500,6 +518,9 @@
             <Component class="javax.swing.JButton" name="btnCari">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cari"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCariActionPerformed"/>

@@ -124,6 +124,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
+        btnCabangFrameKembali.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCabangFrameKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCabangFrameKembaliActionPerformed(evt);
@@ -169,6 +170,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPembayaran);
 
         btnTambahData.setText("Tambah Data");
+        btnTambahData.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTambahData.setEnabled(false);
         btnTambahData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +179,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         });
 
         btnHapus.setText("Hapus");
+        btnHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHapus.setEnabled(false);
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +188,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         });
 
         btnEdit.setText("Edit");
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -192,6 +196,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         });
 
         btnSimpan.setText("Simpan");
+        btnSimpan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSimpan.setEnabled(false);
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +205,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         });
 
         btnReset.setText("Reset");
+        btnReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
@@ -315,6 +321,7 @@ public class PembayaranFrame extends javax.swing.JFrame {
         jTabbedPane1.addTab("Main", jPanel1);
 
         btnCari.setText("Cari");
+        btnCari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariActionPerformed(evt);
