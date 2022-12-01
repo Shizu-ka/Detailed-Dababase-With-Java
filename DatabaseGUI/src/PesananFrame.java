@@ -1,5 +1,7 @@
 
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,12 +11,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -261,6 +273,11 @@ public class PesananFrame extends javax.swing.JFrame {
 
         btnPrint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPrint.setText("Print");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel3.setText("Print Pesanan Receipt");
@@ -977,6 +994,33 @@ public class PesananFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tblPesananCariKeyReleased
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        String dirr = "";
+        String kode = "10027";
+        String query = """
+                       select Pesanan.id_pesanan,concat(pem.nama_depan,' ',pem.nama_belakang) Pembeli,Pesanan.kode_pembayaran,concat(p.nama_depan,' ',p.nama_belakang) Pengantar, total,jenis_pengambilan,tgl_pemesanan,p.nama_cabang, Menu.nama_menu, Menu.harga from Pesanan
+                       join Pengantar p on Pesanan.username_pengantar = p.username 
+                       join Pembeli pem on Pesanan.username_pembeli = pem.username
+                       join PesananMenu on PesananMenu.kode_pembayaran = Pesanan.kode_pembayaran
+                       join Menu on Menu.id_menu = PesananMenu.id_menu
+                       \t where Pesanan.kode_pembayaran = """ + kode;
+        File reportFile = new File(".");
+        connect();
+        try {
+            Statement st = conn.createStatement();
+            dirr = reportFile.getCanonicalPath() + "/src/data/";
+            JasperDesign design = JRXmlLoader.load(dirr + "Pesanan.jrxml");
+            JasperReport jr = JasperCompileManager.compileReport(design);
+            ResultSet rs = st.executeQuery(query);
+            JRResultSetDataSource rsDataSource = new JRResultSetDataSource(rs);
+            JasperPrint jp = JasperFillManager.fillReport(jr,new HashMap(),rsDataSource);
+            JasperViewer.viewReport(jp);
+            
+        } catch (IOException | JRException | SQLException ex) {
+            Logger.getLogger(PesananFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnPrintActionPerformed
 
     void klik() {
         cbIdPesanan.doClick();
