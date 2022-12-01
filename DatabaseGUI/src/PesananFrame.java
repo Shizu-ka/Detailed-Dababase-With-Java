@@ -130,6 +130,8 @@ public class PesananFrame extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         cbTakeAway = new javax.swing.JCheckBox();
         cbDelivery = new javax.swing.JCheckBox();
+        btnPrint = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
@@ -257,6 +259,12 @@ public class PesananFrame extends javax.swing.JFrame {
         cbDelivery.setText("Delivery");
         cbDelivery.setEnabled(false);
 
+        btnPrint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnPrint.setText("Print");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel3.setText("Print Pesanan Receipt");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -267,11 +275,6 @@ public class PesananFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                         .addGap(1052, 1052, 1052))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(DateChooserTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -299,7 +302,17 @@ public class PesananFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfPegawai, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                     .addComponent(tfKodePembayaran))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(DateChooserTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(383, Short.MAX_VALUE)
@@ -359,7 +372,11 @@ public class PesananFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DateChooserTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrint)
+                .addContainerGap(161, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1028,6 +1045,7 @@ public class PesananFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGCari;
     private javax.swing.ButtonGroup btnGPengambilan;
     private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
@@ -1042,6 +1060,7 @@ public class PesananFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
