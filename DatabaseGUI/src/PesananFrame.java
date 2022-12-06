@@ -998,10 +998,10 @@ public class PesananFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tblPesananCariKeyReleased
-
+    
     private void laporan() throws JRException {
         try {
-            String namaFile = "C:\\Users\\Lenovo\\Documents\\project\\proyekAkhirBASDAT\\Detail-Dababase-With-Java\\DatabaseGUI\\src\\data\\report1.jasper";
+            String namaFile = "C:\\Users\\Lenovo\\Documents\\project\\proyekAkhirBASDAT\\Detail-Dababase-With-Java\\DatabaseGUI\\src\\data\\report1.jrxml";
             HashMap map = new HashMap();
             File file = new File(namaFile);
             JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(file.getPath());
@@ -1024,6 +1024,7 @@ public class PesananFrame extends javax.swing.JFrame {
 //        catch(JRException e){
 //            System.out.println(e);
 //        }
+
     }
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         JasperReport reports;
