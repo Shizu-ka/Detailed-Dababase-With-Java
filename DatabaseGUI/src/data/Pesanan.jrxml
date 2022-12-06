@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pesanan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pesanan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a35d833-c7d0-425e-8513-a04cd2f4e6c3">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="basdat"/>
 	<style name="Style1"/>
@@ -59,14 +59,14 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 	<title>
 		<band height="110" splitType="Stretch">
 			<rectangle>
-				<reportElement x="-20" y="-20" width="595" height="130" forecolor="#FFFFFF" backcolor="#BDAAAA" />
+				<reportElement x="-20" y="-20" width="595" height="130" forecolor="#FFFFFF" backcolor="#BDAAAA" uuid="ac2c40ec-30ac-4562-8d6c-23d5e37dfd68"/>
 			</rectangle>
 			<image>
-				<reportElement x="50" y="5" width="454" height="100" />
+				<reportElement x="50" y="5" width="454" height="100" uuid="c1bc16db-055b-40b6-b902-22e4d2a6b630"/>
 				<imageExpression><![CDATA["C:/Users/Lenovo/Documents/project/proyekAkhirBASDAT/pizza-hut-png-logo-3812.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="418" y="80" width="90" height="30" >
+				<reportElement x="418" y="80" width="90" height="30" uuid="f7db6780-b8e9-493a-b1a8-59fe8858ed34">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc431c35-0f27-4b3f-a22e-63b48c41f5c2"/>
 				</reportElement>
 				<textElement>
@@ -79,14 +79,14 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 	<pageHeader>
 		<band height="144" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="50" width="165" height="30" />
+				<reportElement x="0" y="50" width="165" height="30" uuid="e52a6b21-b338-4eeb-b750-c6c00736bdd9"/>
 				<textElement>
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Detail Pesanan"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="73" width="130" height="30" >
+				<reportElement x="0" y="73" width="130" height="30" uuid="afca2ece-45cd-405f-9644-bbc97aa42d02">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7252b7d3-eb42-43c2-a819-67039aae1da3"/>
 				</reportElement>
 				<textElement>
@@ -95,7 +95,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{Pembeli}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="143" width="556" height="1" forecolor="#FF0C08" />
+				<reportElement x="0" y="143" width="556" height="1" forecolor="#FF0C08" uuid="6055946e-79a6-41eb-b92b-4534e80ef17a"/>
 				<graphicElement>
 					<pen lineWidth="4.0" lineColor="#BDAAAA"/>
 				</graphicElement>
@@ -107,7 +107,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<property name="com.jaspersoft.studio.layout"/>
 			<textField>
-				<reportElement x="100" y="20" width="190" height="30" >
+				<reportElement x="100" y="20" width="190" height="30" uuid="64f9aefe-eabd-45aa-b8ea-23d9f2fe18d7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3eda2541-6ea2-455e-882c-7fcc33b4eeee"/>
 				</reportElement>
 				<textElement>
@@ -116,7 +116,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{id_pesanan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="50" width="280" height="30" >
+				<reportElement x="0" y="50" width="280" height="30" uuid="48776705-233b-4c7a-bf9e-28337c191f63">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0167d5d9-7395-4650-bc26-c6d4a13a3160"/>
 				</reportElement>
 				<textElement>
@@ -125,14 +125,14 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{nama_menu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="20" width="100" height="30" />
+				<reportElement x="0" y="20" width="100" height="30" uuid="21a15b1a-5f72-494c-92a9-8b11e7a4c5fa"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ID pesanan: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="50" width="135" height="30" >
+				<reportElement x="390" y="50" width="135" height="30" uuid="2d5e2ddc-c75c-4871-885a-1ff9e71b51a8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3102316-f32f-4c6b-99e8-8328a5394661"/>
 				</reportElement>
 				<textElement>
@@ -145,7 +145,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 	<summary>
 		<band height="412" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="48" width="61" height="30" >
+				<reportElement x="0" y="48" width="61" height="30" uuid="0e3432dd-6318-4291-b75a-706511132b14">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93785322-d920-4c59-aac9-27cf99d2e6e4"/>
 				</reportElement>
 				<textElement>
@@ -154,7 +154,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{jenis_pengambilan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="98" width="130" height="30" >
+				<reportElement x="340" y="98" width="130" height="30" uuid="769fd441-fe0d-4099-b3d2-2166b6dab9e0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38ef3d2b-bec9-47cc-808d-900afc3c8354"/>
 				</reportElement>
 				<textElement>
@@ -163,14 +163,14 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{kode_pembayaran}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="30" width="50" height="30" />
+				<reportElement x="340" y="30" width="50" height="30" uuid="de5e4dec-b76d-42d6-96b0-54ad4847e870"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="30" width="138" height="30" >
+				<reportElement x="390" y="30" width="138" height="30" uuid="04f0f406-130e-4300-9e24-6b20bca5121d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be00d8f2-800b-4902-a8dd-b2938ea05fb0"/>
 				</reportElement>
 				<textElement>
@@ -179,13 +179,13 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA["Rp." + new java.text.DecimalFormat("#,##0.00").format(Double.valueOf($F{total}))]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="16" width="555" height="1" forecolor="#FF0C08" />
+				<reportElement x="1" y="16" width="555" height="1" forecolor="#FF0C08" uuid="c32d3d87-745a-4547-a5d6-0de702dbdba1"/>
 				<graphicElement>
 					<pen lineWidth="4.0" lineColor="#BDAAAA"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="90" y="74" width="160" height="30" >
+				<reportElement x="90" y="74" width="160" height="30" uuid="9e2c6f03-c3a8-4a64-9ec3-c94c0499e5f1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88b2a3b2-4a84-4083-be8f-fe83e912dd0d"/>
 				</reportElement>
 				<textElement>
@@ -194,35 +194,35 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{Pengantar}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="74" width="150" height="24" />
+				<reportElement x="340" y="74" width="150" height="24" uuid="3359818c-9f72-4b59-bda1-c86e8847884a"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Kode Pembayaran"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="30" width="165" height="30" />
+				<reportElement x="0" y="30" width="165" height="30" uuid="b3ddbeb5-1eca-467d-8909-859bc5103b36"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Jenis Pengambilan"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="74" width="90" height="30" />
+				<reportElement x="0" y="74" width="90" height="30" uuid="da24446b-915b-4be7-94e6-ce25b7731c30"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pengantar  : "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="99" y="240" width="359" height="100" />
+				<reportElement x="99" y="240" width="359" height="100" uuid="e5e01bb8-daf8-418d-bd8d-c81164ed7a23"/>
 				<textElement>
 					<font fontName="Blackadder ITC" size="40"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Terimakasih Atas Pesanan Anda..."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="380" width="110" height="30" >
+				<reportElement x="230" y="380" width="110" height="30" uuid="c09418fc-5e68-4836-85f6-1ade9a9c5463">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc38241f-dc5b-40f7-9ffd-e0b59992172a"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{tgl_pemesanan}]]></textFieldExpression>
