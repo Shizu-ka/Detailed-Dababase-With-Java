@@ -53,6 +53,9 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 		<property name="com.jaspersoft.studio.field.name" value="harga"/>
 		<property name="com.jaspersoft.studio.field.label" value="harga"/>
 	</field>
+	<variable name="countMenu" class="java.lang.Integer" incrementType="Report" calculation="Count">
+		<variableExpression><![CDATA[$F{nama_menu}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -77,7 +80,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 		</band>
 	</title>
 	<pageHeader>
-		<band height="144" splitType="Stretch">
+		<band height="154" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="50" width="165" height="30" uuid="e52a6b21-b338-4eeb-b750-c6c00736bdd9"/>
 				<textElement>
@@ -100,14 +103,15 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 					<pen lineWidth="4.0" lineColor="#BDAAAA"/>
 				</graphicElement>
 			</line>
-		</band>
-	</pageHeader>
-	<detail>
-		<band height="125" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-			<property name="com.jaspersoft.studio.layout"/>
 			<textField>
-				<reportElement x="100" y="20" width="190" height="30" uuid="64f9aefe-eabd-45aa-b8ea-23d9f2fe18d7">
+				<reportElement x="0" y="113" width="100" height="30" uuid="21a15b1a-5f72-494c-92a9-8b11e7a4c5fa"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ID pesanan: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="113" width="190" height="30" uuid="64f9aefe-eabd-45aa-b8ea-23d9f2fe18d7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3eda2541-6ea2-455e-882c-7fcc33b4eeee"/>
 				</reportElement>
 				<textElement>
@@ -116,7 +120,27 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{id_pesanan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="50" width="280" height="30" uuid="48776705-233b-4c7a-bf9e-28337c191f63">
+				<reportElement x="220" y="113" width="100" height="20" uuid="09e56c6a-801c-47e9-b0bf-0ece57fe33c5"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kuantitas"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="113" width="100" height="20" uuid="a79fac65-f329-4cb3-9777-a599b705dd01"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kuantitas"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="40" splitType="Immediate">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="10" width="165" height="30" uuid="48776705-233b-4c7a-bf9e-28337c191f63">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0167d5d9-7395-4650-bc26-c6d4a13a3160"/>
 				</reportElement>
 				<textElement>
@@ -125,14 +149,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{nama_menu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="20" width="100" height="30" uuid="21a15b1a-5f72-494c-92a9-8b11e7a4c5fa"/>
-				<textElement>
-					<font size="15"/>
-				</textElement>
-				<textFieldExpression><![CDATA["ID pesanan: "]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="390" y="50" width="135" height="30" uuid="2d5e2ddc-c75c-4871-885a-1ff9e71b51a8">
+				<reportElement x="380" y="10" width="135" height="30" uuid="2d5e2ddc-c75c-4871-885a-1ff9e71b51a8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3102316-f32f-4c6b-99e8-8328a5394661"/>
 				</reportElement>
 				<textElement>
@@ -140,10 +157,17 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				</textElement>
 				<textFieldExpression><![CDATA["Rp." + new java.text.DecimalFormat("#,##0.00").format(Double.valueOf($F{harga} ))]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="220" y="10" width="100" height="30" uuid="fd739bd8-7198-425b-8917-7519a38cf18a"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{countMenu}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="412" splitType="Stretch">
+		<band height="329" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="48" width="61" height="30" uuid="0e3432dd-6318-4291-b75a-706511132b14">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93785322-d920-4c59-aac9-27cf99d2e6e4"/>
@@ -154,7 +178,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{jenis_pengambilan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="98" width="130" height="30" uuid="769fd441-fe0d-4099-b3d2-2166b6dab9e0">
+				<reportElement x="0" y="125" width="130" height="30" uuid="769fd441-fe0d-4099-b3d2-2166b6dab9e0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38ef3d2b-bec9-47cc-808d-900afc3c8354"/>
 				</reportElement>
 				<textElement>
@@ -163,14 +187,14 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{kode_pembayaran}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="30" width="50" height="30" uuid="de5e4dec-b76d-42d6-96b0-54ad4847e870"/>
+				<reportElement x="252" y="71" width="50" height="30" uuid="de5e4dec-b76d-42d6-96b0-54ad4847e870"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="30" width="138" height="30" uuid="04f0f406-130e-4300-9e24-6b20bca5121d">
+				<reportElement x="380" y="71" width="138" height="30" uuid="04f0f406-130e-4300-9e24-6b20bca5121d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be00d8f2-800b-4902-a8dd-b2938ea05fb0"/>
 				</reportElement>
 				<textElement>
@@ -194,7 +218,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA[$F{Pengantar}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="74" width="150" height="24" uuid="3359818c-9f72-4b59-bda1-c86e8847884a"/>
+				<reportElement x="0" y="101" width="150" height="24" uuid="3359818c-9f72-4b59-bda1-c86e8847884a"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
@@ -215,17 +239,31 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textFieldExpression><![CDATA["Pengantar  : "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="99" y="240" width="359" height="100" uuid="e5e01bb8-daf8-418d-bd8d-c81164ed7a23"/>
+				<reportElement x="106" y="160" width="359" height="100" uuid="e5e01bb8-daf8-418d-bd8d-c81164ed7a23"/>
 				<textElement>
 					<font fontName="Blackadder ITC" size="40"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Terimakasih Atas Pesanan Anda..."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="380" width="110" height="30" uuid="c09418fc-5e68-4836-85f6-1ade9a9c5463">
+				<reportElement x="230" y="280" width="110" height="30" uuid="c09418fc-5e68-4836-85f6-1ade9a9c5463">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc38241f-dc5b-40f7-9ffd-e0b59992172a"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{tgl_pemesanan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="30" width="88" height="30" uuid="b9b99a64-a924-4ba7-bbac-6b19afd788d2"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Biaya Antar "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="30" width="136" height="30" uuid="ce08f065-4f8a-4b5d-b95b-0be9b19320b1"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_pengambilan}.equalsIgnoreCase( "Delivery" )?"Rp.10.000" : "Rp.0"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
