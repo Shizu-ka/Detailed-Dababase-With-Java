@@ -18,11 +18,11 @@ import java.util.logging.Logger;
  *
  * @author Lenovo
  */
-public class JasperReportInstructor extends javax.swing.JFrame {
+public class PesananReportFrame extends javax.swing.JFrame {
 
     private static String destFileName = "report.pdf";
 
-    public JasperReportInstructor() {
+    public PesananReportFrame() {
         initComponents();
     }
 
@@ -46,16 +46,16 @@ public class JasperReportInstructor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(btnPrint)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(btnPrint)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(136, 136, 136))
         );
 
         pack();
@@ -81,11 +81,11 @@ public class JasperReportInstructor extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint, false);
             JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(JasperReportInstructor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesananReportFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
-            Logger.getLogger(JasperReportInstructor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesananReportFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(JasperReportInstructor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesananReportFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnPrintActionPerformed
@@ -93,7 +93,7 @@ public class JasperReportInstructor extends javax.swing.JFrame {
     public static void main(String args[]) throws FileNotFoundException, JRException {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JasperReportInstructor().setVisible(true);
+                new PesananReportFrame().setVisible(true);
             }
 
         });
