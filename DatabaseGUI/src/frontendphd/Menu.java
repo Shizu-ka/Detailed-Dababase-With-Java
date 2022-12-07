@@ -543,6 +543,11 @@ public class Menu extends javax.swing.JFrame {
 
         tfJumlah.setEditable(false);
         tfJumlah.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tfJumlah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfJumlahActionPerformed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel15.setText("Harga");
@@ -1628,6 +1633,10 @@ public class Menu extends javax.swing.JFrame {
     private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsernameActionPerformed
+
+    private void tfJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfJumlahActionPerformed
 
     /**
      * @param args the command line arguments
