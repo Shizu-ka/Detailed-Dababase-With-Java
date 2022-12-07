@@ -1027,20 +1027,13 @@ public class PesananFrame extends javax.swing.JFrame {
 
     }
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        JasperReport reports;
-
-        String path = ".\\src\\data\\report1.jasper";
+        PesananReportFrame frame = new PesananReportFrame();
+        frame.setVisible(true);
         try {
-            reports = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jprint = JasperFillManager.fillReport(path, null, conn);
-            JasperViewer jviewer = new JasperViewer(jprint, false);
-            jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jviewer.setVisible(true);
-            System.out.println("Masuk try");
-        } catch (JRException ex) {
-            Logger.getLogger(PesananFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+                    frame.tampilkanData();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(PesananReportFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }//GEN-LAST:event_btnPrintActionPerformed
 
     void klik() {
