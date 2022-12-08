@@ -68,6 +68,7 @@ public class CabangFrame extends javax.swing.JFrame {
         connect();
         int no = 1;
         Statement st = conn.createStatement();
+        //view sql
         String cth = "select * from view_cabang";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
@@ -462,10 +463,6 @@ public class CabangFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangFrameKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangFrameKembaliActionPerformed
-        MainFrame frame1 = new MainFrame();
-        frame1.setVisible(true);
-        frame1.enableAdmin();
-        frame1.pindah();
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
@@ -473,7 +470,7 @@ public class CabangFrame extends javax.swing.JFrame {
         String temp = tfNamaCabang.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
+
         } else {
             connect();
             try {
@@ -501,9 +498,7 @@ public class CabangFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -538,7 +533,6 @@ public class CabangFrame extends javax.swing.JFrame {
         String temp = primaryKeyNow;
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -565,9 +559,7 @@ public class CabangFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -613,7 +605,6 @@ public class CabangFrame extends javax.swing.JFrame {
         String temp = tfNamaCabang.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
