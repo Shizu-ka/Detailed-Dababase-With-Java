@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +20,10 @@ import java.util.logging.Logger;
  */
 public class BulanReportFrame extends javax.swing.JFrame {
 
-    private static String destFileName = "report2.pdf";
+    private static String destFileName = "report.pdf";
     private static Connection conn;
-
+    private static String primaryKeyNow = "";
+    private static String kodePembayaran = "";
 
     private static void connect() {
         String hostname = "localhost";
@@ -47,6 +50,9 @@ public class BulanReportFrame extends javax.swing.JFrame {
         System.out.println("Connect to database successful!!");
     }
 
+    public BulanReportFrame() {
+        initComponents();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,7 +74,7 @@ public class BulanReportFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Masukkan Bulan (bentuk angka)");
+        jLabel1.setText("Masukkan bulan dalam angka");
 
         btnKembali.setText("Kembali");
         btnKembali.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +83,7 @@ public class BulanReportFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Masukkan Nama Cabang");
+        jLabel2.setText("Masukkan nama cabang");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,49 +92,44 @@ public class BulanReportFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(208, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnKembali)
-                                .addGap(8, 8, 8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfNamaCabang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfBulan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 105, Short.MAX_VALUE))
+                    .addComponent(tfNamaCabang)
+                    .addComponent(tfBulan)
+                    .addComponent(jLabel2))
+                .addGap(71, 71, 71)
+                .addComponent(btnKembali)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNamaCabang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(btnKembali)
-                .addGap(17, 17, 17))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        if (tfBulan.getText().replaceAll("\\s", "").equals("") || tfNamaCabang.getText().replaceAll("\\s", "").equals("")) {
+            JOptionPane.showMessageDialog(new BulanReportFrame(), "Input Kosong");
+        } else {
         String hostname = "localhost";
         String sqlInstanceName = "LAPTOP-43HAT1M2"; //computer name 
         String sqlDatabase = "basdat";  //sql server database name
@@ -149,7 +150,8 @@ public class BulanReportFrame extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint, false);
             JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
         } catch (FileNotFoundException | JRException | SQLException ex) {
-            Logger.getLogger(BulanReportFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PesananReportFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
 
     }//GEN-LAST:event_btnPrintActionPerformed
@@ -161,7 +163,6 @@ public class BulanReportFrame extends javax.swing.JFrame {
     public static void main(String args[]) throws FileNotFoundException, JRException {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                connect();
                 BulanReportFrame frame = new BulanReportFrame();
                 frame.setVisible(true);
             }
