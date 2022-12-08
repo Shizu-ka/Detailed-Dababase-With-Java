@@ -4,8 +4,6 @@ package frontendphd;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,23 +23,25 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class Menu extends javax.swing.JFrame {
+
     private static Connection conn;
-    public static int totalTemp=0;
-    private static int harga1=0;
-    private int harga2=0;
-    private int harga3=0;
-    private int harga4=0;
-    private int harga5=0;
-     ArrayList<Integer> list=new ArrayList<Integer>();
-     private String metode_bayar = "";
-     private String jenis_pengambilan = "";
+    public static int totalTemp = 0;
+    private static int harga1 = 0;
+    private int harga2 = 0;
+    private int harga3 = 0;
+    private int harga4 = 0;
+    private int harga5 = 0;
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    private String metode_bayar = "";
+    private String jenis_pengambilan = "";
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
     }
-    
+
     private static void connect() {
         String hostname = "localhost";
         String sqlInstanceName = "DESKTOP-B0NJVNF"; //computer name 
@@ -66,6 +66,7 @@ public class Menu extends javax.swing.JFrame {
         }
         System.out.println("Connect to database successful!!");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1096,8 +1097,8 @@ public class Menu extends javax.swing.JFrame {
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(0);
-        
-        
+
+
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
@@ -1109,52 +1110,51 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2);
         connect();
-            try {
-                Statement st = conn.createStatement();
+        try {
+            Statement st = conn.createStatement();
 //                char[] pwc = pfPassword.getPassword();
 //                String pw = "";
 //                for (char s : pwc) {
 //                    pw += String.valueOf(s);
 //                }
 //                Date date = dcTanggalLahir.getDate();
-               // java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                String cth = "select * from Pembeli where username = '"
-                        + Login.userNow +"'" ;
-                ResultSet resultSet = st.executeQuery(cth);
-                while (resultSet.next()) {
-                    tfNamaDepan.setText(resultSet.getString(4));
-                    tfNamaTengah.setText(resultSet.getString(5));
-                    tfNamaBelakang.setText(resultSet.getString(6));
-                    tfUsername.setText(resultSet.getString(1));
-                    //pfPassword.setText(resultSet.getString(1));
-                    //dcTanggalLahir.setDateFormatString(resultSet.getString(7));
-                    String date = resultSet.getString(7);
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date2;
-                    try {
-                        date2 = formatter.parse(date);
-                        dcTanggalLahir.setDate(date2);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    tfNoTelp.setText(resultSet.getString(2));
-                    tfJalan.setText(resultSet.getString(8));
-                    tfNoRumah.setText(resultSet.getString(11));
-                    tfKecamatan.setText(resultSet.getString(9));
-                    tfKota.setText(resultSet.getString(10));
+            // java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            String cth = "select * from Pembeli where username = '"
+                    + Login.userNow + "'";
+            ResultSet resultSet = st.executeQuery(cth);
+            while (resultSet.next()) {
+                tfNamaDepan.setText(resultSet.getString(4));
+                tfNamaTengah.setText(resultSet.getString(5));
+                tfNamaBelakang.setText(resultSet.getString(6));
+                tfUsername.setText(resultSet.getString(1));
+                //pfPassword.setText(resultSet.getString(1));
+                //dcTanggalLahir.setDateFormatString(resultSet.getString(7));
+                String date = resultSet.getString(7);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date2;
+                try {
+                    date2 = formatter.parse(date);
+                    dcTanggalLahir.setDate(date2);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
-            } catch (SQLException e) {
-                System.out.println(e);
+                tfNoTelp.setText(resultSet.getString(2));
+                tfJalan.setText(resultSet.getString(8));
+                tfNoRumah.setText(resultSet.getString(11));
+                tfKecamatan.setText(resultSet.getString(9));
+                tfKota.setText(resultSet.getString(10));
             }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-            Login konek = new Login();
-            konek.setVisible(true);
-            this.dispose();
+        Login konek = new Login();
+        konek.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void rbTakeawayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTakeawayActionPerformed
@@ -1169,25 +1169,24 @@ public class Menu extends javax.swing.JFrame {
             Statement st = conn.createStatement();
             String cth = "select * from KeranjangBelanja";
             ResultSet resultSet = st.executeQuery(cth);
-            switch(cbxMenu.getSelectedIndex()){
+            switch (cbxMenu.getSelectedIndex()) {
                 case 0 -> {
                     while (resultSet.next()) {
                         int temp = -1;
                         int id_menu = Integer.parseInt(resultSet.getString(2));
                         int kuantitas = Integer.parseInt(resultSet.getString(3));
                         System.out.println(id_menu);
-                        if(id_menu == 10){
+                        if (id_menu == 10) {
                             temp = 1;
                             tfJumlah.setText(Integer.toString(kuantitas));
                             tfHarga.setText(resultSet.getString(4));
                             list.add(id_menu);
                             break;
-                        }
-                        else if(temp == -1){
+                        } else if (temp == -1) {
                             tfJumlah.setText("0");
                             tfHarga.setText("0");
                         }
-                        
+
                     }
                 }
                 case 1 -> {
@@ -1196,18 +1195,17 @@ public class Menu extends javax.swing.JFrame {
                         int id_menu = Integer.parseInt(resultSet.getString(2));
                         int kuantitas = Integer.parseInt(resultSet.getString(3));
                         System.out.println(id_menu);
-                        if(id_menu == 11){
+                        if (id_menu == 11) {
                             temp = 1;
                             tfJumlah.setText(Integer.toString(kuantitas));
                             tfHarga.setText(resultSet.getString(4));
                             list.add(id_menu);
                             break;
-                        }
-                        else if(temp == -1){
+                        } else if (temp == -1) {
                             tfJumlah.setText("0");
                             tfHarga.setText("0");
                         }
-                        
+
                     }
                 }
                 case 2 -> {
@@ -1216,18 +1214,17 @@ public class Menu extends javax.swing.JFrame {
                         int id_menu = Integer.parseInt(resultSet.getString(2));
                         int kuantitas = Integer.parseInt(resultSet.getString(3));
                         System.out.println(id_menu);
-                        if(id_menu == 12){
+                        if (id_menu == 12) {
                             tfJumlah.setText(Integer.toString(kuantitas));
                             tfHarga.setText(resultSet.getString(4));
                             list.add(id_menu);
                             break;
-                        }
-                        else if(temp == -1){
+                        } else if (temp == -1) {
                             temp = 1;
                             tfJumlah.setText("0");
                             tfHarga.setText("0");
                         }
-                        
+
                     }
                 }
                 case 3 -> {
@@ -1236,18 +1233,17 @@ public class Menu extends javax.swing.JFrame {
                         int id_menu = Integer.parseInt(resultSet.getString(2));
                         int kuantitas = Integer.parseInt(resultSet.getString(3));
                         System.out.println(id_menu);
-                        if(id_menu == 13){
+                        if (id_menu == 13) {
                             temp = 1;
                             tfJumlah.setText(Integer.toString(kuantitas));
                             tfHarga.setText(resultSet.getString(4));
                             list.add(id_menu);
                             break;
-                        }
-                        else if(temp == -1){
+                        } else if (temp == -1) {
                             tfJumlah.setText("0");
                             tfHarga.setText("0");
                         }
-                        
+
                     }
                 }
                 case 4 -> {
@@ -1256,14 +1252,13 @@ public class Menu extends javax.swing.JFrame {
                         int id_menu = Integer.parseInt(resultSet.getString(2));
                         int kuantitas = Integer.parseInt(resultSet.getString(3));
                         System.out.println(id_menu);
-                        if(id_menu == 14){
+                        if (id_menu == 14) {
                             temp = 1;
                             tfJumlah.setText(Integer.toString(kuantitas));
                             tfHarga.setText(resultSet.getString(4));
                             list.add(id_menu);
                             break;
-                        }
-                        else if(temp == -1){
+                        } else if (temp == -1) {
                             tfJumlah.setText("0");
                             tfHarga.setText("0");
                         }
@@ -1279,12 +1274,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnCekHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekHargaActionPerformed
         // TODO add your handling code here:
-        harga1=90000*(int)spn1.getValue();
-        harga2=90000*(int)spn2.getValue();
-        harga3=112727*(int)spn3.getValue();
-        harga4=138182*(int)spn4.getValue();
-        harga5=147273*(int)spn5.getValue();
-        totalTemp = harga1+harga2+harga3+harga4+harga5;
+        harga1 = 90000 * (int) spn1.getValue();
+        harga2 = 90000 * (int) spn2.getValue();
+        harga3 = 112727 * (int) spn3.getValue();
+        harga4 = 138182 * (int) spn4.getValue();
+        harga5 = 147273 * (int) spn5.getValue();
+        totalTemp = harga1 + harga2 + harga3 + harga4 + harga5;
         tfCekHarga.setText(Integer.toString(totalTemp));
     }//GEN-LAST:event_btnCekHargaActionPerformed
 
@@ -1297,13 +1292,13 @@ public class Menu extends javax.swing.JFrame {
         try {
             connect();
             Statement st = conn.createStatement();
-            if(harga1!=0){
+            if (harga1 != 0) {
                 String cth = "insert into KeranjangBelanja values("
-                + "'" + Login.userNow + "'"
-                + ", '10'"
-                +  ", '" + (int)spn1.getValue() + "'"
-                + ", '" + harga1 + "'"
-                +")";
+                        + "'" + Login.userNow + "'"
+                        + ", '10'"
+                        + ", '" + (int) spn1.getValue() + "'"
+                        + ", '" + harga1 + "'"
+                        + ")";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -1312,13 +1307,13 @@ public class Menu extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
             }
-            if(harga2!=0){
+            if (harga2 != 0) {
                 String cth = "insert into KeranjangBelanja values("
-                + "'" + Login.userNow + "'"
-                + ", '11'"
-                +  ", '" + (int)spn2.getValue() + "'"
-                + ", '" + harga2 + "'"
-                +")";
+                        + "'" + Login.userNow + "'"
+                        + ", '11'"
+                        + ", '" + (int) spn2.getValue() + "'"
+                        + ", '" + harga2 + "'"
+                        + ")";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -1327,13 +1322,13 @@ public class Menu extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
             }
-            if(harga3!=0){
+            if (harga3 != 0) {
                 String cth = "insert into KeranjangBelanja values("
-                + "'" + Login.userNow + "'"
-                + ", '12'"
-                +  ", '" + (int)spn3.getValue() + "'"
-                + ", '" + harga3 + "'"
-                +")";
+                        + "'" + Login.userNow + "'"
+                        + ", '12'"
+                        + ", '" + (int) spn3.getValue() + "'"
+                        + ", '" + harga3 + "'"
+                        + ")";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -1342,13 +1337,13 @@ public class Menu extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
             }
-            if(harga4!=0){
+            if (harga4 != 0) {
                 String cth = "insert into KeranjangBelanja values("
-                + "'" + Login.userNow + "'"
-                + ", '13'"
-                +  ", '" + (int)spn4.getValue() + "'"
-                + ", '" + harga4 + "'"
-                +")";
+                        + "'" + Login.userNow + "'"
+                        + ", '13'"
+                        + ", '" + (int) spn4.getValue() + "'"
+                        + ", '" + harga4 + "'"
+                        + ")";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -1357,13 +1352,13 @@ public class Menu extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
             }
-            if(harga5!=0){
+            if (harga5 != 0) {
                 String cth = "insert into KeranjangBelanja values("
-                + "'" + Login.userNow + "'"
-                + ", '14'"
-                +  ", '" + (int)spn5.getValue() + "'"
-                + ", '" + harga5 + "'"
-                +")";
+                        + "'" + Login.userNow + "'"
+                        + ", '14'"
+                        + ", '" + (int) spn5.getValue() + "'"
+                        + ", '" + harga5 + "'"
+                        + ")";
                 boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
@@ -1407,17 +1402,16 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekActionPerformed
         // TODO add your handling code here:
-        if(rbDelivery.isSelected()){
-            tfTotal.setText(Integer.toString(totalTemp+10000));
+        if (rbDelivery.isSelected()) {
+            tfTotal.setText(Integer.toString(totalTemp + 10000));
             //tfTotal.setText(Integer.toString(total));
-        }
-        else if (rbTakeaway.isSelected()){
+        } else if (rbTakeaway.isSelected()) {
             tfTotal.setText(Integer.toString(totalTemp));
             //tfTotal.setText(Integer.toString(total));
         }
     }//GEN-LAST:event_btnCekActionPerformed
 
-    
+
     private void rbCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCashActionPerformed
         // TODO add your handling code here:
         metode_bayar = "Cash";
@@ -1450,30 +1444,29 @@ public class Menu extends javax.swing.JFrame {
             Statement st = conn.createStatement();
             java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             String cth = "begin tran insert into Pembayaran values("
-                    +" '" + metode_bayar + "'"
+                    + " '" + metode_bayar + "'"
                     + ", '" + tfTotal.getText() + "'"
-                    +")" + "insert into Pesanan values("
-                    
-                    + "'"+ Login.userNow + "'"
-                    + ", "+ "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
-                    + ", '"+103+"'"
-                    + ", '"+tfTotal.getText()+"'"
-                    + ", '"+jenis_pengambilan+"'"
+                    + ")" + "insert into Pesanan values("
+                    + "'" + Login.userNow + "'"
+                    + ", " + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
+                    + ", '" + 103 + "'"
+                    + ", '" + tfTotal.getText() + "'"
+                    + ", '" + jenis_pengambilan + "'"
                     + ", 'bowocoewie7'"
-                    + ", '"+sqlDate+"'"
-                    +")" +"if @@trancount > 0 begin commit tran end";
-                boolean gotResults = st.execute(cth);
-                ResultSet rs = null;
-                    if (!gotResults) {
-                        System.out.println("No results returned");
-                    } else {
-                        rs = st.getResultSet();
-                    }
-            
+                    + ", '" + sqlDate + "'"
+                    + ")" + "if @@trancount > 0 begin commit tran end";
+            boolean gotResults = st.execute(cth);
+            ResultSet rs = null;
+            if (!gotResults) {
+                System.out.println("No results returned");
+            } else {
+                rs = st.getResultSet();
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             connect();
             Statement st = conn.createStatement();
@@ -1483,46 +1476,45 @@ public class Menu extends javax.swing.JFrame {
             while (resultSet.next()) {
                 listId.add(resultSet.getInt(2));
             }
-            for (int id:listId){
+            for (int id : listId) {
                 String cth2 = "insert into PesananMenu values("
-                    + "(select top 1 id_pesanan from Pesanan order by id_pesanan desc)"
-                    + ", '"+id+"'"
-                    +  "," + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
-                    +")";
+                        + "(select top 1 id_pesanan from Pesanan order by id_pesanan desc)"
+                        + ", '" + id + "'"
+                        + "," + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
+                        + ",(select kuantitas from KeranjangBelanja where id_menu = " + id + " )"
+                        + ")";
                 boolean gotResults = st.execute(cth2);
                 ResultSet rs = null;
-                    if (!gotResults) {
-                        System.out.println("No results returned");
-                    } else {
-                        rs = st.getResultSet();
-                    }    
-            
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
+
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         try {
             connect();
             Statement st = conn.createStatement();
-            
-                String cth = "delete from KeranjangBelanja where username_pembeli="
+
+            String cth = "delete from KeranjangBelanja where username_pembeli="
                     + "'" + Login.userNow + "'";
-                boolean gotResults = st.execute(cth);
-                ResultSet rs = null;
-                    if (!gotResults) {
-                        System.out.println("No results returned");
-                    } else {
-                        rs = st.getResultSet();
-                    }
-            
+            boolean gotResults = st.execute(cth);
+            ResultSet rs = null;
+            if (!gotResults) {
+                System.out.println("No results returned");
+            } else {
+                rs = st.getResultSet();
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         JOptionPane.showMessageDialog(new Menu(), "Pesanan telah dibuat!");
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnPesanActionPerformed
@@ -1532,21 +1524,21 @@ public class Menu extends javax.swing.JFrame {
         try {
             connect();
             Statement st = conn.createStatement();
-            
-                String cth = "delete from KeranjangBelanja where username_pembeli="
+
+            String cth = "delete from KeranjangBelanja where username_pembeli="
                     + "'" + Login.userNow + "'";
-                boolean gotResults = st.execute(cth);
-                ResultSet rs = null;
-                    if (!gotResults) {
-                        System.out.println("No results returned");
-                    } else {
-                        rs = st.getResultSet();
-                    }
-            
+            boolean gotResults = st.execute(cth);
+            ResultSet rs = null;
+            if (!gotResults) {
+                System.out.println("No results returned");
+            } else {
+                rs = st.getResultSet();
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnBatalActionPerformed
 
@@ -1567,14 +1559,13 @@ public class Menu extends javax.swing.JFrame {
         tfKecamatan.setEditable(true);
         tfKota.setEditable(true);
         tfNoRumah.setEditable(true);
-        
+
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void rbShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbShowActionPerformed
-        if (rbShow.isSelected()){
+        if (rbShow.isSelected()) {
             pfPassword.setEchoChar((char) 0);
-        }
-        else{
+        } else {
             pfPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_rbShowActionPerformed
@@ -1582,52 +1573,52 @@ public class Menu extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         connect();
-            try {
-                Statement st = conn.createStatement();
-                char[] pwc = pfPassword.getPassword();
-                String pw = "";
-                for (char s : pwc) {
-                    pw += String.valueOf(s);
-                }
-                Date date = dcTanggalLahir.getDate();
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                String cth = "update Pembeli set "
-                        + "username='" + tfUsername.getText() + "'"
-                        + ", no_telp='" + tfNoTelp.getText() + "'"
-                        + ", password= HASHBYTES('SHA2_512', '" + pw + "')"
-                        + ", nama_depan='" + tfNamaDepan.getText() + "'"
-                        + ", nama_tengah='" + tfNamaTengah.getText() + "'"
-                        + ", nama_belakang='" + tfNamaBelakang.getText() + "'"
-                        + ", tanggal_lahir='" + sqlDate + "'"
-                        + ", jalan='" + tfJalan.getText() + "'"
-                        + ", kecamatan='" + tfKecamatan.getText() + "'"
-                        + ", kota='" + tfKota.getText() + "'"
-                        + ", no_rumah=" + tfNoRumah.getText()
-                        + " where username='" + tfUsername.getText() + "'";
-                boolean gotResults = st.execute(cth);
-                ResultSet rs = null;
-                if (!gotResults) {
-                    System.out.println("No results returned");
-                } else {
-                    rs = st.getResultSet();
-                }
-                Login.userNow = tfUsername.getText();
-                JOptionPane.showMessageDialog(new Menu(), "Data Berhasil Di Simpan");
-                btnSave.setEnabled(false);
-                tfUsername.setEditable(false);
-                tfNoTelp.setEditable(false);
-                pfPassword.setEditable(false);
-                tfNamaDepan.setEditable(false);
-                tfNamaTengah.setEditable(false);
-                tfNamaBelakang.setEditable(false);
-                tfJalan.setEditable(false);
-                tfKecamatan.setEditable(false);
-                tfKota.setEditable(false);
-                tfNoRumah.setEditable(false);
-            } catch (SQLException e) {
-                System.out.println(e);
-                JOptionPane.showMessageDialog(new Menu(), "Data Berhasil Di Simpan");
+        try {
+            Statement st = conn.createStatement();
+            char[] pwc = pfPassword.getPassword();
+            String pw = "";
+            for (char s : pwc) {
+                pw += String.valueOf(s);
             }
+            Date date = dcTanggalLahir.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            String cth = "update Pembeli set "
+                    + "username='" + tfUsername.getText() + "'"
+                    + ", no_telp='" + tfNoTelp.getText() + "'"
+                    + ", password= HASHBYTES('SHA2_512', '" + pw + "')"
+                    + ", nama_depan='" + tfNamaDepan.getText() + "'"
+                    + ", nama_tengah='" + tfNamaTengah.getText() + "'"
+                    + ", nama_belakang='" + tfNamaBelakang.getText() + "'"
+                    + ", tanggal_lahir='" + sqlDate + "'"
+                    + ", jalan='" + tfJalan.getText() + "'"
+                    + ", kecamatan='" + tfKecamatan.getText() + "'"
+                    + ", kota='" + tfKota.getText() + "'"
+                    + ", no_rumah=" + tfNoRumah.getText()
+                    + " where username='" + tfUsername.getText() + "'";
+            boolean gotResults = st.execute(cth);
+            ResultSet rs = null;
+            if (!gotResults) {
+                System.out.println("No results returned");
+            } else {
+                rs = st.getResultSet();
+            }
+            Login.userNow = tfUsername.getText();
+            JOptionPane.showMessageDialog(new Menu(), "Data Berhasil Di Simpan");
+            btnSave.setEnabled(false);
+            tfUsername.setEditable(false);
+            tfNoTelp.setEditable(false);
+            pfPassword.setEditable(false);
+            tfNamaDepan.setEditable(false);
+            tfNamaTengah.setEditable(false);
+            tfNamaBelakang.setEditable(false);
+            tfJalan.setEditable(false);
+            tfKecamatan.setEditable(false);
+            tfKota.setEditable(false);
+            tfNoRumah.setEditable(false);
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(new Menu(), "Data Berhasil Di Simpan");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
@@ -1671,7 +1662,7 @@ public class Menu extends javax.swing.JFrame {
                 new Menu().setVisible(true);
             }
         });
-       
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
