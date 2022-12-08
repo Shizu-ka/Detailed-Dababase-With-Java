@@ -413,10 +413,6 @@ public class MenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangFrameKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangFrameKembaliActionPerformed
-        MainFrame frame1 = new MainFrame();
-        frame1.setVisible(true);
-        frame1.enableAdmin();
-        frame1.pindah();
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
@@ -503,7 +499,6 @@ public class MenuFrame extends javax.swing.JFrame {
         String temp = primaryKeyNow;
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -527,9 +522,7 @@ public class MenuFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -551,7 +544,6 @@ public class MenuFrame extends javax.swing.JFrame {
         String temp = tfIdMenu.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -581,9 +573,7 @@ public class MenuFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
