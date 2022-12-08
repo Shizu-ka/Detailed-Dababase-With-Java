@@ -302,7 +302,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKasirActionPerformed
 
     private void btnPesananMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananMenuActionPerformed
-
+        try {
+            PesananMenuFrame konek = new PesananMenuFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+            konek.klik();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPesananMenuActionPerformed
 
     private void btnPengantarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengantarActionPerformed
@@ -329,13 +336,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananActionPerformed
         try {
-                    PesananFrame konek = new PesananFrame();
-                    konek.setVisible(true);
-                    konek.tampilkanData();
-                    konek.klik();
-                } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            PesananFrame konek = new PesananFrame();
+            konek.setVisible(true);
+            konek.tampilkanData();
+            konek.klik();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPesananActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
