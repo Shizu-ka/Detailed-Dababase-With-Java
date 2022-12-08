@@ -202,7 +202,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnBulan.setText("Report Bulan Ini");
+        btnBulan.setText("Report Bulanan");
         btnBulan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBulan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,7 +394,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConnectActionPerformed
 
     private void btnBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulanActionPerformed
-        // TODO add your handling code here:
+        BulanReportFrame frame = new BulanReportFrame();
+        frame.setVisible(true);
     }//GEN-LAST:event_btnBulanActionPerformed
 
     private void btnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotaActionPerformed
