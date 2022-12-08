@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pesanan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a35d833-c7d0-425e-8513-a04cd2f4e6c3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="basdat"/>
+	<style name="Style1"/>
+	<parameter name="bulan" class="java.lang.String"/>
+	<parameter name="namaCabangParameter" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select k.nama_cabang,MONTH(p.tgl_pemesanan) bulan,m.nama_menu, pem.kuantitas, jumlahTotal, jumlahUntung from Pesanan p
+join Kasir k on k.no_pegawai = p.no_pegawai
+join Cabang c on k.nama_cabang = c.nama_cabang
+join PesananMenu pem on pem.kode_pembayaran = p.kode_pembayaran
+join Menu m on pem.id_menu = m.id_menu
+join view_jumlah_penjualan v on v.kode_pembayaran = pem.kode_pembayaran
+join view_jumlah_untung v2 on v2.kode_pembayaran = p.kode_pembayaran
+where MONTH(p.tgl_pemesanan) =  $P{bulan} and k.nama_cabang =  $P{namaCabangParameter} ]]>
+	</queryString>
+	<field name="nama_cabang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_cabang"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_cabang"/>
+	</field>
+	<field name="bulan" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="bulan"/>
+		<property name="com.jaspersoft.studio.field.label" value="bulan"/>
+	</field>
+	<field name="nama_menu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_menu"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_menu"/>
+	</field>
+	<field name="kuantitas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="kuantitas"/>
+		<property name="com.jaspersoft.studio.field.label" value="kuantitas"/>
+	</field>
+	<field name="jumlahTotal" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="jumlahTotal"/>
+		<property name="com.jaspersoft.studio.field.label" value="jumlahTotal"/>
+	</field>
+	<field name="jumlahUntung" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="jumlahUntung"/>
+		<property name="com.jaspersoft.studio.field.label" value="jumlahUntung"/>
+	</field>
+	<variable name="bulanNama" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="595" height="130" forecolor="#FFFFFF" backcolor="#BDAAAA" uuid="ac2c40ec-30ac-4562-8d6c-23d5e37dfd68"/>
+			</rectangle>
+			<image>
+				<reportElement x="50" y="5" width="454" height="100" uuid="c1bc16db-055b-40b6-b902-22e4d2a6b630"/>
+				<imageExpression><![CDATA["C:/Users/Lenovo/Documents/project/proyekAkhirBASDAT/pizza-hut-png-logo-3812.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="392" y="80" width="112" height="30" uuid="f7db6780-b8e9-493a-b1a8-59fe8858ed34">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc431c35-0f27-4b3f-a22e-63b48c41f5c2"/>
+				</reportElement>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_cabang}.equalsIgnoreCase( $P{namaCabangParameter} ) ? $F{nama_cabang} : "Error"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="154" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="50" width="177" height="30" uuid="e52a6b21-b338-4eeb-b750-c6c00736bdd9"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Laporan Bulan "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="143" width="556" height="1" forecolor="#FF0C08" uuid="6055946e-79a6-41eb-b92b-4534e80ef17a"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#BDAAAA"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="30" y="114" width="150" height="24" uuid="b8b3d3fd-ab50-434c-be27-d8ec34911aae"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nama Menu"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="114" width="150" height="24" uuid="a5e92a32-a28d-4dfc-8fdc-f620aa7c9a72"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Jumlah Penjualan"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="50" width="120" height="30" uuid="7c3af49f-5715-4395-857d-7bdfdde74262"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bulan}.intValue()==1?"JANUARO":
+    $F{bulan}.intValue()==2?"FEBRUARY":
+        $F{bulan}.intValue()==3?"MARERT":
+            $F{bulan}.intValue()==4?"APRIL":
+                $F{bulan}.intValue()==5?"MEI":
+                    $F{bulan}.intValue()==6?"JUNI":
+                        $F{bulan}.intValue()==7?"JULY":
+                            $F{bulan}.intValue()==8?"AGUSTUS":
+                                $F{bulan}.intValue()==9?"SEPTEMBER":
+                                    $F{bulan}.intValue()==10?"OKTOBER":
+                                        $F{bulan}.intValue()==11?"NOV":"DESEMBER"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="40" splitType="Immediate">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="30" y="10" width="165" height="30" uuid="48776705-233b-4c7a-bf9e-28337c191f63">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0167d5d9-7395-4650-bc26-c6d4a13a3160"/>
+				</reportElement>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_menu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="10" width="100" height="30" uuid="fd739bd8-7198-425b-8917-7519a38cf18a"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="329" splitType="Stretch">
+			<textField>
+				<reportElement x="380" y="60" width="61" height="30" uuid="0e3432dd-6318-4291-b75a-706511132b14">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93785322-d920-4c59-aac9-27cf99d2e6e4"/>
+				</reportElement>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlahTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="30" width="147" height="30" uuid="de5e4dec-b76d-42d6-96b0-54ad4847e870"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Keuntungan"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="60" width="138" height="30" uuid="04f0f406-130e-4300-9e24-6b20bca5121d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be00d8f2-800b-4902-a8dd-b2938ea05fb0"/>
+				</reportElement>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp." + new java.text.DecimalFormat("#,##0.00").format(Double.valueOf($F{jumlahUntung}))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="16" width="555" height="1" forecolor="#FF0C08" uuid="c32d3d87-745a-4547-a5d6-0de702dbdba1"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#BDAAAA"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="350" y="30" width="205" height="30" uuid="b3ddbeb5-1eca-467d-8909-859bc5103b36"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Jumlah Total Penjualan"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
