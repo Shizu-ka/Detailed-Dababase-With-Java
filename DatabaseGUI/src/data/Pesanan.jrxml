@@ -6,7 +6,7 @@
 	<style name="Style1"/>
 	<parameter name="kodePembayaran" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select Pesanan.id_pesanan,concat(pem.nama_depan,' ',pem.nama_belakang) Pembeli,Pesanan.kode_pembayaran,concat(p.nama_depan,' ',p.nama_belakang) Pengantar, total,jenis_pengambilan,tgl_pemesanan,p.nama_cabang, Menu.nama_menu, Menu.harga from Pesanan
+		<![CDATA[select Pesanan.id_pesanan,concat(pem.nama_depan,' ',pem.nama_belakang) Pembeli,Pesanan.kode_pembayaran,concat(p.nama_depan,' ',p.nama_belakang) Pengantar, total,jenis_pengambilan,tgl_pemesanan,p.nama_cabang, Menu.nama_menu, Menu.harga, PesananMenu.kuantitas  from Pesanan
 join Pengantar p on Pesanan.username_pengantar = p.username 
 join Pembeli pem on Pesanan.username_pembeli = pem.username
 join PesananMenu on PesananMenu.kode_pembayaran = Pesanan.kode_pembayaran
@@ -52,6 +52,10 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 	<field name="harga" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="harga"/>
 		<property name="com.jaspersoft.studio.field.label" value="harga"/>
+	</field>
+	<field name="kuantitas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="kuantitas"/>
+		<property name="com.jaspersoft.studio.field.label" value="kuantitas"/>
 	</field>
 	<variable name="countMenu" class="java.lang.Integer" incrementType="Report" calculation="Count">
 		<variableExpression><![CDATA[$F{nama_menu}]]></variableExpression>
@@ -131,7 +135,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textElement>
 					<font size="15"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Kuantitas"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Harga"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -162,7 +166,7 @@ join Menu on Menu.id_menu = PesananMenu.id_menu
 				<textElement>
 					<font size="15"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{countMenu}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
