@@ -68,7 +68,7 @@ public class CabangFrame extends javax.swing.JFrame {
         connect();
         int no = 1;
         Statement st = conn.createStatement();
-        String cth = "select * from Cabang";
+        String cth = "select * from view_cabang";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
             model.addRow(new Object[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5)});
