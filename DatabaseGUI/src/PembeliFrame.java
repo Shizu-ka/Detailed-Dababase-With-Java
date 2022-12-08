@@ -578,10 +578,6 @@ public class PembeliFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangFrameKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangFrameKembaliActionPerformed
-        MainFrame frame1 = new MainFrame();
-        frame1.setVisible(true);
-        frame1.enableAdmin();
-        frame1.pindah();
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
@@ -589,7 +585,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         String temp = tfUsername.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -620,10 +615,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                tfUsername.setText(temp);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -650,7 +642,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         String tempPrimaryKey = tfUsername.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -692,18 +683,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                if (!temp.equals(tempPrimaryKey)) {
-                    konek.tfUsername.setText(tempPrimaryKey);
-                    konek.tfUsername.setText(tempPrimaryKey);
-                } else {
-                    konek.tfUsername.setText(temp);
-                    konek.tfUsername.setText(temp);
-                }
-
-                konek.btnCari.doClick();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -832,7 +812,6 @@ public class PembeliFrame extends javax.swing.JFrame {
         String temp = tfUsername.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new PembeliFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -874,11 +853,7 @@ public class PembeliFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                konek.tfUsername.setText(temp);
-                konek.tfUsername.setText(temp);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
