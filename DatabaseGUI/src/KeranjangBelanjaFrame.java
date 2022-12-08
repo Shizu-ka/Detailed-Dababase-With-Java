@@ -452,10 +452,6 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangFrameKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangFrameKembaliActionPerformed
-        MainFrame frame1 = new MainFrame();
-        frame1.setVisible(true);
-        frame1.enableAdmin();
-        frame1.pindah();
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
@@ -544,7 +540,6 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
         String temp = primaryKeyNow;
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new CabangFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
