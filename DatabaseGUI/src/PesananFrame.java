@@ -576,10 +576,6 @@ public class PesananFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCabangFrameKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCabangFrameKembaliActionPerformed
-        MainFrame frame1 = new MainFrame();
-        frame1.setVisible(true);
-        frame1.enableAdmin();
-        frame1.pindah();
         this.dispose();
     }//GEN-LAST:event_btnCabangFrameKembaliActionPerformed
 
@@ -617,7 +613,6 @@ public class PesananFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                tfIdPesanan.setText(temp);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -645,7 +640,6 @@ public class PesananFrame extends javax.swing.JFrame {
         String tempPrimaryKey = tfIdPesanan.getText();
         if (temp.replaceAll("\\s", "").equals("")) {
             JOptionPane.showMessageDialog(new KasirFrame(), "Error");
-            btnReset.doClick();
         } else {
             connect();
             try {
@@ -678,14 +672,6 @@ public class PesananFrame extends javax.swing.JFrame {
                 konek.setVisible(true);
                 konek.tampilkanData();
                 this.dispose();
-                if (!temp.equals(tempPrimaryKey)) {
-                    konek.tfIdPesanan.setText(tempPrimaryKey);
-                    konek.tfIdPesanan.setText(tempPrimaryKey);
-                } else {
-                    konek.tfIdPesanan.setText(temp);
-                    konek.tfIdPesanan.setText(temp);
-                }
-
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CabangFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -833,8 +819,6 @@ public class PesananFrame extends javax.swing.JFrame {
             konek.setVisible(true);
             konek.tampilkanData();
             this.dispose();
-            konek.tfIdPesanan.setText(temp);
-            konek.tfIdPesanan.setText(temp);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(KasirFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
