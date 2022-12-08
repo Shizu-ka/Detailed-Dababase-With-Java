@@ -59,10 +59,12 @@ public class PesananMenuFrame extends javax.swing.JFrame {
         model.addColumn("ID Pesanan");
         model.addColumn("ID Menu");
         model.addColumn("Kode Pembayaran");
+        model.addColumn("Kuantitas");
         DefaultTableModel model2 = new DefaultTableModel();
         model2.addColumn("ID Pesanan");
         model2.addColumn("ID Menu");
         model2.addColumn("Kode Pembayaran");
+        model2.addColumn("Kuantitas");
 
         connect();
         int no = 1;
@@ -70,12 +72,12 @@ public class PesananMenuFrame extends javax.swing.JFrame {
         String cth = "select * from PesananMenu";
         ResultSet resultSet = st.executeQuery(cth);
         while (resultSet.next()) {
-            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3)});
+            model.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), resultSet.getInt(4)});
         }
         tblPesananMenu.setModel(model);
         resultSet = st.executeQuery(setTable);
         while (resultSet.next()) {
-            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3)});
+            model2.addRow(new Object[]{resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), resultSet.getInt(4)});
         }
         tblPesananMenuCari.setModel(model2);
     }
@@ -101,6 +103,8 @@ public class PesananMenuFrame extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        tfKuantitas = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnCari = new javax.swing.JButton();
         tfCari = new javax.swing.JTextField();
@@ -135,7 +139,7 @@ public class PesananMenuFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Kode Pembayaran");
+        jLabel3.setText("Kuantitas");
 
         tfKodePembayaran.setEditable(false);
         tfKodePembayaran.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +219,20 @@ public class PesananMenuFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Kode Pembayaran");
+
+        tfKuantitas.setEditable(false);
+        tfKuantitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfKuantitasActionPerformed(evt);
+            }
+        });
+        tfKuantitas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfKuantitasKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -228,19 +246,21 @@ public class PesananMenuFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(tfIdMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(tfIdPesanan)
-                    .addComponent(tfKodePembayaran))
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                    .addComponent(tfKodePembayaran)
+                    .addComponent(tfKuantitas, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnTambahData)
@@ -273,9 +293,13 @@ public class PesananMenuFrame extends javax.swing.JFrame {
                     .addComponent(tfIdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(tfKodePembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tfKuantitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambahData)
                     .addComponent(btnHapus)
@@ -284,9 +308,9 @@ public class PesananMenuFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
                     .addComponent(btnSimpan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(568, Short.MAX_VALUE)
@@ -478,6 +502,9 @@ public class PesananMenuFrame extends javax.swing.JFrame {
 
         String harga = tblPesananMenu.getValueAt(baris, 2).toString();
         tfKodePembayaran.setText(harga);
+        
+        String kuantitas = tblPesananMenu.getValueAt(baris, 3).toString();
+        tfKuantitas.setText(kuantitas);
     }//GEN-LAST:event_tblPesananMenuMouseClicked
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
@@ -623,6 +650,9 @@ public class PesananMenuFrame extends javax.swing.JFrame {
 
         String harga = tblPesananMenuCari.getValueAt(baris, 2).toString();
         tfKodePembayaran.setText(harga);
+        
+        String kuantitas = tblPesananMenu.getValueAt(baris, 3).toString();
+        tfKuantitas.setText(kuantitas);
     }//GEN-LAST:event_tblPesananMenuCariMouseClicked
 
     private void tfIdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdMenuActionPerformed
@@ -676,6 +706,14 @@ public class PesananMenuFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tblPesananMenuCariKeyReleased
+
+    private void tfKuantitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKuantitasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfKuantitasActionPerformed
+
+    private void tfKuantitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKuantitasKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfKuantitasKeyPressed
 
 //    @Override
 //    public void actionPerformed(ActionEvent event) {
@@ -742,6 +780,7 @@ public class PesananMenuFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -753,6 +792,7 @@ public class PesananMenuFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tfIdMenu;
     private javax.swing.JTextField tfIdPesanan;
     private javax.swing.JTextField tfKodePembayaran;
+    private javax.swing.JTextField tfKuantitas;
     // End of variables declaration//GEN-END:variables
 
 }
