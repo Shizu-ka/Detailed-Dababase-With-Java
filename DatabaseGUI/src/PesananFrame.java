@@ -162,7 +162,7 @@ public class PesananFrame extends javax.swing.JFrame {
         cbPengantar = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Pesanan");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
