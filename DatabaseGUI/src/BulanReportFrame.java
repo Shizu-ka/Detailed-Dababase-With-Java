@@ -66,6 +66,7 @@ public class BulanReportFrame extends javax.swing.JFrame {
         tfNamaCabang = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Laporan Bulan");
 
         btnPrint.setText("Print");
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -95,12 +96,13 @@ public class BulanReportFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 105, Short.MAX_VALUE))
                     .addComponent(tfNamaCabang)
                     .addComponent(tfBulan)
-                    .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(0, 105, Short.MAX_VALUE)))
                 .addGap(71, 71, 71)
                 .addComponent(btnKembali)
                 .addContainerGap())
