@@ -24,7 +24,10 @@ public class PesananReportFrame extends javax.swing.JFrame {
     private static String primaryKeyNow = "";
     private static String kodePembayaran = "";
 
-
+    public void setKodePembayaran(String kode){
+        kodePembayaran = kode;
+        
+    }
     private static void connect() {
         String hostname = "localhost";
         String sqlInstanceName = "LAPTOP-43HAT1M2"; //computer name 
