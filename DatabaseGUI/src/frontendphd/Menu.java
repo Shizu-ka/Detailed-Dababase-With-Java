@@ -34,6 +34,8 @@ public class Menu extends javax.swing.JFrame {
     ArrayList<Integer> list = new ArrayList<Integer>();
     private String metode_bayar = "";
     private String jenis_pengambilan = "";
+    private String username_pengantar = "";
+    private int no_pegawai;
 
     /**
      * Creates new form Menu
@@ -134,6 +136,8 @@ public class Menu extends javax.swing.JFrame {
         btnBatal = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
+        cbxCabang = new javax.swing.JComboBox<>();
+        jLabel44 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -671,6 +675,17 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        cbxCabang.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        cbxCabang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JakartaPz", "LondonNoCap", "MalangPhd" }));
+        cbxCabang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCabangActionPerformed(evt);
+            }
+        });
+
+        jLabel44.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel44.setText("Cabang");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -691,14 +706,15 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(rbBca)
                         .addGap(18, 18, 18)
                         .addComponent(rbBni))
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel16)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(196, 196, 196)
                         .addComponent(jLabel14)
                         .addGap(73, 73, 73)
                         .addComponent(jLabel15))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(btnPesan, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -713,12 +729,14 @@ public class Menu extends javax.swing.JFrame {
                                         .addGap(40, 40, 40)
                                         .addComponent(rbDelivery)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel16))
                         .addGap(50, 50, 50)
-                        .addComponent(tfHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(btnPesan, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(jLabel44)
+                            .addComponent(cbxCabang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel17))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -736,12 +754,15 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(tfJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel16)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel44))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbTakeaway)
-                    .addComponent(rbDelivery))
-                .addGap(18, 18, 18)
+                    .addComponent(rbDelivery)
+                    .addComponent(cbxCabang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addComponent(jLabel17)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -755,7 +776,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(btnPesan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnBatal)
                 .addGap(18, 18, 18))
         );
@@ -1167,7 +1188,7 @@ public class Menu extends javax.swing.JFrame {
         try {
             connect();
             Statement st = conn.createStatement();
-            String cth = "select * from KeranjangBelanja";
+            String cth = "select * from view_isi_keranjang";
             ResultSet resultSet = st.executeQuery(cth);
             switch (cbxMenu.getSelectedIndex()) {
                 case 0 -> {
@@ -1438,52 +1459,73 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_rbDeliveryActionPerformed
 
     private void btnPesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesanActionPerformed
-        // TODO add your handling code here:
-        try {
-            connect();
-            Statement st = conn.createStatement();
-            java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-            String cth = "begin tran insert into Pembayaran values("
-                    + " '" + metode_bayar + "'"
-                    + ", '" + tfTotal.getText() + "'"
-                    + ")" + "insert into Pesanan values("
-                    + "'" + Login.userNow + "'"
-                    + ", " + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
-                    + ", '" + 103 + "'"
-                    + ", '" + tfTotal.getText() + "'"
-                    + ", '" + jenis_pengambilan + "'"
-                    + ", 'bowocoewie7'"
-                    + ", '" + sqlDate + "'"
-                    + ")" + "if @@trancount > 0 begin commit tran end";
-            boolean gotResults = st.execute(cth);
-            ResultSet rs = null;
-            if (!gotResults) {
-                System.out.println("No results returned");
-            } else {
-                rs = st.getResultSet();
+        try {                                         
+            // TODO add your handling code here:
+            try {
+                connect();
+                Statement st = conn.createStatement();
+                java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                String cth = "begin tran insert into Pembayaran values("
+                        + " '" + metode_bayar + "'"
+                        + ", '" + tfTotal.getText() + "'"
+                        + ")" + "insert into Pesanan values("
+                        + "'" + Login.userNow + "'"
+                        + ", " + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
+                        + ", '" + no_pegawai + "'"
+                        + ", '" + tfTotal.getText() + "'"
+                        + ", '" + jenis_pengambilan + "'"
+                        + ", "+ username_pengantar
+                        + ", '" + sqlDate + "'"
+                        + ")" + "if @@trancount > 0 begin commit tran end";
+                boolean gotResults = st.execute(cth);
+                ResultSet rs = null;
+                if (!gotResults) {
+                    System.out.println("No results returned");
+                } else {
+                    rs = st.getResultSet();
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            connect();
-            Statement st = conn.createStatement();
-            String cth = "select * from KeranjangBelanja";
-            ResultSet resultSet = st.executeQuery(cth);
-            ArrayList<Integer> listId = new ArrayList();
-            while (resultSet.next()) {
-                listId.add(resultSet.getInt(2));
+            
+            try {
+                connect();
+                Statement st = conn.createStatement();
+                String cth = "select * from KeranjangBelanja";
+                ResultSet resultSet = st.executeQuery(cth);
+                ArrayList<Integer> listId = new ArrayList();
+                while (resultSet.next()) {
+                    listId.add(resultSet.getInt(2));
+                }
+                for (int id : listId) {
+                    String cth2 = "insert into PesananMenu values("
+                            + "(select top 1 id_pesanan from Pesanan order by id_pesanan desc)"
+                            + ", '" + id + "'"
+                            + "," + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
+                            + ",(select kuantitas from KeranjangBelanja where id_menu = " + id + " )"
+                            + ")";
+                    boolean gotResults = st.execute(cth2);
+                    ResultSet rs = null;
+                    if (!gotResults) {
+                        System.out.println("No results returned");
+                    } else {
+                        rs = st.getResultSet();
+                    }
+                    
+                }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int id : listId) {
-                String cth2 = "insert into PesananMenu values("
-                        + "(select top 1 id_pesanan from Pesanan order by id_pesanan desc)"
-                        + ", '" + id + "'"
-                        + "," + "(select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc)"
-                        + ",(select kuantitas from KeranjangBelanja where id_menu = " + id + " )"
-                        + ")";
-                boolean gotResults = st.execute(cth2);
+            
+            try {
+                connect();
+                Statement st = conn.createStatement();
+                
+                String cth = "delete from KeranjangBelanja where username_pembeli="
+                        + "'" + Login.userNow + "'";
+                boolean gotResults = st.execute(cth);
                 ResultSet rs = null;
                 if (!gotResults) {
                     System.out.println("No results returned");
@@ -1491,32 +1533,26 @@ public class Menu extends javax.swing.JFrame {
                     rs = st.getResultSet();
                 }
 
+            } catch (SQLException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (Exception ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            connect();
+            
+            JOptionPane.showMessageDialog(new Menu(), "Pesanan telah dibuat!");
+            jTabbedPane1.setSelectedIndex(0);
+            PesananReportFrame report = new PesananReportFrame();
+            String kueri = "select top 1 kode_pembayaran from Pembayaran order by kode_pembayaran desc";
             Statement st = conn.createStatement();
-
-            String cth = "delete from KeranjangBelanja where username_pembeli="
-                    + "'" + Login.userNow + "'";
-            boolean gotResults = st.execute(cth);
-            ResultSet rs = null;
-            if (!gotResults) {
-                System.out.println("No results returned");
-            } else {
-                rs = st.getResultSet();
+            ResultSet resultSet = st.executeQuery(kueri);
+            while (resultSet.next()) {
+            
+            report.setKodePembayaran(resultSet.getString(1));
             }
-
+        
+            report.klik();
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        JOptionPane.showMessageDialog(new Menu(), "Pesanan telah dibuat!");
-        jTabbedPane1.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnPesanActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
@@ -1629,6 +1665,29 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfJumlahActionPerformed
 
+    private void cbxCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCabangActionPerformed
+        // TODO add your handling code here:
+        switch(cbxCabang.getSelectedIndex()){
+            case 0 -> {
+                username_pengantar = "'bowocoewie7'";
+                no_pegawai = 100;
+            }
+            case 1 -> {
+                username_pengantar = "'sharford48'";
+                no_pegawai = 103;
+            }
+            case 2 -> {
+                username_pengantar = "'gpatron4c'";
+                no_pegawai = 106;
+            }
+            default ->{
+                username_pengantar = "'bowocoewie7'";
+                no_pegawai = 100;
+            }
+        }
+        
+    }//GEN-LAST:event_cbxCabangActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1684,6 +1743,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnTambah5;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cbxCabang;
     private javax.swing.JComboBox<String> cbxMenu;
     private com.toedter.calendar.JDateChooser dcTanggalLahir;
     private javax.swing.JLabel jLabel1;
@@ -1724,6 +1784,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
