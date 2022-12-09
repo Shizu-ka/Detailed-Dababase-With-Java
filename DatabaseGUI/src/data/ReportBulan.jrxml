@@ -7,14 +7,17 @@
 	<parameter name="bulan" class="java.lang.String"/>
 	<parameter name="namaCabangParameter" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select k.nama_cabang,MONTH(p.tgl_pemesanan) bulan,m.nama_menu, pem.kuantitas, jumlahTotal, jumlahUntung from Pesanan p
+		<![CDATA[select nama_cabang, bulan,nama_menu, sum(kuantitas) kuantitas, sum(jumlahTotal)totalKuantitas, sum(jumlahUntung) totalUntung from (
+select k.nama_cabang,MONTH(p.tgl_pemesanan) bulan,m.nama_menu, pem.kuantitas, jumlahTotal, jumlahUntung from Pesanan p
 join Kasir k on k.no_pegawai = p.no_pegawai
 join Cabang c on k.nama_cabang = c.nama_cabang
 join PesananMenu pem on pem.kode_pembayaran = p.kode_pembayaran
 join Menu m on pem.id_menu = m.id_menu
 join view_jumlah_penjualan v on v.kode_pembayaran = pem.kode_pembayaran
 join view_jumlah_untung v2 on v2.kode_pembayaran = p.kode_pembayaran
-where MONTH(p.tgl_pemesanan) =  $P{bulan} and k.nama_cabang =  $P{namaCabangParameter} ]]>
+where MONTH(p.tgl_pemesanan) = $P{bulan} and k.nama_cabang = $P{namaCabangParameter}   
+) as tes 
+group by nama_cabang, bulan, nama_menu]]>
 	</queryString>
 	<field name="nama_cabang" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nama_cabang"/>
@@ -32,13 +35,13 @@ where MONTH(p.tgl_pemesanan) =  $P{bulan} and k.nama_cabang =  $P{namaCabangPara
 		<property name="com.jaspersoft.studio.field.name" value="kuantitas"/>
 		<property name="com.jaspersoft.studio.field.label" value="kuantitas"/>
 	</field>
-	<field name="jumlahTotal" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="jumlahTotal"/>
-		<property name="com.jaspersoft.studio.field.label" value="jumlahTotal"/>
+	<field name="totalKuantitas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="totalKuantitas"/>
+		<property name="com.jaspersoft.studio.field.label" value="totalKuantitas"/>
 	</field>
-	<field name="jumlahUntung" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="jumlahUntung"/>
-		<property name="com.jaspersoft.studio.field.label" value="jumlahUntung"/>
+	<field name="totalUntung" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="totalUntung"/>
+		<property name="com.jaspersoft.studio.field.label" value="totalUntung"/>
 	</field>
 	<variable name="bulanNama" class="java.lang.String"/>
 	<background>
@@ -143,7 +146,7 @@ where MONTH(p.tgl_pemesanan) =  $P{bulan} and k.nama_cabang =  $P{namaCabangPara
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jumlahTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{totalKuantitas}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="30" y="30" width="147" height="30" uuid="de5e4dec-b76d-42d6-96b0-54ad4847e870"/>
@@ -159,7 +162,7 @@ where MONTH(p.tgl_pemesanan) =  $P{bulan} and k.nama_cabang =  $P{namaCabangPara
 				<textElement>
 					<font size="15"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp." + new java.text.DecimalFormat("#,##0.00").format(Double.valueOf($F{jumlahUntung}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp." + new java.text.DecimalFormat("#,##0.00").format(Double.valueOf($F{totalUntung}))]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1" y="16" width="555" height="1" forecolor="#FF0C08" uuid="c32d3d87-745a-4547-a5d6-0de702dbdba1"/>
