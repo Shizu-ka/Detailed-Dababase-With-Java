@@ -153,7 +153,7 @@ public class KasirFrame extends javax.swing.JFrame {
         cbNamaBelakang = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Kasir");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
