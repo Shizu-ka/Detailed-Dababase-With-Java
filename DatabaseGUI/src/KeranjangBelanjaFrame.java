@@ -116,7 +116,7 @@ public class KeranjangBelanjaFrame extends javax.swing.JFrame {
         cbTotal = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Keranjang Belanja");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
