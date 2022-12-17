@@ -149,7 +149,7 @@ public class PengantarFrame extends javax.swing.JFrame {
         cbNamaBelakang = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Pengantar");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
