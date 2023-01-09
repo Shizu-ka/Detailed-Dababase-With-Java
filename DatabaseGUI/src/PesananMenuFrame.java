@@ -115,7 +115,7 @@ public class PesananMenuFrame extends javax.swing.JFrame {
         cbKodePembayaran = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cabang");
+        setTitle("Pesanan Menu");
 
         btnCabangFrameKembali.setText("Kembali");
         btnCabangFrameKembali.setToolTipText("");
